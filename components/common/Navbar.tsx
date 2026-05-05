@@ -9,6 +9,7 @@ import type { NavLink as NavLinkType } from '@/types';
 const navLinks: NavLinkType[] = [
   { label: 'Home', href: '/' },
   { label: 'The Process', href: '/process' },
+  { label: 'Our Works', href: '/works' },
   { label: 'About Larsva', href: '/about' },
   { label: 'Hit Us Up', href: '/contact' },
 ];

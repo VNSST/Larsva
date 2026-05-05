@@ -26,6 +26,7 @@ export default function Footer() {
               <ul className="flex flex-col gap-2.5">
                 <li><Link href="/" className="text-sm hover:text-[var(--color-accent-sky)] transition-colors">Home</Link></li>
                 <li><Link href="/process" className="text-sm hover:text-[var(--color-accent-sky)] transition-colors">The Process</Link></li>
+                <li><Link href="/works" className="text-sm hover:text-[var(--color-accent-sky)] transition-colors">Our Works</Link></li>
                 <li><Link href="/about" className="text-sm hover:text-[var(--color-accent-sky)] transition-colors">About</Link></li>
                 <li><Link href="/contact" className="text-sm hover:text-[var(--color-accent-sky)] transition-colors">Contact</Link></li>
               </ul>
