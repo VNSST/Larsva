@@ -2,52 +2,44 @@ import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <footer id="site-footer" className="bg-[var(--color-text-primary)] text-white/70 pt-16 pb-8">
-      <div className="mx-auto max-w-[1200px] px-8">
+    <footer id="site-footer" className="bg-[var(--color-bg-dark)] text-white/60 pt-20 pb-10">
+      <div className="container-wide">
         {/* Top */}
-        <div className="flex flex-col md:flex-row justify-between items-start gap-10 mb-12">
-          <div>
-            <Link href="/" className="flex items-center mb-3">
-              <span className="bg-gradient-to-r from-[#7c3aed] to-[#4f46e5] bg-clip-text text-transparent font-display font-extrabold text-xl tracking-tight">
-                L
+        <div className="flex flex-col md:flex-row justify-between items-start gap-12 mb-16">
+          <div className="max-w-[320px]">
+            <Link href="/" className="flex items-center mb-5">
+              <span className="font-serif font-bold text-2xl tracking-tight">
+                <span className="gradient-text">L</span>
+                <span className="text-white">arsva</span>
               </span>
-              <span className="text-white font-display font-bold text-xl tracking-tight -ml-0.5">arsva</span>
             </Link>
-            <p className="text-sm leading-relaxed">
-              Think It. Ship It. Done.<br />In 14 days.
+            <p className="text-sm leading-relaxed text-white/40">
+              A rapid-delivery tech consulting firm that turns bold ideas into production-ready products — in just 14 days.
             </p>
           </div>
 
-          <div className="flex gap-16">
-            <div>
-              <h4 className="font-display font-semibold text-xs text-white uppercase tracking-widest mb-4">
-                Navigate
-              </h4>
-              <ul className="flex flex-col gap-2.5">
-                <li><Link href="/" className="text-sm hover:text-[var(--color-accent-sky)] transition-colors">Home</Link></li>
-                <li><Link href="/process" className="text-sm hover:text-[var(--color-accent-sky)] transition-colors">The Process</Link></li>
-                <li><Link href="/works" className="text-sm hover:text-[var(--color-accent-sky)] transition-colors">Our Works</Link></li>
-                <li><Link href="/about" className="text-sm hover:text-[var(--color-accent-sky)] transition-colors">About</Link></li>
-                <li><Link href="/contact" className="text-sm hover:text-[var(--color-accent-sky)] transition-colors">Contact</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-display font-semibold text-xs text-white uppercase tracking-widest mb-4">
-                Connect
-              </h4>
-              <ul className="flex flex-col gap-2.5">
-                <li><a href="#" className="text-sm hover:text-[var(--color-accent-sky)] transition-colors">Twitter / X</a></li>
-                <li><a href="#" className="text-sm hover:text-[var(--color-accent-sky)] transition-colors">LinkedIn</a></li>
-                <li><a href="#" className="text-sm hover:text-[var(--color-accent-sky)] transition-colors">GitHub</a></li>
-              </ul>
-            </div>
+          <div>
+            <h4 className="overline text-white/30 mb-5">
+              Connect
+            </h4>
+            <ul className="flex flex-col gap-3">
+              <li><a href="#" className="text-sm text-white/50 hover:text-white transition-colors duration-300">Twitter / X</a></li>
+              <li><a href="#" className="text-sm text-white/50 hover:text-white transition-colors duration-300">LinkedIn</a></li>
+              <li><Link href="/contact" className="text-sm text-white/50 hover:text-white transition-colors duration-300">Contact Us</Link></li>
+            </ul>
           </div>
         </div>
 
+        {/* Divider */}
+        <div className="h-px bg-white/6 mb-8" />
+
         {/* Bottom */}
-        <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/8 text-xs gap-2">
+        <div className="flex flex-col md:flex-row justify-between items-center text-xs text-white/25 gap-3">
           <p>&copy; 2026 Larsva. All rights reserved.</p>
-          <p className="text-white/40">Built with 💜 at warp speed.</p>
+          <div className="flex gap-6">
+            <a href="#" className="hover:text-white/50 transition-colors">Privacy Policy</a>
+            <a href="#" className="hover:text-white/50 transition-colors">Terms of Service</a>
+          </div>
         </div>
       </div>
     </footer>

@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import Link from 'next/link';
 
 const projects = [
   {
@@ -9,15 +10,7 @@ const projects = [
     tags: ['SaaS', 'MVP'],
     duration: '11 Days',
     type: 'Web App',
-    icon: (
-      <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-        <rect x="6" y="10" width="36" height="28" rx="3" stroke="currentColor" strokeWidth="2" />
-        <path d="M6 18H42" stroke="currentColor" strokeWidth="2" />
-        <circle cx="11" cy="14" r="1.5" fill="currentColor" />
-        <circle cx="16" cy="14" r="1.5" fill="currentColor" />
-        <circle cx="21" cy="14" r="1.5" fill="currentColor" />
-      </svg>
-    ),
+    gradient: 'from-violet-600 to-indigo-600',
   },
   {
     title: 'PulseCheck',
@@ -25,14 +18,7 @@ const projects = [
     tags: ['Mobile', 'Health'],
     duration: '13 Days',
     type: 'iOS + Android',
-    icon: (
-      <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-        <rect x="14" y="6" width="20" height="36" rx="3" stroke="currentColor" strokeWidth="2" />
-        <path d="M14 12H34" stroke="currentColor" strokeWidth="2" />
-        <path d="M14 36H34" stroke="currentColor" strokeWidth="2" />
-        <circle cx="24" cy="40" r="1.5" fill="currentColor" />
-      </svg>
-    ),
+    gradient: 'from-cyan-500 to-blue-600',
   },
   {
     title: 'Vibe Store',
@@ -40,13 +26,7 @@ const projects = [
     tags: ['E-Commerce', 'Shopify'],
     duration: '10 Days',
     type: 'Full Stack',
-    icon: (
-      <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-        <path d="M8 14L24 6L40 14V34L24 42L8 34V14Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
-        <path d="M8 14L24 22L40 14" stroke="currentColor" strokeWidth="2" />
-        <path d="M24 22V42" stroke="currentColor" strokeWidth="2" />
-      </svg>
-    ),
+    gradient: 'from-amber-500 to-orange-600',
   },
 ];
 
@@ -59,61 +39,94 @@ export default function WorkPlaceholder() {
     const cards = el.querySelectorAll('.work-card-reveal');
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry, i) => {
+        entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setTimeout(() => entry.target.classList.add('visible'), i * 120);
+            entry.target.classList.add('visible');
             observer.unobserve(entry.target);
           }
         });
       },
-      { threshold: 0.15 }
+      { threshold: 0.1 }
     );
-    cards.forEach((card) => observer.observe(card));
+    cards.forEach((card, i) => {
+      (card as HTMLElement).style.transitionDelay = `${i * 150}ms`;
+      observer.observe(card);
+    });
     return () => observer.disconnect();
   }, []);
 
   return (
-    <section className="py-28 bg-[var(--color-bg-primary)]" ref={sectionRef}>
-      <div className="mx-auto max-w-[1200px] px-8">
-        <div className="text-center mb-16">
-          <span className="inline-block px-5 py-1.5 rounded-full bg-[var(--color-accent-light-purple)] text-[var(--color-accent-purple)] font-display font-semibold text-xs tracking-widest uppercase mb-4">
+    <section className="py-28 md:py-36 bg-[var(--color-bg-dark)] grid-pattern-dark relative overflow-hidden" ref={sectionRef}>
+      {/* Ambient glow */}
+      <div className="absolute top-[-20%] right-[-10%] w-[40%] h-[50%] bg-[radial-gradient(circle,rgba(108,75,244,0.08),transparent_70%)] rounded-full pointer-events-none" />
+
+      <div className="container-wide relative z-10">
+        <div className="text-center mb-20">
+          <span className="overline text-[var(--color-accent-purple)] mb-4 block">
             Portfolio
           </span>
-          <h2 className="font-display font-bold text-[clamp(2rem,4vw,3rem)] tracking-tight mb-3">
+          <h2 className="font-serif font-bold text-[clamp(2rem,4vw,3.2rem)] tracking-tight mb-4 text-white">
             Recent Wins
           </h2>
-          <p className="text-lg text-[var(--color-text-secondary)] max-w-[480px] mx-auto">
-            A sneak peek at the projects we&apos;ve shipped at warp speed.
+          <div className="section-divider mx-auto mb-6" />
+          <p className="text-lg text-white/40 max-w-[520px] mx-auto leading-relaxed">
+            A look at the projects we&apos;ve shipped at warp speed.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-7">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {projects.map((project) => (
-            <div key={project.title} className="work-card-reveal reveal card-border-sky group cursor-pointer">
-              <div className="bg-white rounded-[18px] overflow-hidden relative z-[1]">
-                <div className="px-7 pt-7">
-                  <div className="w-full h-44 rounded-xl gradient-card flex items-center justify-center text-[var(--color-accent-purple)] transition-all duration-400 group-hover:bg-[linear-gradient(135deg,rgba(124,58,237,0.12),rgba(56,189,248,0.15))]">
-                    {project.icon}
+            <div key={project.title} className="work-card-reveal reveal group">
+              <div className="card-dark overflow-hidden">
+                {/* Gradient header */}
+                <div className={`h-44 bg-gradient-to-br ${project.gradient} relative overflow-hidden`}>
+                  <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-500" />
+                  <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-white/10 rounded-full blur-2xl" />
+                  <div className="absolute top-6 left-6 w-14 h-14 bg-white/10 rounded-full blur-xl" />
+                  {/* Icon */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-14 h-14 bg-white/15 backdrop-blur-md rounded-2xl flex items-center justify-center border border-white/20 transform group-hover:scale-110 transition-transform duration-500">
+                      <svg className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
+                    </div>
                   </div>
                 </div>
-                <div className="px-7 pt-6 pb-7">
-                  <div className="flex gap-2 mb-3">
+
+                <div className="p-7">
+                  <div className="flex gap-2 mb-4">
                     {project.tags.map((tag) => (
-                      <span key={tag} className="px-3 py-1 rounded-full bg-[var(--color-accent-light-purple)] text-[var(--color-accent-purple)] font-display font-semibold text-[0.72rem] tracking-wide uppercase">
+                      <span key={tag} className="px-3 py-1 rounded-full bg-white/5 text-white/50 font-display font-semibold text-[0.7rem] tracking-wider uppercase border border-white/8">
                         {tag}
                       </span>
                     ))}
                   </div>
-                  <h3 className="font-display font-bold text-xl tracking-tight mb-2">{project.title}</h3>
-                  <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed mb-4">{project.description}</p>
-                  <div className="flex items-center justify-between text-xs text-[var(--color-text-muted)] font-medium">
-                    <span className="flex items-center gap-1.5">⏱ {project.duration}</span>
+                  <h3 className="font-display font-bold text-xl tracking-tight mb-2 text-white group-hover:text-[var(--color-accent-purple)] transition-colors duration-300">{project.title}</h3>
+                  <p className="text-sm text-white/40 leading-relaxed mb-5">{project.description}</p>
+                  <div className="flex items-center justify-between text-xs text-white/30 font-medium">
+                    <span className="flex items-center gap-1.5">
+                      <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M12 6v6l4 2" strokeLinecap="round" />
+                      </svg>
+                      {project.duration}
+                    </span>
                     <span className="text-[var(--color-accent-purple)] font-semibold">{project.type}</span>
                   </div>
                 </div>
               </div>
             </div>
           ))}
+        </div>
+
+        {/* View All Link */}
+        <div className="text-center mt-14">
+          <Link href="/works" className="inline-flex items-center gap-2 text-white/50 hover:text-white font-display font-semibold text-sm transition-colors duration-300 group/link">
+            View All Projects
+            <svg className="w-4 h-4 transform group-hover/link:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </Link>
         </div>
       </div>
     </section>

@@ -11,7 +11,6 @@ const navLinks: NavLinkType[] = [
   { label: 'The Process', href: '/process' },
   { label: 'Our Works', href: '/works' },
   { label: 'About Larsva', href: '/about' },
-  { label: 'Hit Us Up', href: '/contact' },
 ];
 
 export default function Navbar() {
@@ -25,34 +24,49 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Close mobile menu on resize to desktop
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) close();
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [close]);
+
   return (
     <header
       id="site-header"
-      className={`fixed top-0 left-0 right-0 z-50 border-b transition-all duration-200 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? 'glass-solid border-purple-200/30 shadow-sm'
-          : 'glass border-purple-200/12'
+          ? 'glass-solid border-b border-gray-200/60 shadow-[0_1px_20px_rgba(0,0,0,0.04)]'
+          : 'bg-transparent'
       }`}
     >
-      <nav className="mx-auto flex max-w-[1200px] items-center justify-between px-8 h-[72px]">
+      <nav className="mx-auto flex max-w-[1200px] items-center justify-between px-6 md:px-10 h-[80px]">
         {/* Logo */}
-        <Link href="/" className="group flex items-center font-display font-bold text-2xl z-10 transition-all duration-300 hover:opacity-80">
-          <span className="gradient-text text-2xl font-extrabold tracking-tight">
-            L
+        <Link href="/" className="group flex items-center z-10 transition-all duration-300 hover:opacity-80">
+          <span className="font-serif font-bold text-2xl tracking-tight transition-colors duration-500">
+            <span className="gradient-text">L</span>
+            <span className={`transition-colors duration-500 ${
+              scrolled && !isOpen ? 'text-[var(--color-text-primary)]' : 'text-white'
+            }`}>arsva</span>
           </span>
-          <span className="text-[var(--color-text-primary)] tracking-tight -ml-0.5">arsva</span>
         </Link>
 
         {/* Desktop Nav Links */}
-        <ul className="hidden md:flex items-center gap-2">
+        <ul className="hidden md:flex items-center gap-1">
           {navLinks.map((link) => (
             <li key={link.href}>
               <Link
                 href={link.href}
-                className={`font-display font-medium text-sm px-4 py-2 rounded-lg transition-all duration-200 tracking-wide ${
+                className={`font-display font-medium text-[0.9rem] px-5 py-2.5 rounded-lg transition-all duration-300 ${
                   pathname === link.href
-                    ? 'text-[var(--color-accent-purple)] bg-[var(--color-accent-light-purple)]'
-                    : 'text-[var(--color-text-secondary)] hover:text-[var(--color-accent-purple)] hover:bg-[var(--color-accent-light-purple)]'
+                    ? scrolled
+                      ? 'text-[var(--color-accent-purple)] bg-[var(--color-accent-light-purple)]'
+                      : 'text-white bg-white/10'
+                    : scrolled
+                      ? 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-gray-100/60'
+                      : 'text-white/70 hover:text-white hover:bg-white/10'
                 }`}
               >
                 {link.label}
@@ -64,32 +78,32 @@ export default function Navbar() {
         {/* Desktop CTA */}
         <Link
           href="/contact"
-          className="hidden md:inline-flex items-center px-6 py-2.5 rounded-lg gradient-purple text-white font-display font-semibold text-sm tracking-wide transition-all duration-400 hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgba(124,58,237,0.3)]"
+          className="hidden md:inline-flex items-center px-7 py-3 rounded-lg gradient-purple text-white font-display font-semibold text-[0.9rem] tracking-wide transition-all duration-400 hover:-translate-y-0.5 hover:shadow-[0_8px_32px_rgba(108,75,244,0.3)]"
         >
-          Let&apos;s Talk
+          Contact us
         </Link>
 
         {/* Mobile Hamburger */}
         <button
           id="mobile-toggle"
-          className="flex md:hidden flex-col gap-[5px] p-2 z-10"
+          className="flex md:hidden flex-col gap-[6px] p-2 z-50"
           onClick={toggle}
           aria-label="Toggle menu"
           aria-expanded={isOpen}
         >
           <span
-            className={`w-6 h-[2.5px] bg-[var(--color-text-primary)] rounded-sm transition-all duration-200 ${
-              isOpen ? 'rotate-45 translate-y-[7.5px]' : ''
+            className={`w-6 h-[2px] rounded-sm transition-all duration-300 ${
+              isOpen ? 'rotate-45 translate-y-[8px] bg-white' : 'bg-[var(--color-text-primary)]'
             }`}
           />
           <span
-            className={`w-6 h-[2.5px] bg-[var(--color-text-primary)] rounded-sm transition-all duration-200 ${
-              isOpen ? 'opacity-0' : ''
+            className={`w-6 h-[2px] rounded-sm transition-all duration-300 ${
+              isOpen ? 'opacity-0 bg-white' : 'bg-[var(--color-text-primary)]'
             }`}
           />
           <span
-            className={`w-6 h-[2.5px] bg-[var(--color-text-primary)] rounded-sm transition-all duration-200 ${
-              isOpen ? '-rotate-45 -translate-y-[7.5px]' : ''
+            className={`w-6 h-[2px] rounded-sm transition-all duration-300 ${
+              isOpen ? '-rotate-45 -translate-y-[8px] bg-white' : 'bg-[var(--color-text-primary)]'
             }`}
           />
         </button>
@@ -106,10 +120,10 @@ export default function Navbar() {
             <li key={link.href}>
               <Link
                 href={link.href}
-                className={`font-display font-semibold text-xl p-4 transition-colors duration-200 ${
+                className={`font-display font-semibold text-xl p-4 transition-colors duration-300 ${
                   pathname === link.href
                     ? 'text-[var(--color-accent-purple)]'
-                    : 'text-[var(--color-text-primary)] hover:text-[var(--color-accent-purple)]'
+                    : 'text-white/80 hover:text-white'
                 }`}
                 onClick={close}
               >
@@ -120,10 +134,10 @@ export default function Navbar() {
         </ul>
         <Link
           href="/contact"
-          className="mt-4 px-10 py-4 rounded-xl gradient-purple text-white font-display font-semibold text-lg transition-all duration-400 hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgba(124,58,237,0.3)]"
+          className="mt-6 px-10 py-4 rounded-xl gradient-purple text-white font-display font-semibold text-lg transition-all duration-400 hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgba(108,75,244,0.3)]"
           onClick={close}
         >
-          Let&apos;s Build Something Epic
+          Contact Us
         </Link>
       </div>
     </header>
