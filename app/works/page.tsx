@@ -13,7 +13,8 @@ const works = [
     displayUrl: 'manapgrent.in',
     description: 'A seamless platform for finding and managing PG accommodations. Built for speed and reliability.',
     tags: ['Web App', 'Real Estate'],
-    gradient: 'from-blue-500 to-cyan-400',
+    gradient: 'from-blue-600 to-cyan-500',
+    image: '/images/manapgrent.png',
   },
   {
     title: 'B School of AI',
@@ -21,7 +22,8 @@ const works = [
     displayUrl: 'bschoolofai.com',
     description: 'Empowering the next generation with cutting-edge artificial intelligence education and resources.',
     tags: ['EdTech', 'AI'],
-    gradient: 'from-purple-500 to-indigo-500',
+    gradient: 'from-purple-600 to-indigo-600',
+    image: '/images/bschoolofai.png',
   },
   {
     title: 'Fly Castles',
@@ -29,7 +31,8 @@ const works = [
     displayUrl: 'flycastles.com',
     description: 'Premium travel and accommodation booking experience with stunning design and fluid interactions.',
     tags: ['Travel', 'Booking'],
-    gradient: 'from-amber-500 to-orange-500',
+    gradient: 'from-amber-500 to-orange-600',
+    image: '/images/flycastles.png',
   },
 ];
 
@@ -68,15 +71,33 @@ export default function WorksPage() {
                 className="group relative flex flex-col h-full bg-white rounded-2xl border border-gray-100 hover:border-[var(--color-accent-purple)]/20 shadow-sm hover:shadow-[0_20px_60px_rgba(108,75,244,0.08)] transition-all duration-500 hover:-translate-y-2 overflow-hidden"
               >
                 {/* Visual Header */}
-                <div className={`h-52 w-full bg-gradient-to-br ${work.gradient} relative overflow-hidden`}>
-                  <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-500" />
-                  <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-white/15 rounded-full blur-2xl" />
-                  <div className="absolute top-4 left-4 w-16 h-16 bg-white/10 rounded-full blur-xl" />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-16 h-16 bg-white/15 backdrop-blur-md rounded-2xl flex items-center justify-center border border-white/25 transform group-hover:scale-110 transition-transform duration-500">
-                      <svg className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                      </svg>
+                <div className={`h-52 w-full bg-gradient-to-br ${work.gradient} relative overflow-hidden pt-6 px-6 flex items-end justify-center`}>
+                  {/* Subtle decorative elements in gradient */}
+                  <div className="absolute -bottom-8 -right-8 w-24 h-24 bg-white/15 rounded-full blur-xl transition-all duration-700 group-hover:scale-150" />
+                  <div className="absolute -top-4 -left-4 w-20 h-20 bg-white/10 rounded-full blur-lg transition-all duration-700 group-hover:scale-120" />
+                  
+                  {/* Browser Mockup */}
+                  <div className="w-full h-full rounded-t-xl bg-white/15 backdrop-blur-md border-t border-x border-white/25 shadow-[0_15px_35px_rgba(0,0,0,0.15)] overflow-hidden flex flex-col transform translate-y-2 group-hover:translate-y-0.5 transition-transform duration-500 ease-out">
+                    {/* Browser Header Bar */}
+                    <div className="h-7 px-3 bg-white/10 border-b border-white/10 flex items-center justify-between shrink-0">
+                      <div className="flex gap-1.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-red-400/90" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-yellow-400/90" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-green-400/90" />
+                      </div>
+                      <span className="text-[9px] text-white/60 font-mono tracking-wider truncate max-w-[140px]">
+                        {work.displayUrl}
+                      </span>
+                      <div className="w-9" />
+                    </div>
+                    {/* Website Screenshot */}
+                    <div className="flex-grow relative overflow-hidden bg-gray-50">
+                      <img
+                        src={work.image}
+                        alt={work.title}
+                        className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-500" />
                     </div>
                   </div>
                 </div>
