@@ -1,23 +1,52 @@
-export interface ProcessStep {
-  id: string;
-  stepNumber: string;
-  title: string;
-  description: string;
-  timeline: string;
-  icon: 'lightbulb' | 'code' | 'rocket';
-}
-
-export interface ProjectCard {
-  id: string;
-  title: string;
-  description: string;
-  tags: string[];
-  duration: string;
-  type: string;
-  icon: 'desktop' | 'mobile' | 'cube';
-}
-
 export interface NavLink {
   label: string;
   href: string;
+}
+
+export interface Service {
+  id: string;
+  title: string;
+  price: string;
+  priceNote?: string;
+  description: string;
+  highlights: string[];
+  whoFor: string;
+  deliverables: string[];
+  process: string[];
+  outcomes: string[];
+  ctaText: string;
+  ctaHref: string;
+}
+
+export interface Testimonial {
+  id: string;
+  name: string;
+  role: string;
+  company: string;
+  quote: string;
+  avatar?: string;
+}
+
+export interface CaseStudy {
+  id: string;
+  title: string;
+  category: 'validation' | 'mvp' | 'launch';
+  problem: string;
+  approach: string;
+  outcome: string;
+  tags: string[];
+  image?: string;
+  url?: string;
+}
+
+export interface FAQ {
+  question: string;
+  answer: string;
+}
+
+export interface ConsultationFormData {
+  fullName: string;
+  email: string;
+  phone: string;
+  startupIdea: string;
 }

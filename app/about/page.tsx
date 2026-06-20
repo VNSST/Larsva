@@ -1,77 +1,32 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import ScrollReveal from '@/components/common/ScrollReveal';
 
 export const metadata: Metadata = {
-  title: 'About Larsva',
-  description: 'We\'re a crew of builders, designers, and strategists who ship products at startup speed. Learn what makes Larsva different.',
+  title: 'About Us — Our Story & Mission',
+  description: 'Larsva was created to bridge the gap between great startup ideas and successful execution. Learn about our mission to empower aspiring founders.',
+  keywords: ['Startup Consulting India', 'Founder Advisory Services', 'Startup Launch Services'],
+  openGraph: {
+    title: 'About Larsva — Helping Founders Move From Idea To Execution',
+    description: 'Learn how Larsva helps working professionals validate startup ideas, build MVPs, and launch professionally.',
+  },
 };
-
-const values = [
-  {
-    icon: (
-      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-        <path d="M14 3L17 9L24 10L19 15L20 22L14 19L8 22L9 15L4 10L11 9L14 3Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
-      </svg>
-    ),
-    title: 'Speed is a Feature',
-    description: 'We believe the fastest path to validation is a shipped product. Every day counts.',
-  },
-  {
-    icon: (
-      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-        <circle cx="14" cy="14" r="10" stroke="currentColor" strokeWidth="1.5" />
-        <circle cx="14" cy="14" r="4" stroke="currentColor" strokeWidth="1.5" />
-        <circle cx="14" cy="14" r="1" fill="currentColor" />
-      </svg>
-    ),
-    title: 'Ruthless Focus',
-    description: 'We cut scope, not corners. Every feature earns its place in the sprint.',
-  },
-  {
-    icon: (
-      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-        <path d="M4 14L10 20L24 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
-    title: 'Radical Transparency',
-    description: 'Daily check-ins, live previews, zero surprises. You\'re part of the team.',
-  },
-  {
-    icon: (
-      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-        <path d="M14 4V14L20 20" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-        <circle cx="14" cy="14" r="10" stroke="currentColor" strokeWidth="1.5" />
-      </svg>
-    ),
-    title: 'Ship > Perfect',
-    description: 'A good product in users\' hands beats a perfect one on a whiteboard.',
-  },
-];
-
-const stats = [
-  { value: '50+', label: 'Projects Shipped' },
-  { value: '14', label: 'Avg. Days to Launch' },
-  { value: '100%', label: 'Client Satisfaction' },
-  { value: '24/7', label: 'Support Coverage' },
-];
 
 export default function AboutPage() {
   return (
     <>
       {/* Hero */}
       <section className="gradient-hero pt-36 pb-24 px-6 md:px-10 relative overflow-hidden">
-        <div className="absolute top-[-20%] left-[-10%] w-[40%] h-[50%] bg-[radial-gradient(circle,rgba(108,75,244,0.1),transparent_70%)] rounded-full pointer-events-none" />
+        <div className="absolute top-[-20%] left-[-10%] w-[40%] h-[50%] bg-[radial-gradient(circle,rgba(0,194,168,0.06),transparent_70%)] rounded-full pointer-events-none" />
         <div className="mx-auto max-w-[800px] text-center relative z-10">
-          <span className="overline text-[var(--color-accent-purple)] mb-5 block">
-            About Us
-          </span>
-          <h1 className="font-serif font-bold text-[clamp(2.5rem,5vw,4rem)] tracking-tight leading-tight mb-6 text-white">
-            We Build Things<br />
-            <span className="gradient-text">Insanely Fast.</span>
+          <span className="overline text-[var(--color-accent)] mb-5 block">About Us</span>
+          <h1 className="font-heading font-bold text-[clamp(2.5rem,5vw,4rem)] tracking-tight leading-tight mb-6 text-white">
+            Helping Founders Move From{' '}
+            <span className="gradient-text">Idea To Execution</span>
           </h1>
           <div className="section-divider mx-auto mb-6" />
           <p className="text-lg text-white/45 max-w-[560px] mx-auto leading-relaxed">
-            Larsva is a crew of builders, designers, and strategists who turn bold ideas into production-ready products — in just two weeks.
+            We believe every aspiring founder deserves a structured path from concept to launch.
           </p>
         </div>
       </section>
@@ -79,78 +34,126 @@ export default function AboutPage() {
       {/* Story */}
       <section className="py-24 md:py-32 bg-white">
         <div className="mx-auto max-w-[800px] px-6 md:px-10">
-          <span className="overline text-[var(--color-accent-purple)] mb-4 block">Our Story</span>
-          <h2 className="font-serif font-bold text-3xl tracking-tight mb-8">Why we exist.</h2>
-          <div className="flex flex-col gap-6 text-[var(--color-text-secondary)] leading-[1.8]">
-            <p>
-              We started Larsva because we were tired of watching great ideas die in six-month development cycles.
-              Founders were bleeding cash. Agencies were billing hours. And nothing was shipping.
-            </p>
-            <p>
-              So we built a different kind of studio — one obsessed with velocity. Our team has collectively shipped
-              over 50 products across SaaS, e-commerce, health tech, and fintech. We&apos;ve worked with bootstrapped
-              founders and funded startups alike.
-            </p>
-            <p>
-              The secret? A razor-sharp process, a stacked team, and an allergic reaction to scope creep.
-              We don&apos;t do &quot;phase 2.&quot; We ship phase 1 — fast — and iterate from there.
-            </p>
-          </div>
+          <ScrollReveal>
+            <span className="overline text-[var(--color-accent)] mb-4 block">Our Story</span>
+            <h2 className="font-heading font-bold text-3xl tracking-tight mb-8">Why We Exist</h2>
+            <div className="flex flex-col gap-6 text-[var(--color-text-secondary)] leading-[1.8]">
+              <p>
+                Most founders don&apos;t fail because they lack ideas. They fail because they lack
+                validation, execution, and structure.
+              </p>
+              <p>
+                We saw ambitious working professionals with brilliant startup ideas but no clear
+                path to bring them to life. They were stuck between the security of their jobs and
+                the dream of building something meaningful. Many wasted months researching, second-guessing,
+                and building features nobody needed.
+              </p>
+              <p>
+                Larsva was created to bridge that gap — to give aspiring founders the structured
+                framework, expert guidance, and execution support they need to validate ideas, build
+                MVPs, and launch professionally, without quitting their jobs or assembling a full startup team.
+              </p>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
-      {/* Stats */}
-      <section className="py-20 bg-[var(--color-bg-dark)]">
-        <div className="mx-auto max-w-[1000px] px-6 md:px-10">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
-            {stats.map((stat) => (
-              <div key={stat.label} className="text-center">
-                <div className="font-serif font-bold text-4xl md:text-5xl tracking-tight text-white mb-2">
-                  {stat.value}
+      {/* Founder */}
+      <section className="py-24 md:py-32 bg-[var(--color-bg-primary)] grid-pattern">
+        <div className="mx-auto max-w-[900px] px-6 md:px-10">
+          <ScrollReveal>
+            <div className="flex flex-col md:flex-row gap-12 items-center">
+              {/* Headshot placeholder */}
+              <div className="flex-shrink-0">
+                <div className="w-48 h-48 md:w-56 md:h-56 rounded-2xl bg-[var(--color-accent-light)] flex items-center justify-center border border-[var(--color-accent)]/10 overflow-hidden">
+                  <div className="flex flex-col items-center gap-2">
+                    <div className="w-20 h-20 rounded-full bg-[var(--color-accent)]/20 flex items-center justify-center">
+                      <span className="font-heading font-bold text-2xl text-[var(--color-accent)]">ST</span>
+                    </div>
+                    <span className="text-xs text-[var(--color-text-muted)] font-display">Photo Coming Soon</span>
+                  </div>
                 </div>
-                <div className="text-xs text-white/30 font-medium tracking-wider uppercase">{stat.label}</div>
               </div>
-            ))}
-          </div>
+
+              {/* Bio */}
+              <div>
+                <span className="overline text-[var(--color-accent)] mb-3 block">Founder</span>
+                <h2 className="font-heading font-bold text-2xl tracking-tight mb-2">
+                  V.N.S. Satya Teja
+                </h2>
+                <p className="text-sm text-[var(--color-accent)] font-display font-semibold mb-5">
+                  Founder & CEO, Larsva
+                </p>
+                <div className="flex flex-col gap-4 text-[var(--color-text-secondary)] leading-relaxed text-[0.95rem]">
+                  <p>
+                    Data Science professional with experience in product, AI, analytics, and
+                    technology. Passionate about helping aspiring founders validate ideas and
+                    launch startups.
+                  </p>
+                  <p>
+                    Having seen too many great ideas die from lack of structure and execution,
+                    Satya built Larsva to provide founders with the exact framework they need to
+                    go from concept to a live product.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
-      {/* Values */}
-      <section className="py-24 md:py-32 bg-white grid-pattern">
-        <div className="mx-auto max-w-[1000px] px-6 md:px-10">
-          <div className="text-center mb-16">
-            <span className="overline text-[var(--color-accent-purple)] mb-4 block">Our Values</span>
-            <h2 className="font-serif font-bold text-3xl tracking-tight mb-4">What We Stand For</h2>
-            <div className="section-divider mx-auto mb-6" />
-            <p className="text-lg text-[var(--color-text-secondary)]">Our guiding principles — in everything we build.</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {values.map((value) => (
-              <div
-                key={value.title}
-                className="group bg-white rounded-2xl p-8 border border-gray-100 hover:border-[var(--color-accent-purple)]/20 transition-all duration-500 hover:shadow-[0_16px_48px_rgba(108,75,244,0.08)] hover:-translate-y-1"
-              >
-                <div className="w-12 h-12 rounded-xl bg-[var(--color-accent-light-purple)] text-[var(--color-accent-purple)] flex items-center justify-center mb-5 transition-all duration-400 group-hover:bg-[var(--color-accent-purple)] group-hover:text-white group-hover:scale-105">
-                  {value.icon}
+      {/* Vision & Mission */}
+      <section className="py-24 md:py-32 bg-white">
+        <div className="mx-auto max-w-[900px] px-6 md:px-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <ScrollReveal>
+              <div className="p-8 rounded-2xl bg-[var(--color-bg-primary)] border border-gray-100">
+                <div className="w-12 h-12 rounded-xl bg-[var(--color-accent-light)] text-[var(--color-accent)] flex items-center justify-center mb-5">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="12" r="10" />
+                    <circle cx="12" cy="12" r="4" />
+                    <circle cx="12" cy="12" r="1" fill="currentColor" stroke="none" />
+                  </svg>
                 </div>
-                <h3 className="font-display font-bold text-xl tracking-tight mb-2">{value.title}</h3>
-                <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed">{value.description}</p>
+                <h3 className="font-heading font-bold text-xl tracking-tight mb-3">Our Vision</h3>
+                <p className="text-[var(--color-text-secondary)] leading-relaxed">
+                  To empower aspiring founders to build successful startups through structured
+                  validation and execution.
+                </p>
               </div>
-            ))}
+            </ScrollReveal>
+
+            <ScrollReveal delay={150}>
+              <div className="p-8 rounded-2xl bg-[var(--color-bg-primary)] border border-gray-100">
+                <div className="w-12 h-12 rounded-xl bg-[var(--color-accent-light)] text-[var(--color-accent)] flex items-center justify-center mb-5">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
+                    <polyline points="22 4 12 14.01 9 11.01" />
+                  </svg>
+                </div>
+                <h3 className="font-heading font-bold text-xl tracking-tight mb-3">Our Mission</h3>
+                <p className="text-[var(--color-text-secondary)] leading-relaxed">
+                  Reduce startup failure by helping founders make informed decisions before
+                  investing significant time and money.
+                </p>
+              </div>
+            </ScrollReveal>
           </div>
         </div>
       </section>
 
       {/* CTA */}
       <section className="py-24 bg-[var(--color-bg-dark)] relative overflow-hidden">
-        <div className="absolute top-[-30%] right-[-10%] w-[40%] h-[60%] bg-[radial-gradient(circle,rgba(108,75,244,0.1),transparent_70%)] rounded-full pointer-events-none" />
+        <div className="absolute top-[-30%] right-[-10%] w-[40%] h-[60%] bg-[radial-gradient(circle,rgba(0,194,168,0.06),transparent_70%)] rounded-full pointer-events-none" />
         <div className="mx-auto max-w-[600px] px-6 md:px-10 text-center relative z-10">
-          <h2 className="font-serif font-bold text-3xl tracking-tight mb-5 text-white">Want to work with us?</h2>
+          <h2 className="font-heading font-bold text-3xl tracking-tight mb-5 text-white">
+            Ready to start your founder journey?
+          </h2>
           <p className="text-white/40 mb-10 leading-relaxed">
-            We&apos;re always looking for exciting projects. Let&apos;s chat.
+            Request a founder consultation and let&apos;s explore your startup idea together.
           </p>
           <Link href="/contact" className="btn-primary text-lg py-4 px-10 rounded-xl">
-            Get in Touch
+            Request Founder Consultation
             <svg className="btn-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none">
               <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>

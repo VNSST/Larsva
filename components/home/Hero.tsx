@@ -1,232 +1,86 @@
-'use client';
-
-import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 
 export default function Hero() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    let animationId: number;
-    let mouse = { x: -1000, y: -1000 };
-
-    interface Particle {
-      x: number; y: number; size: number;
-      speedX: number; speedY: number;
-      opacity: number;
-    }
-
-    let particles: Particle[] = [];
-
-    function resize() {
-      if (!canvas) return;
-      const dpr = window.devicePixelRatio || 1;
-      canvas.width = canvas.offsetWidth * dpr;
-      canvas.height = canvas.offsetHeight * dpr;
-      ctx!.scale(dpr, dpr);
-    }
-
-    function createParticles() {
-      if (!canvas) return;
-      particles = [];
-      const w = canvas.offsetWidth;
-      const h = canvas.offsetHeight;
-      const count = Math.min(Math.floor((w * h) / 15000), 60);
-
-      for (let i = 0; i < count; i++) {
-        particles.push({
-          x: Math.random() * w,
-          y: Math.random() * h,
-          size: Math.random() * 2 + 0.5,
-          speedX: (Math.random() - 0.5) * 0.3,
-          speedY: (Math.random() - 0.5) * 0.2,
-          opacity: Math.random() * 0.3 + 0.05,
-        });
-      }
-    }
-
-    function animate() {
-      if (!canvas || !ctx) return;
-      const w = canvas.offsetWidth;
-      const h = canvas.offsetHeight;
-      ctx.clearRect(0, 0, w, h);
-
-      particles.forEach((p) => {
-        const dx = mouse.x - p.x;
-        const dy = mouse.y - p.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-
-        if (dist < 200) {
-          p.x -= dx * 0.008;
-          p.y -= dy * 0.008;
-        }
-
-        p.x += p.speedX;
-        p.y += p.speedY;
-
-        if (p.x < -20) p.x = w + 20;
-        if (p.x > w + 20) p.x = -20;
-        if (p.y < -20) p.y = h + 20;
-        if (p.y > h + 20) p.y = -20;
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(108, 75, 244, ${p.opacity})`;
-        ctx.fill();
-      });
-
-      // Draw connections between nearby particles
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 120) {
-            ctx.beginPath();
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(108, 75, 244, ${0.04 * (1 - dist / 120)})`;
-            ctx.lineWidth = 0.5;
-            ctx.stroke();
-          }
-        }
-      }
-
-      animationId = requestAnimationFrame(animate);
-    }
-
-    const handleMouseMove = (e: MouseEvent) => {
-      const rect = canvas.getBoundingClientRect();
-      mouse = { x: e.clientX - rect.left, y: e.clientY - rect.top };
-    };
-    const handleMouseLeave = () => { mouse = { x: -1000, y: -1000 }; };
-
-    canvas.parentElement?.addEventListener('mousemove', handleMouseMove);
-    canvas.parentElement?.addEventListener('mouseleave', handleMouseLeave);
-
-    resize();
-    createParticles();
-    animate();
-
-    const handleResize = () => { resize(); createParticles(); };
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      cancelAnimationFrame(animationId);
-      window.removeEventListener('resize', handleResize);
-      canvas.parentElement?.removeEventListener('mousemove', handleMouseMove);
-      canvas.parentElement?.removeEventListener('mouseleave', handleMouseLeave);
-    };
-  }, []);
-
   return (
     <section className="relative min-h-[100dvh] flex items-center justify-center gradient-hero overflow-hidden px-6 md:px-10 pt-[120px] pb-24">
-      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none" />
-
       {/* Ambient glow effects */}
-      <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[60%] bg-[radial-gradient(circle,rgba(108,75,244,0.12),transparent_70%)] rounded-full pointer-events-none" />
-      <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[50%] bg-[radial-gradient(circle,rgba(56,189,248,0.08),transparent_70%)] rounded-full pointer-events-none" />
+      <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[60%] bg-[radial-gradient(circle,rgba(0,194,168,0.08),transparent_70%)] rounded-full pointer-events-none" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[50%] bg-[radial-gradient(circle,rgba(0,194,168,0.05),transparent_70%)] rounded-full pointer-events-none" />
+
+      {/* Subtle grid overlay */}
+      <div className="absolute inset-0 grid-pattern-dark pointer-events-none" />
 
       <div className="relative z-10 max-w-[900px] text-center flex flex-col items-center">
         {/* Badge */}
         <div className="animate-fade-in-down inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-white/5 border border-white/10 font-display font-medium text-sm text-white/70 mb-8">
-          <span className="w-2 h-2 rounded-full bg-[var(--color-accent-purple)] animate-pulse-dot" />
-          Rapid-Delivery Tech Consulting
+          <span className="w-2 h-2 rounded-full bg-[var(--color-accent)] animate-pulse-dot" />
+          Startup Studio · Founder Advisory
         </div>
 
-        {/* Headline — Editorial serif for authority */}
-        <h1 className="animate-fade-in-up delay-100 font-serif font-bold text-[clamp(2.8rem,6.5vw,5.2rem)] leading-[1.06] tracking-[-0.02em] text-white mb-6">
-          Turn Ideas Into<br />
-          Reality in Just{' '}
-          <span className="gradient-text">14 Days.</span>
+        {/* Headline */}
+        <h1 className="animate-fade-in-up delay-100 font-heading font-bold text-[clamp(2.5rem,6vw,4.8rem)] leading-[1.08] tracking-[-0.02em] text-white mb-6">
+          Turn Your Startup Idea Into a{' '}
+          <span className="gradient-text">Launch-Ready Business</span>
         </h1>
 
         {/* Subtext */}
-        <p className="animate-fade-in-up delay-200 text-lg md:text-xl text-white/50 max-w-[580px] leading-relaxed mb-10">
-          We build MVPs, websites, and mobile apps at lightning speed — so you can launch before the competition even starts.
+        <p className="animate-fade-in-up delay-200 text-lg md:text-xl text-white/50 max-w-[640px] leading-relaxed mb-10">
+          Larsva helps ambitious working professionals and aspiring founders validate startup ideas, build MVPs, and launch professionally — without hiring a full team or taking unnecessary risks.
         </p>
 
         {/* CTAs */}
         <div className="animate-fade-in-up delay-300 flex flex-col sm:flex-row gap-4 items-center justify-center mb-16 w-full sm:w-auto">
           <Link href="/contact" className="btn-primary w-full sm:w-auto justify-center text-[1.05rem] py-[18px] px-10">
-            Start Your Project
+            Request Founder Consultation
             <svg className="btn-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none">
               <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </Link>
-          <Link href="/process" className="btn-outline-light w-full sm:w-auto justify-center py-[18px] px-10">
-            See How It Works
+          <Link href="/services" className="btn-outline-light w-full sm:w-auto justify-center py-[18px] px-10">
+            Explore Services
           </Link>
         </div>
 
-        {/* Stats */}
-        <Stats />
+        {/* Abstract illustration — interconnected nodes */}
+        <div className="animate-fade-in-up delay-500 w-full max-w-[600px]">
+          <svg viewBox="0 0 600 120" fill="none" className="w-full h-auto opacity-30">
+            {/* Connection lines */}
+            <line x1="100" y1="60" x2="225" y2="40" stroke="url(#line-grad)" strokeWidth="1" />
+            <line x1="225" y1="40" x2="375" y2="60" stroke="url(#line-grad)" strokeWidth="1" />
+            <line x1="375" y1="60" x2="500" y2="35" stroke="url(#line-grad)" strokeWidth="1" />
+            <line x1="100" y1="60" x2="300" y2="90" stroke="url(#line-grad)" strokeWidth="0.5" strokeDasharray="4 4" />
+            <line x1="300" y1="90" x2="500" y2="35" stroke="url(#line-grad)" strokeWidth="0.5" strokeDasharray="4 4" />
+
+            {/* Nodes */}
+            <circle cx="100" cy="60" r="8" fill="#00C2A8" fillOpacity="0.3" />
+            <circle cx="100" cy="60" r="4" fill="#00C2A8" />
+            <text x="100" y="88" textAnchor="middle" fill="white" fillOpacity="0.4" fontSize="10" fontFamily="var(--font-display)">Idea</text>
+
+            <circle cx="225" cy="40" r="8" fill="#00C2A8" fillOpacity="0.3" />
+            <circle cx="225" cy="40" r="4" fill="#00C2A8" />
+            <text x="225" y="68" textAnchor="middle" fill="white" fillOpacity="0.4" fontSize="10" fontFamily="var(--font-display)">Validate</text>
+
+            <circle cx="375" cy="60" r="8" fill="#00C2A8" fillOpacity="0.3" />
+            <circle cx="375" cy="60" r="4" fill="#00C2A8" />
+            <text x="375" y="88" textAnchor="middle" fill="white" fillOpacity="0.4" fontSize="10" fontFamily="var(--font-display)">Build</text>
+
+            <circle cx="500" cy="35" r="10" fill="#00C2A8" fillOpacity="0.4" />
+            <circle cx="500" cy="35" r="5" fill="#00C2A8" />
+            <text x="500" y="63" textAnchor="middle" fill="white" fillOpacity="0.4" fontSize="10" fontFamily="var(--font-display)">Launch</text>
+
+            {/* Secondary node */}
+            <circle cx="300" cy="90" r="5" fill="#F59E0B" fillOpacity="0.3" />
+            <circle cx="300" cy="90" r="2.5" fill="#F59E0B" />
+
+            <defs>
+              <linearGradient id="line-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#00C2A8" stopOpacity="0.2" />
+                <stop offset="100%" stopColor="#00C2A8" stopOpacity="0.6" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
       </div>
     </section>
-  );
-}
-
-function Stats() {
-  const ref = useRef<HTMLDivElement>(null);
-  const animated = useRef(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && !animated.current) {
-          animated.current = true;
-          el.querySelectorAll('[data-target]').forEach((counter) => {
-            const target = parseInt(counter.getAttribute('data-target') || '0', 10);
-            const duration = 1800;
-            const start = performance.now();
-
-            function step(now: number) {
-              const elapsed = now - start;
-              const progress = Math.min(elapsed / duration, 1);
-              const eased = 1 - Math.pow(1 - progress, 4);
-              counter.textContent = Math.floor(eased * target).toString();
-              if (progress < 1) requestAnimationFrame(step);
-              else counter.textContent = target.toString();
-            }
-            requestAnimationFrame(step);
-          });
-        }
-      },
-      { threshold: 0.5 }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
-  return (
-    <div ref={ref} className="animate-fade-in-up delay-500 flex flex-col sm:flex-row items-center gap-10 sm:gap-0">
-      <div className="text-center px-8">
-        <span className="font-serif font-bold text-4xl text-white" data-target="50">0</span>
-        <span className="font-serif font-bold text-4xl gradient-text">+</span>
-        <span className="block text-xs text-white/30 mt-1 font-medium tracking-wide uppercase">Projects Shipped</span>
-      </div>
-      <div className="w-px h-12 bg-white/8 hidden sm:block" />
-      <div className="w-12 h-px bg-white/8 sm:hidden" />
-      <div className="text-center px-8">
-        <span className="font-serif font-bold text-4xl text-white" data-target="14">0</span>
-        <span className="font-serif font-bold text-4xl gradient-text"> Days</span>
-        <span className="block text-xs text-white/30 mt-1 font-medium tracking-wide uppercase">Avg. Delivery</span>
-      </div>
-      <div className="w-px h-12 bg-white/8 hidden sm:block" />
-      <div className="w-12 h-px bg-white/8 sm:hidden" />
-      <div className="text-center px-8">
-        <span className="font-serif font-bold text-4xl text-white" data-target="100">0</span>
-        <span className="font-serif font-bold text-4xl gradient-text">%</span>
-        <span className="block text-xs text-white/30 mt-1 font-medium tracking-wide uppercase">Client Satisfaction</span>
-      </div>
-    </div>
   );
 }

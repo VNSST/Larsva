@@ -8,9 +8,10 @@ import type { NavLink as NavLinkType } from '@/types';
 
 const navLinks: NavLinkType[] = [
   { label: 'Home', href: '/' },
-  { label: 'The Process', href: '/process' },
+  { label: 'About Us', href: '/about' },
+  { label: 'Services', href: '/services' },
   { label: 'Our Works', href: '/works' },
-  { label: 'About Larsva', href: '/about' },
+  { label: 'Contact Us', href: '/contact' },
 ];
 
 export default function Navbar() {
@@ -24,7 +25,6 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile menu on resize to desktop
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 768) close();
@@ -45,7 +45,7 @@ export default function Navbar() {
       <nav className="mx-auto flex max-w-[1200px] items-center justify-between px-6 md:px-10 h-[80px]">
         {/* Logo */}
         <Link href="/" className="group flex items-center z-10 transition-all duration-300 hover:opacity-80">
-          <span className="font-serif font-bold text-2xl tracking-tight transition-colors duration-500">
+          <span className="font-heading font-bold text-2xl tracking-tight transition-colors duration-500">
             <span className="gradient-text">L</span>
             <span className={`transition-colors duration-500 ${
               scrolled && !isOpen ? 'text-[var(--color-text-primary)]' : 'text-white'
@@ -62,7 +62,7 @@ export default function Navbar() {
                 className={`font-display font-medium text-[0.9rem] px-5 py-2.5 rounded-lg transition-all duration-300 ${
                   pathname === link.href
                     ? scrolled
-                      ? 'text-[var(--color-accent-purple)] bg-[var(--color-accent-light-purple)]'
+                      ? 'text-[var(--color-accent)] bg-[var(--color-accent-light)]'
                       : 'text-white bg-white/10'
                     : scrolled
                       ? 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-gray-100/60'
@@ -78,9 +78,9 @@ export default function Navbar() {
         {/* Desktop CTA */}
         <Link
           href="/contact"
-          className="hidden md:inline-flex items-center px-7 py-3 rounded-lg gradient-purple text-white font-display font-semibold text-[0.9rem] tracking-wide transition-all duration-400 hover:-translate-y-0.5 hover:shadow-[0_8px_32px_rgba(108,75,244,0.3)]"
+          className="hidden md:inline-flex items-center px-7 py-3 rounded-lg gradient-teal text-white font-display font-semibold text-[0.9rem] tracking-wide transition-all duration-400 hover:-translate-y-0.5 hover:shadow-[0_8px_32px_rgba(0,194,168,0.3)]"
         >
-          Contact us
+          Request Consultation
         </Link>
 
         {/* Mobile Hamburger */}
@@ -93,17 +93,17 @@ export default function Navbar() {
         >
           <span
             className={`w-6 h-[2px] rounded-sm transition-all duration-300 ${
-              isOpen ? 'rotate-45 translate-y-[8px] bg-white' : 'bg-[var(--color-text-primary)]'
+              isOpen ? 'rotate-45 translate-y-[8px] bg-white' : scrolled ? 'bg-[var(--color-text-primary)]' : 'bg-white'
             }`}
           />
           <span
             className={`w-6 h-[2px] rounded-sm transition-all duration-300 ${
-              isOpen ? 'opacity-0 bg-white' : 'bg-[var(--color-text-primary)]'
+              isOpen ? 'opacity-0 bg-white' : scrolled ? 'bg-[var(--color-text-primary)]' : 'bg-white'
             }`}
           />
           <span
             className={`w-6 h-[2px] rounded-sm transition-all duration-300 ${
-              isOpen ? '-rotate-45 -translate-y-[8px] bg-white' : 'bg-[var(--color-text-primary)]'
+              isOpen ? '-rotate-45 -translate-y-[8px] bg-white' : scrolled ? 'bg-[var(--color-text-primary)]' : 'bg-white'
             }`}
           />
         </button>
@@ -122,7 +122,7 @@ export default function Navbar() {
                 href={link.href}
                 className={`font-display font-semibold text-xl p-4 transition-colors duration-300 ${
                   pathname === link.href
-                    ? 'text-[var(--color-accent-purple)]'
+                    ? 'text-[var(--color-accent)]'
                     : 'text-white/80 hover:text-white'
                 }`}
                 onClick={close}
@@ -134,10 +134,10 @@ export default function Navbar() {
         </ul>
         <Link
           href="/contact"
-          className="mt-6 px-10 py-4 rounded-xl gradient-purple text-white font-display font-semibold text-lg transition-all duration-400 hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgba(108,75,244,0.3)]"
+          className="mt-6 px-10 py-4 rounded-xl gradient-teal text-white font-display font-semibold text-lg transition-all duration-400 hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgba(0,194,168,0.3)]"
           onClick={close}
         >
-          Contact Us
+          Request Consultation
         </Link>
       </div>
     </header>

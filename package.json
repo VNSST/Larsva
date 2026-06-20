@@ -12,12 +12,14 @@
   "dependencies": {
     "googleapis": "^171.4.0",
     "next": "latest",
+    "nodemailer": "^9.0.1",
     "react": "latest",
     "react-dom": "latest"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "latest",
     "@types/node": "latest",
+    "@types/nodemailer": "^8.0.1",
     "@types/react": "latest",
     "postcss": "latest",
     "tailwindcss": "latest",
