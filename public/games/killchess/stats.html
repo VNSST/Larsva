@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Generated from the killchess repo by scripts/export-larsva.js. Edit the original, not this copy. -->
+<script>window.KC_API = '/games/killchess'; window.KC_HOME = '/games/killchess';</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kill Chess Stats</title>
+<meta name="description" content="How many Kill Chess games have been played, and who wins: players or the computer.">
+<meta name="theme-color" content="#15121c">
+<style>
+  :root{--bg:#15121c;--panel:#211c2b;--panel2:#2b2538;--text:#f4f0fa;--muted:#a89fba;--accent:#ff3d5a;--accent2:#ffb84d;--good:#3ddc97;--radius:14px}
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",sans-serif}
+  body{min-height:100vh;display:flex;flex-direction:column;align-items:center}
+  header{width:100%;max-width:560px;display:flex;align-items:center;justify-content:space-between;padding:14px 16px 6px}
+  .logo{font-weight:900;font-size:1.45rem;letter-spacing:.5px;color:var(--text);text-decoration:none}
+  .logo span{color:var(--accent)}
+  .btn{background:var(--accent);color:#fff;border:0;border-radius:12px;padding:9px 14px;font-size:.9rem;font-weight:600;text-decoration:none}
+  main{width:100%;max-width:560px;padding:0 16px 24px}
+  h1{font-size:1.15rem;margin:14px 0 4px}
+  .sub{color:var(--muted);font-size:.85rem;margin:0 0 12px}
+  .hero{background:var(--panel);border-radius:var(--radius);padding:20px;text-align:center;margin:10px 0}
+  .hero .n{font-size:3rem;font-weight:900;font-variant-numeric:tabular-nums;line-height:1.1}
+  .hero .l{color:var(--muted);font-size:.9rem;margin-top:4px}
+  .card{background:var(--panel);border-radius:var(--radius);padding:14px;margin:10px 0}
+  .card h2{margin:0 0 10px;font-size:1rem}
+  .tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+  .tile{background:var(--panel2);border-radius:10px;padding:10px;text-align:center}
+  .tile .n{font-size:1.35rem;font-weight:800;font-variant-numeric:tabular-nums}
+  .tile .l{color:var(--muted);font-size:.75rem;margin-top:2px}
+  table{width:100%;border-collapse:collapse;font-size:.88rem;margin-top:12px;font-variant-numeric:tabular-nums}
+  th,td{padding:7px 4px;text-align:right}
+  th{color:var(--muted);font-weight:600;font-size:.75rem;text-transform:uppercase;letter-spacing:.3px}
+  th:first-child,td:first-child{text-align:left}
+  tbody tr{border-top:1px solid var(--panel2)}
+  .bar{display:flex;height:8px;border-radius:99px;overflow:hidden;background:var(--panel2);margin-top:12px}
+  .bar i{display:block;height:100%}
+  .legend{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px;color:var(--muted);font-size:.78rem}
+  .legend b{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+  .msg{color:var(--muted);text-align:center;padding:30px 0}
+  footer{color:#6f6684;font-size:.75rem;padding:10px 16px 24px;text-align:center}
+</style>
+</head>
+<body>
+<header>
+  <a class="logo" href="/games/killchess">KILL<span>CHESS</span> 😈</a>
+  <a class="btn" href="/games/killchess">Play</a>
+</header>
+<main>
+  <h1>Game stats</h1>
+  <p class="sub">Finished games from all players, updated every 30 seconds.</p>
+  <div id="content"><div class="msg">Loading…</div></div>
+</main>
+<footer>Kill Chess · games are counted when they finish</footer>
+
+<script>
+(() => {
+  const fmt = n => n.toLocaleString();
+  const pct = (a, t) => t ? Math.round(a / t * 100) + '%' : '—';
+  const C = { player: 'var(--good)', computer: 'var(--accent)', draw: 'var(--muted)', white: '#f4f0fa', black: '#6f6684' };
+
+  function tile(n, label) { return `<div class="tile"><div class="n">${fmt(n)}</div><div class="l">${label}</div></div>`; }
+  function bar(parts, total) {
+    if (!total) return '';
+    return '<div class="bar">' + parts.map(([n, c]) => `<i style="width:${n / total * 100}%;background:${c}"></i>`).join('') + '</div>';
+  }
+  function legend(items) { return '<div class="legend">' + items.map(([l, c]) => `<span><b style="background:${c}"></b>${l}</span>`).join('') + '</div>'; }
+
+  function render(s) {
+    const g = k => s[k] || 0;
+    const levels = ['veryeasy', 'easy', 'medium', 'hard'];
+    const LEVEL_NAME = { veryeasy: 'Very easy', easy: 'Easy', medium: 'Medium', hard: 'Hard' };
+    const lv = levels.map(l => ({ l, p: g(`cpu:${l}:player`), c: g(`cpu:${l}:computer`), d: g(`cpu:${l}:draw`) }));
+    lv.forEach(x => x.t = x.p + x.c + x.d);
+    const cpu = lv.reduce((a, x) => ({ p: a.p + x.p, c: a.c + x.c, d: a.d + x.d, t: a.t + x.t }), { p: 0, c: 0, d: 0, t: 0 });
+    const loc = { w: g('local:white'), b: g('local:black'), d: g('local:draw') };
+    loc.t = loc.w + loc.b + loc.d;
+    const onl = { w: g('online:white'), b: g('online:black'), d: g('online:draw') };
+    onl.t = onl.w + onl.b + onl.d;
+    const total = g('total');
+
+    document.getElementById('content').innerHTML = `
+      <div class="hero"><div class="n">${fmt(total)}</div><div class="l">games played</div></div>
+
+      <div class="card">
+        <h2>🤖 vs Computer · ${fmt(cpu.t)} ${cpu.t === 1 ? "game" : "games"}</h2>
+        <div class="tiles">${tile(cpu.p, 'Player wins')}${tile(cpu.c, 'Computer wins')}${tile(cpu.d, 'Draws')}</div>
+        ${bar([[cpu.p, C.player], [cpu.c, C.computer], [cpu.d, C.draw]], cpu.t)}
+        ${cpu.t ? legend([['Player ' + pct(cpu.p, cpu.t), C.player], ['Computer ' + pct(cpu.c, cpu.t), C.computer], ['Draw ' + pct(cpu.d, cpu.t), C.draw]]) : ''}
+        <table>
+          <thead><tr><th>Level</th><th>Games</th><th>Player</th><th>Computer</th><th>Draw</th><th>Player win %</th></tr></thead>
+          <tbody>${lv.map(x => `<tr><td>${LEVEL_NAME[x.l]}</td><td>${fmt(x.t)}</td><td>${fmt(x.p)}</td><td>${fmt(x.c)}</td><td>${fmt(x.d)}</td><td>${pct(x.p, x.t)}</td></tr>`).join('')}</tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <h2>👥 Two player, same device · ${fmt(loc.t)} ${loc.t === 1 ? "game" : "games"}</h2>
+        <div class="tiles">${tile(loc.w, 'White wins')}${tile(loc.b, 'Black wins')}${tile(loc.d, 'Draws')}</div>
+        ${bar([[loc.w, C.white], [loc.b, C.black], [loc.d, C.draw]], loc.t)}
+        ${loc.t ? legend([['White ' + pct(loc.w, loc.t), C.white], ['Black ' + pct(loc.b, loc.t), C.black], ['Draw ' + pct(loc.d, loc.t), C.draw]]) : ''}
+      </div>
+
+      <div class="card">
+        <h2>🌐 Two player, online · ${fmt(onl.t)} ${onl.t === 1 ? "game" : "games"}</h2>
+        <div class="tiles">${tile(onl.w, 'White wins')}${tile(onl.b, 'Black wins')}${tile(onl.d, 'Draws')}</div>
+        ${bar([[onl.w, C.white], [onl.b, C.black], [onl.d, C.draw]], onl.t)}
+        ${onl.t ? legend([['White ' + pct(onl.w, onl.t), C.white], ['Black ' + pct(onl.b, onl.t), C.black], ['Draw ' + pct(onl.d, onl.t), C.draw]]) : ''}
+      </div>`;
+  }
+
+  fetch((window.KC_API || '') + '/api/stats')
+    .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(render)
+    .catch(() => { document.getElementById('content').innerHTML = '<div class="msg">Stats are unavailable right now. Try again in a minute.</div>'; });
+})();
+</script>
+</body>
+</html>

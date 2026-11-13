@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Generated from the killchess repo by scripts/export-larsva.js. Edit the original, not this copy. -->
+<script>window.KC_API = '/games/killchess'; window.KC_HOME = '/games/killchess';</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kill Chess Leaderboard</title>
+<meta name="description" content="Top Kill Chess players. Beat the computer to earn points: Very easy +1, Easy +2, Medium +5, Hard +10.">
+<meta name="theme-color" content="#15121c">
+<style>
+  :root{--bg:#15121c;--panel:#211c2b;--panel2:#2b2538;--text:#f4f0fa;--muted:#a89fba;--accent:#ff3d5a;--accent2:#ffb84d;--radius:14px}
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",sans-serif}
+  body{min-height:100vh;display:flex;flex-direction:column;align-items:center}
+  header{width:100%;max-width:560px;display:flex;align-items:center;justify-content:space-between;padding:14px 16px 6px}
+  .logo{font-weight:900;font-size:1.45rem;letter-spacing:.5px;color:var(--text);text-decoration:none}
+  .logo span{color:var(--accent)}
+  .hbtns{display:flex;gap:6px;align-items:center}
+  .btn.ghost{background:var(--panel2);color:var(--text)}
+  .me button{background:var(--accent);color:#fff;border:0;border-radius:9px;padding:7px 12px;font-weight:700;cursor:pointer;font-family:inherit}
+  .btn{background:var(--accent);color:#fff;border:0;border-radius:12px;padding:9px 14px;font-size:.9rem;font-weight:600;text-decoration:none}
+  main{width:100%;max-width:560px;padding:0 16px 24px}
+  h1{font-size:1.15rem;margin:14px 0 4px}
+  .sub{color:var(--muted);font-size:.85rem;margin:0 0 12px;line-height:1.45}
+  .sub b{color:var(--text)}
+  .card{background:var(--panel);border-radius:var(--radius);padding:6px 14px;margin:10px 0}
+  .me{background:linear-gradient(90deg,#3a1f2e,#2b2538);border-left:4px solid var(--accent2);border-radius:12px;padding:12px 14px;margin:10px 0;display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .me b{color:var(--accent2)}
+  table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+  th,td{padding:10px 4px;text-align:right;font-size:.9rem}
+  th{color:var(--muted);font-weight:600;font-size:.72rem;text-transform:uppercase;letter-spacing:.3px}
+  th:nth-child(2),td:nth-child(2){text-align:left}
+  th:first-child,td:first-child{text-align:center;width:2.4em}
+  tbody tr{border-top:1px solid var(--panel2)}
+  tr.mine td{background:rgba(255,184,77,.10)}
+  .rank{font-weight:800}
+  .r1{color:#ffd54d}.r2{color:#d6dbe6}.r3{color:#e0a26b}
+  .nm{font-weight:700;overflow-wrap:anywhere}
+  .pid{display:block;color:var(--muted);font-size:.75rem;font-weight:400}
+  .pts{font-weight:800;color:var(--accent2)}
+  .wins{color:var(--muted);font-size:.8rem;white-space:nowrap}
+  .games{color:var(--muted)}
+  .count{color:var(--muted);font-size:.82rem;margin:14px 2px -4px}
+  .msg{color:var(--muted);text-align:center;padding:28px 0;line-height:1.5}
+  .msg a{color:var(--accent2)}
+  footer{color:#6f6684;font-size:.75rem;padding:10px 16px 24px;text-align:center}
+  footer a{color:#6f6684}
+  @media (max-width:420px){ .hide-sm{display:none} }
+</style>
+</head>
+<body>
+<header>
+  <a class="logo" href="/games/killchess">KILL<span>CHESS</span> 😈</a>
+  <div class="hbtns"><span data-kc-auth></span><a class="btn ghost" href="/games/killchess">Play</a></div>
+</header>
+<main>
+  <h1>🏆 Leaderboard</h1>
+  <p class="sub">Beat the computer to earn points: <b>Very easy +1</b> · <b>Easy +2</b> · <b>Medium +5</b> · <b>Hard +10</b>. Wins where Undo was used don’t count. Same points? More games played ranks higher.</p>
+  <div id="me"></div>
+  <div id="content"><div class="msg">Loading…</div></div>
+</main>
+<footer>Updated every few seconds · <a href="/games/killchess/stats">Game stats</a></footer>
+
+<script src="/games/killchess/auth.js"></script>
+<script>
+(() => {
+  const esc = t => String(t).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const Auth = window.KCAuth;
+  const SIGNUP_PROMPT_AFTER_MS = 5000;
+
+  function render(d) {
+    const myId = Auth.player() && Auth.player().id;
+    const meEl = document.getElementById('me');
+    if (d.me) {
+      meEl.innerHTML = `<div class="me"><span>You: <strong>${esc(d.me.name)}</strong> · ID ${d.me.id}</span>
+        <span><b>${d.me.points}</b> points · ${d.me.games} ${d.me.games === 1 ? 'game' : 'games'} · Rank #${d.me.rank}</span></div>`;
+    } else {
+      meEl.innerHTML = `<div class="me"><span>Where do <strong>you</strong> rank?</span><button type="button" id="meJoin">Sign up & compete</button></div>`;
+      document.getElementById('meJoin').onclick = () => Auth.open('signup', PROMPT);
+    }
+    if (!d.top.length) {
+      document.getElementById('content').innerHTML = `<div class="card"><div class="msg">No players yet.<br><a href="/games/killchess">Be the first — beat the computer</a></div></div>`;
+      return;
+    }
+    const rows = d.top.map(p => `<tr class="${p.id === myId ? 'mine' : ''}">
+        <td class="rank ${p.rank <= 3 ? 'r' + p.rank : ''}">${p.rank <= 3 ? ['🥇', '🥈', '🥉'][p.rank - 1] : p.rank}</td>
+        <td><span class="nm">${esc(p.name)}</span><span class="pid">ID ${p.id}</span></td>
+        <td class="wins hide-sm">${p.wins.veryeasy} / ${p.wins.easy} / ${p.wins.medium} / ${p.wins.hard}</td>
+        <td class="games">${p.games.toLocaleString()}</td>
+        <td class="pts">${p.points.toLocaleString()}</td>
+      </tr>`).join('');
+    document.getElementById('content').innerHTML = `<div class="count">${d.players.toLocaleString()} ${d.players === 1 ? 'player' : 'players'} signed up</div><div class="card"><table>
+      <thead><tr><th>#</th><th>Player</th><th class="hide-sm">Wins VE / E / M / H</th><th>Games</th><th>Points</th></tr></thead>
+      <tbody>${rows}</tbody></table></div>`;
+  }
+
+  function load() {
+    const p = Auth.player();
+    return fetch((window.KC_API || '') + '/api/leaderboard' + (p ? '?me=' + encodeURIComponent(p.id) : ''))
+      .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(render)
+      .catch(() => { document.getElementById('content').innerHTML = '<div class="card"><div class="msg">The leaderboard is unavailable right now. Try again in a minute.</div></div>'; });
+  }
+
+  const PROMPT = { title: 'Where do you rank? 🏆', text: 'Sign up and compete. Beat the computer to earn points: <b>Very easy +1 · Easy +2 · Medium +5 · Hard +10</b>.' };
+
+  // Reload when the player signs up, logs in or logs out.
+  Auth.onChange(load);
+  load();
+
+  // After 5 seconds on the board, invite visitors who aren't signed in (once per visit).
+  setTimeout(() => {
+    let shown = false;
+    try { shown = sessionStorage.getItem('kc_lb_prompt') === '1'; sessionStorage.setItem('kc_lb_prompt', '1'); } catch {}
+    if (!Auth.player() && !shown) Auth.open('signup', PROMPT);
+  }, SIGNUP_PROMPT_AFTER_MS);
+})();
+</script>
+</body>
+</html>

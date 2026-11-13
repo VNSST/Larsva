@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Generated from the killchess repo by scripts/export-larsva.js. Edit the original, not this copy. -->
+<script>window.KC_API = '/games/killchess'; window.KC_HOME = '/games/killchess';</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Reset Password</title>
+<meta name="robots" content="noindex">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#15121c">
+<style>
+  :root{--bg:#15121c;--panel:#211c2b;--panel2:#2b2538;--text:#f4f0fa;--muted:#a89fba;--accent:#ff3d5a;--accent2:#ffb84d;--radius:14px}
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",sans-serif}
+  body{min-height:100vh;display:flex;flex-direction:column;align-items:center}
+  header{width:100%;max-width:560px;display:flex;align-items:center;justify-content:space-between;padding:14px 16px 6px}
+  .logo{font-weight:900;font-size:1.45rem;letter-spacing:.5px;color:var(--text);text-decoration:none}
+  .logo span{color:var(--accent)}
+  main{width:100%;max-width:440px;padding:0 16px 24px}
+  .card{background:var(--panel);border-radius:18px;padding:22px 20px;margin:18px 0}
+  h1{font-size:1.3rem;margin:0 0 6px}
+  p{color:var(--muted);line-height:1.45;margin:0 0 14px;font-size:.92rem}
+  p b{color:var(--text)}
+  form{display:flex;flex-direction:column;gap:9px}
+  .pw{position:relative}
+  .field{background:var(--panel2);color:var(--text);border:1px solid transparent;border-radius:12px;padding:11px 64px 11px 12px;font-size:16px;font-family:inherit;width:100%}
+  .field:focus{outline:none;border-color:var(--accent2)}
+  .eye{position:absolute;right:6px;top:50%;transform:translateY(-50%);background:none;border:0;color:var(--muted);font-weight:700;font-size:.8rem;cursor:pointer;padding:8px;font-family:inherit}
+  .err{color:var(--accent);font-size:.85rem;min-height:1.1em;margin:0}
+  .go{background:var(--accent);color:#fff;border:0;border-radius:12px;padding:12px;font-size:1rem;font-weight:700;cursor:pointer;font-family:inherit;text-align:center;text-decoration:none;display:block}
+  .go:disabled{opacity:.6;cursor:default}
+  .link{background:none;border:0;padding:0;color:var(--accent2);font:inherit;font-weight:700;cursor:pointer}
+</style>
+</head>
+<body>
+<header>
+  <a class="logo" href="/games/killchess">KILL<span>CHESS</span> 😈</a>
+</header>
+<main><div class="card" id="card"></div></main>
+
+<script src="/games/killchess/auth.js"></script>
+<script>
+(() => {
+  const card = document.getElementById('card');
+  const m = location.hash.match(/token=([0-9a-f]{64})/);
+  const token = m && m[1];
+  // Drop the token from the address bar and history.
+  if (location.hash) history.replaceState(null, '', location.pathname);
+
+  function expired(msg) {
+    card.innerHTML = `<h1>Link expired</h1><p>${msg || 'This reset link has expired or was already used.'}</p>
+      <button class="go" type="button" id="again" style="width:100%">Request a new link</button>`;
+    document.getElementById('again').onclick = () => KCAuth.open('forgot');
+  }
+  if (!token) return expired('This reset link isn’t valid. Request a new one below.');
+
+  card.innerHTML = `
+    <h1>Choose a new password</h1>
+    <p>At least 8 characters. After this, you’ll be logged out on your other devices.</p>
+    <form novalidate>
+      <div class="pw"><input class="field" name="password" type="password" placeholder="New password" maxlength="128" autocomplete="new-password" required>
+        <button type="button" class="eye" aria-label="Show password">Show</button></div>
+      <div class="pw"><input class="field" name="confirm" type="password" placeholder="Repeat new password" maxlength="128" autocomplete="new-password" required></div>
+      <p class="err" aria-live="polite"></p>
+      <button class="go" type="submit">Save new password</button>
+    </form>`;
+  const form = card.querySelector('form'), err = form.querySelector('.err'), btn = form.querySelector('.go'), eye = form.querySelector('.eye');
+  eye.onclick = () => {
+    const show = form.password.type === 'password';
+    form.password.type = form.confirm.type = show ? 'text' : 'password';
+    eye.textContent = show ? 'Hide' : 'Show';
+  };
+  form.password.focus();
+  form.onsubmit = async e => {
+    e.preventDefault();
+    const pw = form.password.value;
+    if (pw.length < 8) { err.textContent = 'Password must be at least 8 characters.'; return; }
+    if (pw !== form.confirm.value) { err.textContent = 'The two passwords don’t match.'; return; }
+    err.textContent = ''; btn.disabled = true; btn.textContent = 'Saving…';
+    try {
+      const r = await fetch((window.KC_API || '') + '/api/reset', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ token, password: pw }) });
+      const d = await r.json().catch(() => ({}));
+      if (!r.ok) {
+        if (r.status === 400 && /expired|used/.test(d.error || '')) return expired(d.error);
+        err.textContent = d.error || 'Something went wrong. Try again.'; return;
+      }
+      KCAuth.signIn(d);
+      card.innerHTML = `<h1>Password changed ✅</h1><p>You’re logged in as <b>${d.name.replace(/[&<>"']/g, '')}</b> (player ID ${d.id}).</p>
+        <a class="go" href="/games/killchess">Play Kill Chess 😈</a>`;
+    } catch { err.textContent = 'Can’t reach the server. Check your connection.'; }
+    finally { if (btn.isConnected) { btn.disabled = false; btn.textContent = 'Save new password'; } }
+  };
+})();
+</script>
+</body>
+</html>

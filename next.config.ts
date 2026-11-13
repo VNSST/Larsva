@@ -13,6 +13,9 @@ const nextConfig: NextConfig = {
     const backendUrl = process.env.BACKEND_API_URL || 'http://127.0.0.1:8000';
     const cleanUrl = backendUrl.endsWith('/') ? backendUrl.slice(0, -1) : backendUrl;
     return [
+      // Kill Chess (static copy in public/games/killchess, generated from the killchess repo).
+      { source: '/games/killchess', destination: '/games/killchess/index.html' },
+      { source: '/games/killchess/:page(leaderboard|stats|reset)', destination: '/games/killchess/:page.html' },
       {
         source: '/api/hrdocforensics/:path*',
         destination: `${cleanUrl}/api/hrdocforensics/:path*`, // Proxy to Python backend
