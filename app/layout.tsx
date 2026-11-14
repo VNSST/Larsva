@@ -76,13 +76,24 @@ export default function RootLayout({
               '@context': 'https://schema.org',
               '@type': 'Organization',
               name: 'Larsva',
+              legalName: 'LARSVA (OPC) PRIVATE LIMITED',
               url: 'https://larsva.com',
+              telephone: '+91 91338 04790',
+              address: {
+                '@type': 'PostalAddress',
+                streetAddress: 'FLATNO:402 KALLAM TOWN, SHIP DHARMAKSHETRA, Piduguralla',
+                addressLocality: 'Piduguralla',
+                addressRegion: 'Andhra Pradesh',
+                postalCode: '522413',
+                addressCountry: 'IN',
+              },
               logo: 'https://larsva.com/images/larsva-logo.png',
               description:
                 'Larsva helps ambitious working professionals and aspiring founders validate startup ideas, build MVPs, and launch professionally.',
               contactPoint: {
                 '@type': 'ContactPoint',
                 email: 'info@larsva.com',
+                telephone: '+91 91338 04790',
                 contactType: 'customer service',
               },
               sameAs: [

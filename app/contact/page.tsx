@@ -72,7 +72,9 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <h3 className="font-display font-semibold text-sm mb-1">Phone</h3>
-                      <p className="text-sm text-[var(--color-text-secondary)]">Available upon request</p>
+                      <a href="tel:+919133804790" className="text-sm text-[var(--color-accent)] hover:underline">
+                        +91 91338 04790
+                      </a>
                     </div>
                   </div>
 
