@@ -10,6 +10,8 @@ export const metadata: Metadata = {
     'DocForensics',
     'PDF Metadata Analyzer',
     'Larsva Tools',
+    'Kill Chess',
+    'Antichess Android app',
   ],
   openGraph: {
     title: 'Tools by Larsva — Powerful Free Tools for Professionals',
@@ -18,7 +20,17 @@ export const metadata: Metadata = {
   },
 };
 
-const tools = [
+type Tool = {
+  slug: string;
+  href?: string;
+  title: string;
+  description: string;
+  icon: string;
+  iconBg: string;
+  status: 'live' | 'android' | 'soon';
+};
+
+const tools: Tool[] = [
   {
     slug: 'HRDocForensics',
     title: 'HRDocForensics',
@@ -27,6 +39,16 @@ const tools = [
     icon: '🔍',
     iconBg: 'rgba(99, 102, 241, 0.15)',
     status: 'live' as const,
+  },
+  {
+    slug: 'killchess',
+    href: '/games/killchess',
+    title: 'Kill Chess',
+    description:
+      'Chess where captures are forced and you win by losing all your pieces. Free Android app: play the computer, a friend, or online.',
+    icon: '😈',
+    iconBg: 'rgba(255, 61, 90, 0.12)',
+    status: 'android' as const,
   },
   {
     slug: '',
@@ -97,8 +119,8 @@ export default function ToolsPage() {
                   </div>
                   <h3>{tool.title}</h3>
                   <p className="tool-card-desc">{tool.description}</p>
-                  <span className={`tool-tag ${tool.status === 'live' ? 'live' : 'soon'}`}>
-                    {tool.status === 'live' ? '● LIVE' : 'COMING SOON'}
+                  <span className={`tool-tag ${tool.status === 'soon' ? 'soon' : 'live'}`}>
+                    {tool.status === 'live' ? '● LIVE' : tool.status === 'android' ? '● ANDROID APP' : 'COMING SOON'}
                   </span>
                 </>
               );
@@ -111,7 +133,7 @@ export default function ToolsPage() {
                     </div>
                   ) : (
                     <Link
-                      href={`/products/${tool.slug}`}
+                      href={tool.href ?? `/products/${tool.slug}`}
                       className="tool-catalog-card"
                     >
                       {cardContent}

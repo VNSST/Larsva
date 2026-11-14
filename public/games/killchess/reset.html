@@ -85,9 +85,8 @@
         if (r.status === 400 && /expired|used/.test(d.error || '')) return expired(d.error);
         err.textContent = d.error || 'Something went wrong. Try again.'; return;
       }
-      KCAuth.signIn(d);
-      card.innerHTML = `<h1>Password changed ✅</h1><p>You’re logged in as <b>${d.name.replace(/[&<>"']/g, '')}</b> (player ID ${d.id}).</p>
-        <a class="go" href="/games/killchess">Play Kill Chess 😈</a>`;
+      card.innerHTML = `<h1>Password changed ✅</h1><p>Open the Kill Chess app and log in as <b>${d.name.replace(/[&<>"']/g, '')}</b> (player ID ${d.id}) with your new password.</p>
+        <a class="go" href="/games/killchess">Get the Android app 😈</a>`;
     } catch { err.textContent = 'Can’t reach the server. Check your connection.'; }
     finally { if (btn.isConnected) { btn.disabled = false; btn.textContent = 'Save new password'; } }
   };

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Kill Chess</string>
+    <string name="title_activity_main">Kill Chess</string>
+    <string name="package_name">com.larsva.killchess</string>
+    <string name="custom_url_scheme">com.larsva.killchess</string>
+</resources>

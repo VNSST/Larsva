@@ -1,0 +1,17 @@
+{
+  "appId": "com.larsva.killchess",
+  "appName": "Kill Chess",
+  "webDir": "www",
+  "backgroundColor": "#15121c",
+  "android": {
+    "allowMixedContent": false
+  },
+  "plugins": {
+    "CapacitorHttp": {
+      "enabled": true
+    },
+    "SystemBars": {
+      "style": "DARK"
+    }
+  }
+}

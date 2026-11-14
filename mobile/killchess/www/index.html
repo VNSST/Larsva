@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Generated from the killchess repo by scripts/export-larsva.js. Edit the original, not this copy. -->
-<script>window.KC_API = '/games/killchess'; window.KC_HOME = '/games/killchess';</script>
+<!-- Kill Chess Android app copy. Originally exported from the killchess repo; this folder is now the source for the app. -->
+<script>window.KC_API = 'https://larsva.com/games/killchess'; window.KC_HOME = 'https://larsva.com/games/killchess';</script>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>/* Android app: draw under the status and navigation bars, keep content clear of them */ html{padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}</style>
 <title>Kill Chess — Lose all your pieces to win</title>
 <meta name="description" content="Kill Chess (antichess): captures are forced and you win by losing all your pieces. Play the computer or a friend on the same device. Free, no signup.">
 <meta property="og:title" content="Kill Chess — chess where you try to LOSE">
@@ -124,7 +125,7 @@
       <button class="iconbtn" id="rulesBtn" aria-label="How to play">Rules</button>
       <span data-kc-auth></span>
     </div>
-    <a class="lblink" href="/games/killchess/leaderboard">🏆 Leaderboard</a>
+    <a class="lblink" href="leaderboard.html">🏆 Leaderboard</a>
   </div>
 </header>
 
@@ -191,7 +192,7 @@
   </div>
 </main>
 
-<footer>Kill Chess · also known as antichess, giveaway or losing chess · <a href="/games/killchess/leaderboard" style="color:var(--muted)">Leaderboard</a> · <a href="/games/killchess/stats" style="color:var(--muted)">Stats</a></footer>
+<footer>Kill Chess · also known as antichess, giveaway or losing chess · <a href="leaderboard.html" style="color:var(--muted)">Leaderboard</a> · <a href="stats.html" style="color:var(--muted)">Stats</a></footer>
 
 <div class="overlay" id="rulesOverlay">
   <div class="modal">
@@ -227,14 +228,14 @@
     <button class="btn primary" id="endNext" style="display:block;margin:0 auto 12px;font-size:1.05rem;padding:12px 22px"></button>
     <div class="row" style="justify-content:center">
       <a class="btn wa" id="endShare" href="#" target="_blank" rel="noopener" style="text-decoration:none">Share on WhatsApp</a>
-      <a class="btn" href="/games/killchess/leaderboard" style="text-decoration:none">🏆 Leaderboard</a>
+      <a class="btn" href="leaderboard.html" style="text-decoration:none">🏆 Leaderboard</a>
     </div>
   </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
-<script src="/games/killchess/auth.js"></script>
+<script src="auth.js"></script>
 <script>
 /* =====================================================================
    KILL CHESS ENGINE  (antichess / losing chess)
@@ -759,7 +760,7 @@ const ENGINE = (() => {
   }
 
   function resultShareText() {
-    const base = location.origin + location.pathname;
+    const base = window.KC_HOME;
     const moves = Math.ceil(G.moves.length / 2);
     const won = over && over.winner && over.winner === cfg.human;
     if (cfg.mode === 'online' && ON && ON.color && over && over.winner === ON.color) return `😈 I just beat ${oppName()} at Kill Chess — chess where you WIN by losing all your pieces. Play me: ${base}`;
@@ -894,7 +895,7 @@ const ENGINE = (() => {
     return !joined ? 'Waiting for friend…' : nm || (ON.color ? 'Friend' : side === 'w' ? 'White' : 'Black');
   };
   const oppName = () => ON && ON.color ? seatName(ON.color === 'w' ? 'b' : 'w') : '';
-  const inviteLink = () => location.origin + (window.KC_HOME || '/') + '?play=' + ON.id;
+  const inviteLink = () => window.KC_HOME + '?play=' + ON.id;   // the larsva.com page opens the app (or offers the download)
   const myName = () => { const p = Auth.player(); return p ? p.name : ''; };
 
   function seats() { try { return JSON.parse(localStorage.getItem('kc_online') || '{}'); } catch { return {}; } }

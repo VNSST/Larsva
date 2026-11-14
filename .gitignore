@@ -36,3 +36,6 @@ next-env.d.ts
 
 # Source repos included for reference only
 /DocForensics
+
+# Kill Chess Android app (mobile/killchess)
+/mobile/killchess/node_modules
