@@ -58,9 +58,14 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <h3 className="font-display font-semibold text-sm mb-1">Email</h3>
-                      <a href="mailto:info@larsva.com" className="text-sm text-[var(--color-accent)] hover:underline">
-                        info@larsva.com
-                      </a>
+                      <div className="flex flex-col gap-1">
+                        <a href="mailto:info@larsva.com" className="text-sm text-[var(--color-accent)] hover:underline">
+                          info@larsva.com
+                        </a>
+                        <a href="mailto:admin@larsva.com" className="text-sm text-[var(--color-accent)] hover:underline">
+                          admin@larsva.com
+                        </a>
+                      </div>
                     </div>
                   </div>
 
