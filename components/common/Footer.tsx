@@ -151,6 +151,9 @@ export default function Footer() {
         {/* Bottom */}
         <div className="flex flex-col md:flex-row justify-between items-center text-xs text-white/25 gap-3">
           <p>&copy; {new Date().getFullYear()} Larsva. All rights reserved.</p>
+          <Link href="/privacy-policy" className="hover:text-white transition-colors duration-300">
+            Privacy Policy
+          </Link>
         </div>
       </div>
     </footer>

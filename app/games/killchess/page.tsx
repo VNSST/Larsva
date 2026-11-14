@@ -136,6 +136,8 @@ export default async function KillChessPage({ searchParams }: Props) {
         </div>
         <div className="mx-auto max-w-[1000px] relative z-10 mt-10 text-center">
           <Link href="/products" className="text-white/40 hover:text-white transition-colors">← More from Larsva</Link>
+          <span className="text-white/20 mx-3">·</span>
+          <Link href="/privacy-policy#kill-chess" className="text-white/40 hover:text-white transition-colors">Privacy policy</Link>
         </div>
       </section>
     </>
