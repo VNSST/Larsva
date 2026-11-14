@@ -79,6 +79,27 @@ export default function ContactPage() {
                   <div className="flex items-start gap-4">
                     <div className="w-11 h-11 rounded-xl bg-[var(--color-accent-light)] flex items-center justify-center flex-shrink-0 text-[var(--color-accent)]">
                       <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M10 18s6-5.2 6-10a6 6 0 10-12 0c0 4.8 6 10 6 10z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+                        <circle cx="10" cy="8" r="2.2" stroke="currentColor" strokeWidth="1.5" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="font-display font-semibold text-sm mb-1">Address</h3>
+                      <address className="not-italic text-sm text-[var(--color-text-secondary)] leading-relaxed">
+                        <span className="font-semibold text-[var(--color-text-primary)]">LARSVA (OPC) PRIVATE LIMITED</span>
+                        <br />
+                        FLATNO:402 KALLAM TOWN, SHIP DHARMAKSHETRA,
+                        <br />
+                        Piduguralla, Piduguralla, Guntur- 522413,
+                        <br />
+                        Andhra Pradesh
+                      </address>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4">
+                    <div className="w-11 h-11 rounded-xl bg-[var(--color-accent-light)] flex items-center justify-center flex-shrink-0 text-[var(--color-accent)]">
+                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                         <circle cx="10" cy="10" r="8" stroke="currentColor" strokeWidth="1.5" />
                         <path d="M10 6V10L13 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
                       </svg>
