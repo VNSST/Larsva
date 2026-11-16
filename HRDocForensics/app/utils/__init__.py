@@ -1,1 +1,0 @@
-# HRDocForensics utilities package

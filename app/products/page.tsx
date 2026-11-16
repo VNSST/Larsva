@@ -5,14 +5,8 @@ import ScrollReveal from '@/components/common/ScrollReveal';
 export const metadata: Metadata = {
   title: 'Tools — Powerful Free Tools by Larsva',
   description:
-    'A growing suite of intelligent tools built for learners, educators, and professionals. DocForensics, Data Visualizer and more.',
-  keywords: [
-    'DocForensics',
-    'PDF Metadata Analyzer',
-    'Larsva Tools',
-    'Kill Chess',
-    'Antichess Android app',
-  ],
+    'A growing suite of intelligent tools built for learners, educators, and professionals.',
+  keywords: ['Larsva Tools'],
   openGraph: {
     title: 'Tools by Larsva — Powerful Free Tools for Professionals',
     description:
@@ -27,29 +21,10 @@ type Tool = {
   description: string;
   icon: string;
   iconBg: string;
-  status: 'live' | 'android' | 'soon';
+  status: 'live' | 'soon';
 };
 
 const tools: Tool[] = [
-  {
-    slug: 'HRDocForensics',
-    title: 'HRDocForensics',
-    description:
-      'Upload a PDF to predict authenticity, detect editing anomalies, and generate data-driven counter-offer strategies for HR teams.',
-    icon: '🔍',
-    iconBg: 'rgba(99, 102, 241, 0.15)',
-    status: 'live' as const,
-  },
-  {
-    slug: 'killchess',
-    href: '/games/killchess',
-    title: 'Kill Chess',
-    description:
-      'Chess where captures are forced and you win by losing all your pieces. Free Android app: play the computer, a friend, or online.',
-    icon: '😈',
-    iconBg: 'rgba(255, 61, 90, 0.12)',
-    status: 'android' as const,
-  },
   {
     slug: '',
     title: 'Data Visualizer',
@@ -120,7 +95,7 @@ export default function ToolsPage() {
                   <h3>{tool.title}</h3>
                   <p className="tool-card-desc">{tool.description}</p>
                   <span className={`tool-tag ${tool.status === 'soon' ? 'soon' : 'live'}`}>
-                    {tool.status === 'live' ? '● LIVE' : tool.status === 'android' ? '● ANDROID APP' : 'COMING SOON'}
+                    {tool.status === 'live' ? '● LIVE' : 'COMING SOON'}
                   </span>
                 </>
               );

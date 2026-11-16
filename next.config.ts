@@ -1,28 +1,16 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  serverExternalPackages: ['pdfjs-dist'],
   images: {
     // Add any external image domains here if needed
     // e.g., domains: ['example.com'],
   },
   async redirects() {
     return [
-      // Old Kill Chess web pages: the game, leaderboard and stats now live in the Android app.
-      { source: '/games/killchess/:page(leaderboard|stats)', destination: '/games/killchess', permanent: true },
-    ];
-  },
-  async rewrites() {
-    const backendUrl = process.env.BACKEND_API_URL || 'http://127.0.0.1:8000';
-    const cleanUrl = backendUrl.endsWith('/') ? backendUrl.slice(0, -1) : backendUrl;
-    return [
-      // Kill Chess is an Android app now (mobile/killchess); /games/killchess is its download page.
-      // The password-reset page stays on the web because reset emails link to it.
-      { source: '/games/killchess/reset', destination: '/games/killchess/reset.html' },
-      {
-        source: '/api/hrdocforensics/:path*',
-        destination: `${cleanUrl}/api/hrdocforensics/:path*`, // Proxy to Python backend
-      },
+      // Kill Chess and HRDocForensics were removed; send old links to the products page.
+      { source: '/games/killchess/:path*', destination: '/products', permanent: false },
+      { source: '/products/HRDocForensics/:path*', destination: '/products', permanent: false },
+      { source: '/downloads/killchess.apk', destination: '/products', permanent: false },
     ];
   },
   async headers() {
