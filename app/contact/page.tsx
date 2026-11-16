@@ -1,146 +1,70 @@
 import type { Metadata } from 'next';
 import ConsultationForm from '@/components/forms/ConsultationForm';
-import ScrollReveal from '@/components/common/ScrollReveal';
 
 export const metadata: Metadata = {
-  title: 'Contact Us — Request a Founder Consultation',
-  description: 'Request a founder consultation with Larsva. Share your startup idea and we\'ll contact you within 24 hours to discuss validation, MVP development, or launch support.',
-  keywords: ['Contact Larsva', 'Startup Consultation India', 'Founder Advisory Contact'],
+  title: 'Contact — Get a Quote',
+  description:
+    'Tell Larsva what you need built. Within 24 hours you get a written scope, one fixed price and a delivery date.',
+  keywords: ['Contact Larsva', 'Website Quote India', 'App Development Quote'],
   alternates: {
     canonical: '/contact',
   },
   openGraph: {
-    title: 'Contact Larsva — Let\'s Build Something Meaningful',
-    description: 'Share your startup idea. We\'ll help you validate it, build your MVP, and launch professionally.',
+    title: 'Contact Larsva — Get a Quote',
+    description: 'Send a short brief and get a fixed-price quote within 24 hours.',
   },
 };
 
 export default function ContactPage() {
   return (
     <>
-      {/* Hero */}
-      <section className="gradient-hero pt-36 pb-20 px-6 md:px-10 relative overflow-hidden">
-        <div className="absolute top-[-20%] right-[-10%] w-[40%] h-[50%] bg-[radial-gradient(circle,rgba(0,194,168,0.06),transparent_70%)] rounded-full pointer-events-none" />
-        <div className="mx-auto max-w-[800px] text-center relative z-10">
-          <span className="overline text-[var(--color-accent)] mb-5 block">Contact Us</span>
-          <h1 className="font-heading font-bold text-[clamp(2.5rem,5vw,4rem)] tracking-tight leading-tight mb-6 text-white">
-            Let&apos;s Build Something{' '}
-            <span className="gradient-text">Meaningful</span>
-          </h1>
-          <div className="section-divider mx-auto mb-6" />
-          <p className="text-lg text-white/45 max-w-[520px] mx-auto leading-relaxed">
-            Share your startup idea. We&apos;ll help you validate it, build your MVP, and launch professionally.
+      <section className="page-hero">
+        <div className="container-site">
+          <p className="eyebrow">Contact</p>
+          <h1 className="h-display mt-4">Get a quote</h1>
+          <p className="lead mt-6 max-w-[600px]">
+            Send a short brief. Within 24 hours we reply with a written scope, one fixed price and a delivery date.
           </p>
         </div>
       </section>
 
-      {/* Form Section */}
-      <section id="consultation-form" className="py-20 md:py-28 bg-white grid-pattern">
-        <div className="mx-auto max-w-[1100px] px-6 md:px-10">
-          <div className="flex flex-col md:flex-row gap-16 md:gap-20 items-start">
-            {/* Left: Info */}
-            <div className="flex-1 max-w-[420px]">
-              <ScrollReveal>
-                <h2 className="font-heading font-bold text-2xl tracking-tight mb-6">
-                  Request a Founder Consultation
-                </h2>
-                <p className="text-[var(--color-text-secondary)] leading-relaxed mb-10">
-                  Tell us about your startup idea and we&apos;ll reach out within 24 hours to discuss how we can help you move forward.
-                </p>
+      <section id="quote-form" className="section section-alt">
+        <div className="container-site grid gap-12 lg:grid-cols-[1.15fr_1fr] lg:gap-16">
+          {/* The form comes first, on phones too. */}
+          <div className="card p-6 md:p-8">
+            <h2 className="mb-6 text-2xl font-bold">Tell us what you need</h2>
+            <ConsultationForm />
+          </div>
 
-                <div className="flex flex-col gap-7">
-                  <div className="flex items-start gap-4">
-                    <div className="w-11 h-11 rounded-xl bg-[var(--color-accent-light)] flex items-center justify-center flex-shrink-0 text-[var(--color-accent)]">
-                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                        <path d="M3 5L10 11L17 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                        <rect x="2" y="4" width="16" height="12" rx="2" stroke="currentColor" strokeWidth="1.5" />
-                      </svg>
-                    </div>
-                    <div>
-                      <h3 className="font-display font-semibold text-sm mb-1">Email</h3>
-                      <div className="flex flex-col gap-1">
-                        <a href="mailto:info@larsva.com" className="text-sm text-[var(--color-accent)] hover:underline">
-                          info@larsva.com
-                        </a>
-                        <a href="mailto:admin@larsva.com" className="text-sm text-[var(--color-accent)] hover:underline">
-                          admin@larsva.com
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-4">
-                    <div className="w-11 h-11 rounded-xl bg-[var(--color-accent-light)] flex items-center justify-center flex-shrink-0 text-[var(--color-accent)]">
-                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                        <path d="M2 3h5l2 5-3 2a11 11 0 005 5l2-3 5 2v5a2 2 0 01-2 2A18 18 0 012 3z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    </div>
-                    <div>
-                      <h3 className="font-display font-semibold text-sm mb-1">Phone</h3>
-                      <a href="tel:+919133804790" className="text-sm text-[var(--color-accent)] hover:underline">
-                        +91 91338 04790
-                      </a>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-4">
-                    <div className="w-11 h-11 rounded-xl bg-[var(--color-accent-light)] flex items-center justify-center flex-shrink-0 text-[var(--color-accent)]">
-                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                        <path d="M10 18s6-5.2 6-10a6 6 0 10-12 0c0 4.8 6 10 6 10z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
-                        <circle cx="10" cy="8" r="2.2" stroke="currentColor" strokeWidth="1.5" />
-                      </svg>
-                    </div>
-                    <div>
-                      <h3 className="font-display font-semibold text-sm mb-1">Address</h3>
-                      <address className="not-italic text-sm text-[var(--color-text-secondary)] leading-relaxed">
-                        <span className="font-semibold text-[var(--color-text-primary)]">LARSVA (OPC) PRIVATE LIMITED</span>
-                        <br />
-                        FLATNO:402 KALLAM TOWN, SHIP DHARMAKSHETRA,
-                        <br />
-                        Piduguralla, Piduguralla, Guntur- 522413,
-                        <br />
-                        Andhra Pradesh
-                      </address>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-4">
-                    <div className="w-11 h-11 rounded-xl bg-[var(--color-accent-light)] flex items-center justify-center flex-shrink-0 text-[var(--color-accent)]">
-                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                        <circle cx="10" cy="10" r="8" stroke="currentColor" strokeWidth="1.5" />
-                        <path d="M10 6V10L13 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                      </svg>
-                    </div>
-                    <div>
-                      <h3 className="font-display font-semibold text-sm mb-1">Response Time</h3>
-                      <p className="text-sm text-[var(--color-text-secondary)]">Within 24 hours</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-4">
-                    <div className="w-11 h-11 rounded-xl bg-[var(--color-accent-light)] flex items-center justify-center flex-shrink-0 text-[var(--color-accent)]">
-                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                        <path d="M10 2L13 8L20 9L15 14L16 20L10 17L4 20L5 14L0 9L7 8L10 2Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
-                      </svg>
-                    </div>
-                    <div>
-                      <h3 className="font-display font-semibold text-sm mb-1">Confidential</h3>
-                      <p className="text-sm text-[var(--color-text-secondary)]">
-                        Your startup idea is kept completely confidential.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </ScrollReveal>
+          <div className="flex flex-col gap-8">
+            <div>
+              <h2 className="font-display text-sm font-semibold uppercase tracking-[0.06em] text-[var(--color-ink-2)]">Email</h2>
+              <ul className="mt-2 flex flex-col gap-1">
+                <li><a href="mailto:info@larsva.com" className="text-lg font-medium text-[var(--color-accent)] hover:underline underline-offset-4">info@larsva.com</a></li>
+                <li><a href="mailto:admin@larsva.com" className="text-lg font-medium text-[var(--color-accent)] hover:underline underline-offset-4">admin@larsva.com</a></li>
+              </ul>
             </div>
-
-            {/* Right: Form */}
-            <div className="flex-1 w-full">
-              <ScrollReveal delay={150}>
-                <div className="bg-white rounded-2xl p-8 md:p-10 border border-gray-100 shadow-[0_4px_24px_rgba(0,0,0,0.04)]">
-                  <ConsultationForm />
-                </div>
-              </ScrollReveal>
+            <div>
+              <h2 className="font-display text-sm font-semibold uppercase tracking-[0.06em] text-[var(--color-ink-2)]">Phone</h2>
+              <a href="tel:+919133804790" className="mt-2 inline-block text-lg font-medium text-[var(--color-accent)] hover:underline underline-offset-4">
+                +91 91338 04790
+              </a>
+            </div>
+            <div>
+              <h2 className="font-display text-sm font-semibold uppercase tracking-[0.06em] text-[var(--color-ink-2)]">Address</h2>
+              <address className="mt-2 not-italic leading-relaxed text-[var(--color-ink-2)]">
+                <span className="font-semibold text-[var(--color-ink)]">LARSVA (OPC) PRIVATE LIMITED</span>
+                <br />
+                FLATNO:402 KALLAM TOWN, SHIP DHARMAKSHETRA,
+                <br />
+                Piduguralla, Piduguralla, Guntur- 522413,
+                <br />
+                Andhra Pradesh
+              </address>
+            </div>
+            <div>
+              <h2 className="font-display text-sm font-semibold uppercase tracking-[0.06em] text-[var(--color-ink-2)]">Response time</h2>
+              <p className="mt-2 text-[var(--color-ink-2)]">Within 24 hours. Everything you share stays confidential.</p>
             </div>
           </div>
         </div>

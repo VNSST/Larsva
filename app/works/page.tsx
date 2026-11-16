@@ -1,192 +1,77 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import Image from 'next/image';
-import ScrollReveal from '@/components/common/ScrollReveal';
-import Testimonials from '@/components/home/Testimonials';
-import type { CaseStudy } from '@/types';
+import { projects } from '@/data/projects';
+import { ExternalIcon } from '@/components/ui/icons';
+import CtaBand from '@/components/ui/CtaBand';
 
 export const metadata: Metadata = {
-  title: 'Our Works — Portfolio & Case Studies',
-  description: 'Explore startup validation projects, MVP development case studies, and launch support work by Larsva. See how we help founders go from idea to launch.',
-  keywords: ['Startup Portfolio', 'MVP Case Studies', 'Startup Validation Projects'],
+  title: 'Our Work — Websites and Apps We Have Built',
+  description: 'Websites and web apps built by Larsva, including Mana PG Rent, B School of AI and Fly Castles.',
+  keywords: ['Larsva Portfolio', 'Website Development Projects', 'Web App Case Studies'],
   alternates: {
     canonical: '/works',
   },
   openGraph: {
-    title: 'Our Works — Larsva Portfolio & Case Studies',
-    description: 'See how Larsva helps founders validate ideas, build MVPs, and launch startups.',
+    title: 'Our Work — Larsva',
+    description: 'Websites and web apps built by Larsva.',
   },
 };
-
-const caseStudies: CaseStudy[] = [
-  {
-    id: 'manapgrent',
-    title: 'Mana PG Rent',
-    category: 'mvp',
-    problem: 'Finding and managing PG accommodations was fragmented across multiple platforms with no unified experience for tenants or landlords.',
-    approach: 'Built a seamless web platform with property listings, search filters, and a management dashboard. Focused on mobile-first design and fast load times.',
-    outcome: 'Launched a fully functional PG rental platform that streamlined the discovery and booking process for both tenants and property owners.',
-    tags: ['Web App', 'Real Estate', 'MVP'],
-    image: '/images/manapgrent.png',
-    url: 'https://manapgrent.in/',
-  },
-  {
-    id: 'bschoolofai',
-    title: 'B School of AI',
-    category: 'mvp',
-    problem: 'Aspiring AI professionals lacked a structured, accessible platform for learning business applications of artificial intelligence.',
-    approach: 'Designed and developed an educational platform with course modules, resource libraries, and a modern learning experience. Optimized for engagement and retention.',
-    outcome: 'Created a comprehensive EdTech platform that empowers the next generation with cutting-edge AI education and career resources.',
-    tags: ['EdTech', 'AI', 'Platform'],
-    image: '/images/bschoolofai.png',
-    url: 'https://bschoolofai.com',
-  },
-  {
-    id: 'flycastles',
-    title: 'Fly Castles',
-    category: 'mvp',
-    problem: 'Existing travel booking platforms lacked premium design quality and failed to deliver the aspirational experience that luxury travelers expect.',
-    approach: 'Crafted a premium travel and accommodation booking experience with stunning visual design, fluid interactions, and an intuitive booking flow.',
-    outcome: 'Delivered a visually premium travel platform that elevated the booking experience and positioned the brand in the luxury travel segment.',
-    tags: ['Travel', 'Booking', 'Premium'],
-    image: '/images/flycastles.png',
-    url: 'https://flycastles.com',
-  },
-];
 
 export default function WorksPage() {
   return (
     <>
-      {/* Hero */}
-      <section className="pt-36 pb-24 px-6 md:px-10 gradient-hero relative overflow-hidden">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-[radial-gradient(circle,rgba(0,194,168,0.06),transparent_70%)] rounded-full pointer-events-none" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[30%] h-[30%] bg-[radial-gradient(circle,rgba(0,194,168,0.04),transparent_70%)] rounded-full pointer-events-none" />
-
-        <div className="mx-auto max-w-[800px] text-center relative z-10">
-          <span className="overline text-[var(--color-accent)] mb-5 block">Portfolio</span>
-          <h1 className="font-heading font-bold text-[clamp(2.5rem,5vw,4rem)] tracking-tight leading-tight mb-6 text-white">
-            Our Works<span className="gradient-text">.</span>
-          </h1>
-          <div className="section-divider mx-auto mb-6" />
-          <p className="text-lg text-white/45 max-w-[600px] mx-auto leading-relaxed">
-            Real projects. Real founders. Real results. Here&apos;s how we&apos;ve helped founders go from idea to launch.
-          </p>
+      <section className="page-hero">
+        <div className="container-site">
+          <p className="eyebrow">Work</p>
+          <h1 className="h-display mt-4">Our work</h1>
+          <p className="lead mt-6 max-w-[600px]">Live sites and apps we have built, what each client needed and what we delivered.</p>
         </div>
       </section>
 
-      {/* Case Studies */}
-      <section className="py-20 md:py-24 px-6 md:px-10 bg-white grid-pattern">
-        <div className="mx-auto max-w-[1100px]">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {caseStudies.map((study, i) => (
-              <ScrollReveal key={study.id} delay={i * 100}>
-                <div className="group h-full flex flex-col bg-white rounded-2xl border border-gray-100 hover:border-[var(--color-accent)]/20 shadow-sm hover:shadow-[0_16px_48px_rgba(0,0,0,0.06)] transition-all duration-500 hover:-translate-y-1 overflow-hidden">
-                  {study.image ? (
-                    <div className="relative w-full h-48 overflow-hidden">
-                      <Image
-                        src={study.image}
-                        alt={`${study.title} screenshot`}
-                        fill
-                        className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      />
-                    </div>
-                  ) : (
-                    <div className="h-1.5 w-full gradient-teal" />
-                  )}
-
-                  <div className="p-7 flex flex-col flex-grow">
-                    {/* Tags */}
-                    <div className="flex gap-2 mb-4 flex-wrap">
-                      {study.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="text-xs font-semibold px-3 py-1 rounded-full bg-[var(--color-accent-light)] text-[var(--color-accent)] tracking-wider uppercase"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-
-                    <h3 className="font-heading font-bold text-xl mb-4 text-gray-900">
-                      {study.title}
-                    </h3>
-
-                    {/* Problem / Approach / Outcome */}
-                    <div className="flex flex-col gap-4 flex-grow">
-                      <div>
-                        <h4 className="font-display font-semibold text-xs text-[var(--color-text-muted)] uppercase tracking-wider mb-1">
-                          Problem
-                        </h4>
-                        <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed">
-                          {study.problem}
-                        </p>
-                      </div>
-                      <div>
-                        <h4 className="font-display font-semibold text-xs text-[var(--color-text-muted)] uppercase tracking-wider mb-1">
-                          Approach
-                        </h4>
-                        <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed">
-                          {study.approach}
-                        </p>
-                      </div>
-                      <div>
-                        <h4 className="font-display font-semibold text-xs text-[var(--color-accent)] uppercase tracking-wider mb-1">
-                          Outcome
-                        </h4>
-                        <p className="text-sm text-[var(--color-text-primary)] leading-relaxed font-medium">
-                          {study.outcome}
-                        </p>
-                      </div>
-                    </div>
-
-                    {study.url && (
-                      <a
-                        href={study.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="mt-5 inline-flex items-center gap-2 text-sm font-display font-semibold text-[var(--color-accent)] hover:gap-3 transition-all duration-300"
-                      >
-                        Visit Project
-                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                          <path d="M2 7H12M12 7L8 3M12 7L8 11" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
-                      </a>
-                    )}
-                  </div>
+      <section className="section">
+        <div className="container-site flex flex-col gap-16 md:gap-24">
+          {projects.map((p) => (
+            <article key={p.slug} className="grid items-center gap-8 lg:grid-cols-[1.2fr_1fr] lg:gap-14" aria-labelledby={`${p.slug}-heading`}>
+              <a
+                href={p.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="card card-link relative block aspect-[16/10] overflow-hidden bg-[var(--color-bg-alt)]"
+                tabIndex={-1}
+                aria-hidden="true"
+              >
+                <Image src={p.image} alt="" fill sizes="(min-width: 1024px) 600px, 100vw" className="object-cover object-top" />
+              </a>
+              <div>
+                <div className="flex flex-wrap gap-2">
+                  {p.tags.map((t) => (
+                    <span key={t} className="tag">{t}</span>
+                  ))}
                 </div>
-              </ScrollReveal>
-            ))}
-          </div>
+                <h2 id={`${p.slug}-heading`} className="mt-4 text-3xl font-bold">{p.name}</h2>
+                <p className="lead mt-3">{p.summary}</p>
+                <dl className="mt-6 flex flex-col gap-4">
+                  <div>
+                    <dt className="font-display font-semibold">What they needed</dt>
+                    <dd className="mt-1 leading-relaxed text-[var(--color-ink-2)]">{p.needed}</dd>
+                  </div>
+                  <div>
+                    <dt className="font-display font-semibold">What we built</dt>
+                    <dd className="mt-1 leading-relaxed text-[var(--color-ink-2)]">{p.built}</dd>
+                  </div>
+                </dl>
+                <a href={p.url} target="_blank" rel="noopener noreferrer" className="link-arrow mt-6">
+                  Visit {p.name}
+                  <ExternalIcon />
+                  <span className="sr-only">(opens in a new tab)</span>
+                </a>
+              </div>
+            </article>
+          ))}
         </div>
       </section>
 
-      {/* Testimonials */}
-      <Testimonials />
-
-      {/* Coming Soon */}
-      <section className="py-20 md:py-24 px-6 md:px-10 bg-[var(--color-bg-dark)] grid-pattern-dark">
-        <div className="mx-auto max-w-[800px] text-center">
-          <ScrollReveal>
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-6">
-              <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse-dot" />
-              <span className="text-sm text-white/60 font-display font-medium">Coming Soon</span>
-            </div>
-            <h2 className="font-heading font-bold text-2xl tracking-tight mb-4 text-white">
-              More Startups Launching Through Larsva
-            </h2>
-            <p className="text-white/40 leading-relaxed mb-8 max-w-[480px] mx-auto">
-              We&apos;re currently working with founders on exciting new ventures. Case studies will be added as projects launch.
-            </p>
-            <Link href="/contact" className="btn-primary inline-flex">
-              Request Founder Consultation
-              <svg className="btn-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </Link>
-          </ScrollReveal>
-        </div>
-      </section>
+      <CtaBand />
     </>
   );
 }

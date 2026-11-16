@@ -45,17 +45,15 @@ const contents = [
 export default function PrivacyPolicyPage() {
   return (
     <>
-      <section className="gradient-hero pt-36 pb-16 px-6 md:px-10 relative overflow-hidden">
-        <div className="mx-auto max-w-[800px] text-center relative z-10">
-          <span className="overline text-[var(--color-accent)] mb-5 block">Legal</span>
-          <h1 className="font-heading font-bold text-[clamp(2.5rem,5vw,3.5rem)] tracking-tight leading-tight mb-5 text-white">
-            Privacy Policy
-          </h1>
-          <p className="text-white/45">Effective {EFFECTIVE_DATE}</p>
+      <section className="page-hero">
+        <div className="container-site">
+          <p className="eyebrow">Legal</p>
+          <h1 className="h-display mt-4">Privacy Policy</h1>
+          <p className="mt-4 text-[var(--color-ink-2)]">Effective {EFFECTIVE_DATE}</p>
         </div>
       </section>
 
-      <section className="py-16 md:py-20 bg-white">
+      <section className="py-16 md:py-20">
         <article className="mx-auto max-w-[760px] px-6 md:px-10 text-[var(--color-text-secondary)] leading-relaxed">
           <p className="mb-4">
             This policy explains what personal data LARSVA (OPC) PRIVATE LIMITED (“Larsva”, “we”, “us”) collects, why, and
@@ -66,7 +64,7 @@ export default function PrivacyPolicyPage() {
             do not use advertising or tracking cookies.
           </p>
 
-          <nav aria-label="Contents" className="rounded-2xl border border-gray-100 bg-gray-50/60 p-6 mb-4">
+          <nav aria-label="Contents" className="card-muted p-6 mb-4">
             <p className="font-display font-semibold text-sm mb-3 text-[var(--color-text-primary)]">Contents</p>
             <ol className="list-decimal pl-5 space-y-1 text-sm">
               {contents.map(([id, label]) => (
