@@ -7,10 +7,10 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
-      // Kill Chess and HRDocForensics were removed; send old links to the products page.
-      { source: '/games/killchess/:path*', destination: '/products', permanent: false },
-      { source: '/products/HRDocForensics/:path*', destination: '/products', permanent: false },
-      { source: '/downloads/killchess.apk', destination: '/products', permanent: false },
+      // The products page, Kill Chess and HRDocForensics were removed; send old links home.
+      { source: '/products/:path*', destination: '/', permanent: false },
+      { source: '/games/killchess/:path*', destination: '/', permanent: false },
+      { source: '/downloads/killchess.apk', destination: '/', permanent: false },
     ];
   },
   async headers() {

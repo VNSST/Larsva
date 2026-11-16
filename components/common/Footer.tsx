@@ -8,9 +8,6 @@ const footerLinks = {
     { label: 'Our Works', href: '/works' },
     { label: 'Contact Us', href: '/contact' },
   ],
-  products: [
-    { label: 'All Products', href: '/products' },
-  ],
   resources: [
     { label: 'The Open Orbit', href: '/#open-orbit' },
     { label: 'Startup Validation', href: '/services#validation' },
@@ -50,22 +47,6 @@ export default function Footer() {
               <h4 className="overline text-white/30 mb-5">Company</h4>
               <ul className="flex flex-col gap-3">
                 {footerLinks.company.map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="text-sm text-white/50 hover:text-white transition-colors duration-300"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="overline text-white/30 mb-5">Products</h4>
-              <ul className="flex flex-col gap-3">
-                {footerLinks.products.map((link) => (
                   <li key={link.href}>
                     <Link
                       href={link.href}
