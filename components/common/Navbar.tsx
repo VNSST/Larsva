@@ -12,6 +12,7 @@ const navLinks: NavLinkType[] = [
   { label: 'Work', href: '/works' },
   { label: 'How it works', href: '/#how-it-works' },
   { label: 'About', href: '/about' },
+  { label: 'Contact', href: '/contact' },
 ];
 
 const QUOTE_HREF = '/#quote';
@@ -60,7 +61,7 @@ export default function Navbar() {
                 <Link
                   href={link.href}
                   aria-current={isActive(link.href) ? 'page' : undefined}
-                  className={`inline-flex items-center min-h-[44px] px-4 rounded-lg font-display font-medium text-[0.9375rem] transition-colors ${
+                  className={`inline-flex items-center min-h-[44px] px-2.5 lg:px-4 rounded-lg font-display font-medium text-[0.9375rem] transition-colors ${
                     isActive(link.href)
                       ? 'text-[var(--color-accent)]'
                       : 'text-[var(--color-ink-2)] hover:text-[var(--color-ink)]'
