@@ -1,140 +1,66 @@
 import Link from 'next/link';
 import Image from 'next/image';
 
-const footerLinks = {
-  company: [
-    { label: 'About Us', href: '/about' },
-    { label: 'Services', href: '/services' },
-    { label: 'Our Works', href: '/works' },
-    { label: 'Contact Us', href: '/contact' },
-  ],
-  resources: [
-    { label: 'The Open Orbit', href: '/#open-orbit' },
-    { label: 'Startup Validation', href: '/services#validation' },
-    { label: 'MVP Development', href: '/services#mvp' },
-  ],
-};
+const pageLinks = [
+  { label: 'Services', href: '/services' },
+  { label: 'Work', href: '/works' },
+  { label: 'About', href: '/about' },
+  { label: 'Contact', href: '/contact' },
+];
+
+const socialLinks = [
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/company/larsva-opc/' },
+  { label: 'Instagram', href: 'https://www.instagram.com/larsva_official' },
+  { label: 'YouTube', href: 'https://www.youtube.com/@Larsva' },
+];
 
 export default function Footer() {
   return (
-    <footer id="site-footer" className="bg-[var(--color-bg-dark)] text-white/60 pt-20 pb-10">
-      <div className="container-wide">
-        {/* Top */}
-        <div className="flex flex-col md:flex-row justify-between items-start gap-12 mb-16">
+    <footer id="site-footer" className="bg-[var(--color-dark)] text-[var(--color-on-dark)]">
+      <div className="container-site py-16">
+        <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
           <div className="max-w-[360px]">
-            <Link href="/" className="flex items-center mb-5">
-              <Image
-                src="/images/larsva-logo.png"
-                alt="Larsva"
-                width={120}
-                height={40}
-                className="h-10 w-auto object-contain"
-              />
+            <Link href="/" className="inline-flex items-center gap-3" aria-label="Larsva home">
+              <Image src="/images/larsva-logo.png" alt="Larsva" width={40} height={40} className="h-10 w-10 rounded-md" />
+              <span className="font-heading font-bold text-xl text-white">Larsva</span>
             </Link>
-            <p className="text-sm leading-relaxed text-white/40 mb-6">
-              Helping ambitious working professionals and aspiring founders validate startup ideas, build MVPs, and launch professionally.
+            <p className="mt-4 leading-relaxed">
+              Websites, apps and AI automation, built at a fixed price on a fixed timeline.
             </p>
-            <a
-              href="mailto:info@larsva.com"
-              className="text-sm text-[var(--color-accent)] hover:underline font-medium"
-            >
+            <a href="mailto:info@larsva.com" className="mt-4 inline-block text-white underline underline-offset-4 hover:no-underline">
               info@larsva.com
             </a>
           </div>
 
-          <div className="flex gap-12 md:gap-16 flex-wrap">
+          <div className="flex flex-wrap gap-x-16 gap-y-8">
             <div>
-              <h4 className="overline text-white/30 mb-5">Company</h4>
+              <h2 className="font-display text-sm font-semibold text-white mb-4">Pages</h2>
               <ul className="flex flex-col gap-3">
-                {footerLinks.company.map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="text-sm text-white/50 hover:text-white transition-colors duration-300"
-                    >
-                      {link.label}
-                    </Link>
+                {pageLinks.map((l) => (
+                  <li key={l.href}>
+                    <Link href={l.href} className="hover:text-white">{l.label}</Link>
                   </li>
                 ))}
               </ul>
             </div>
-
             <div>
-              <h4 className="overline text-white/30 mb-5">Resources</h4>
+              <h2 className="font-display text-sm font-semibold text-white mb-4">Follow</h2>
               <ul className="flex flex-col gap-3">
-                {footerLinks.resources.map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="text-sm text-white/50 hover:text-white transition-colors duration-300"
-                    >
-                      {link.label}
-                    </Link>
+                {socialLinks.map((l) => (
+                  <li key={l.href}>
+                    <a href={l.href} target="_blank" rel="noopener noreferrer" className="hover:text-white">
+                      {l.label}
+                    </a>
                   </li>
                 ))}
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="overline text-white/30 mb-5">Connect</h4>
-              <ul className="flex flex-col gap-3">
-                <li>
-                  <a
-                    href="mailto:info@larsva.com"
-                    className="text-sm text-white/50 hover:text-white transition-colors duration-300"
-                  >
-                    Email Us
-                  </a>
-                </li>
-                <li>
-                  <Link href="/contact" className="text-sm text-white/50 hover:text-white transition-colors duration-300">
-                    Contact Us
-                  </Link>
-                </li>
-                <li>
-                  <a
-                    href="https://www.linkedin.com/company/larsva-opc/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm text-white/50 hover:text-white transition-colors duration-300"
-                  >
-                    LinkedIn
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://www.instagram.com/larsva_official"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm text-white/50 hover:text-white transition-colors duration-300"
-                  >
-                    Instagram
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://www.youtube.com/@Larsva"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm text-white/50 hover:text-white transition-colors duration-300"
-                  >
-                    YouTube
-                  </a>
-                </li>
               </ul>
             </div>
           </div>
         </div>
 
-        {/* Divider */}
-        <div className="h-px bg-white/6 mb-8" />
-
-        {/* Bottom */}
-        <div className="flex flex-col md:flex-row justify-between items-center text-xs text-white/25 gap-3">
-          <p>&copy; {new Date().getFullYear()} Larsva. All rights reserved.</p>
-          <Link href="/privacy-policy" className="hover:text-white transition-colors duration-300">
-            Privacy Policy
-          </Link>
+        <div className="mt-12 flex flex-col gap-3 border-t border-[var(--color-line-dark)] pt-8 text-sm md:flex-row md:items-center md:justify-between">
+          <p>&copy; {new Date().getFullYear()} LARSVA (OPC) PRIVATE LIMITED</p>
+          <Link href="/privacy-policy" className="hover:text-white">Privacy policy</Link>
         </div>
       </div>
     </footer>
