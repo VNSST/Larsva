@@ -30,18 +30,18 @@ export default function WorksPage() {
 
       <section className="section">
         <div className="container-site flex flex-col gap-16 md:gap-24">
-          {projects.map((p) => (
+          {projects.map((p, i) => (
             <article key={p.slug} className="grid items-center gap-8 lg:grid-cols-[1.2fr_1fr] lg:gap-14" aria-labelledby={`${p.slug}-heading`}>
-              <a
-                href={p.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="card card-link relative block aspect-[16/10] overflow-hidden bg-[var(--color-bg-alt)]"
-                tabIndex={-1}
-                aria-hidden="true"
-              >
-                <Image src={p.image} alt="" fill sizes="(min-width: 1024px) 600px, 100vw" className="object-cover object-top" />
-              </a>
+              <div className="card relative aspect-[16/10] overflow-hidden bg-[var(--color-bg-alt)]">
+                <Image
+                  src={p.image}
+                  alt={p.imageAlt}
+                  fill
+                  priority={i === 0}
+                  sizes="(min-width: 1024px) 600px, 100vw"
+                  className="object-cover object-top"
+                />
+              </div>
               <div>
                 <div className="flex flex-wrap gap-2">
                   {p.tags.map((t) => (
