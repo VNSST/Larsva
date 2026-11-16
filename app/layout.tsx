@@ -1,27 +1,24 @@
 import type { Metadata } from 'next';
-import { Space_Grotesk, Inter, Outfit } from 'next/font/google';
+import { Space_Grotesk, Inter } from 'next/font/google';
 import Navbar from '@/components/common/Navbar';
 import Footer from '@/components/common/Footer';
 import './globals.css';
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
-  variable: '--font-display',
+  variable: '--font-space-grotesk',
   display: 'swap',
 });
 
 const inter = Inter({
   subsets: ['latin'],
-  variable: '--font-body',
+  variable: '--font-inter',
   display: 'swap',
 });
 
-const outfit = Outfit({
-  subsets: ['latin'],
-  variable: '--font-heading',
-  display: 'swap',
-});
-
+const SITE_TITLE = 'Larsva — Websites, Apps and AI Automation at a Fixed Price';
+const SITE_DESCRIPTION =
+  'Larsva builds websites, web apps, mobile apps and AI automations at a fixed price on a fixed timeline. Tell us what you need and get a clear quote within 24 hours.';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://larsva.com'),
@@ -29,19 +26,17 @@ export const metadata: Metadata = {
     canonical: '/',
   },
   title: {
-    default: 'Larsva — Turn Your Startup Idea into a Launch-Ready Business',
+    default: SITE_TITLE,
     template: '%s | Larsva',
   },
-  description:
-    'Larsva helps ambitious working professionals and aspiring founders validate startup ideas, build MVPs, and launch professionally without hiring a full team.',
+  description: SITE_DESCRIPTION,
   keywords: [
-    'Startup Validation Services India',
-    'Startup Consulting India',
+    'Website Development India',
+    'Web App Development',
     'MVP Development India',
-    'Startup Idea Validation',
-    'Build MVP for Startup',
-    'Founder Advisory Services',
-    'Startup Launch Services',
+    'Mobile App Development',
+    'AI Automation',
+    'Fixed Price Software Development',
   ],
   authors: [{ name: 'Larsva' }],
   openGraph: {
@@ -49,15 +44,13 @@ export const metadata: Metadata = {
     locale: 'en_IN',
     url: 'https://larsva.com',
     siteName: 'Larsva',
-    title: 'Larsva — Turn Your Startup Idea into a Launch-Ready Business',
-    description:
-      'Larsva helps ambitious working professionals and aspiring founders validate startup ideas, build MVPs, and launch professionally.',
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Larsva — Turn Your Startup Idea into a Launch-Ready Business',
-    description:
-      'Validate startup ideas, build MVPs, and launch professionally with Larsva.',
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
   },
 };
 
@@ -67,7 +60,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${spaceGrotesk.variable} ${inter.variable} ${outfit.variable}`}>
+    <html lang="en" className={`${spaceGrotesk.variable} ${inter.variable}`}>
       <head>
         <script
           type="application/ld+json"
@@ -88,8 +81,7 @@ export default function RootLayout({
                 addressCountry: 'IN',
               },
               logo: 'https://larsva.com/images/larsva-logo.png',
-              description:
-                'Larsva helps ambitious working professionals and aspiring founders validate startup ideas, build MVPs, and launch professionally.',
+              description: SITE_DESCRIPTION,
               contactPoint: {
                 '@type': 'ContactPoint',
                 email: 'info@larsva.com',
