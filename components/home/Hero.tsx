@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { deliverables } from '@/data/services';
+import { projects } from '@/data/projects';
 import { TickIcon } from '@/components/ui/icons';
 
 export default function Hero() {
@@ -17,6 +18,17 @@ export default function Hero() {
             <Link href="#quote" className="btn btn-primary">Get a quote</Link>
             <Link href="/works" className="btn btn-outline">See our work</Link>
           </div>
+          <p className="mt-8 text-sm text-[var(--color-ink-2)]">
+            Recently built:{' '}
+            {projects.map((p, i) => (
+              <span key={p.slug}>
+                {i > 0 && <span aria-hidden="true"> · </span>}
+                <a href={p.url} target="_blank" rel="noopener noreferrer" className="font-medium text-[var(--color-ink)] underline decoration-[var(--color-line)] underline-offset-4 hover:decoration-[var(--color-ink)]">
+                  {p.name}
+                </a>
+              </span>
+            ))}
+          </p>
         </div>
 
         <aside className="card-muted p-6 md:p-8" aria-labelledby="what-you-get">
