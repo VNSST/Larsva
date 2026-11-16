@@ -15,7 +15,9 @@ const navLinks: NavLinkType[] = [
   { label: 'Contact', href: '/contact' },
 ];
 
-const QUOTE_HREF = '/#quote';
+// On the home page "Get a quote" scrolls to the form there; elsewhere it opens the Contact page form,
+// so visitors don't lose their place on a long page they didn't ask to go to.
+const quoteHref = (pathname: string) => (pathname === '/' ? '#quote' : '/contact#quote-form');
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -36,6 +38,7 @@ export default function Navbar() {
   }, [close]);
 
   const isActive = (href: string) => !href.includes('#') && pathname === href;
+  const QUOTE_HREF = quoteHref(pathname);
 
   return (
     <header id="site-header" className="fixed inset-x-0 top-0 z-50">
@@ -73,23 +76,26 @@ export default function Navbar() {
             ))}
           </ul>
 
-          <Link href={QUOTE_HREF} className="btn btn-primary btn-sm hidden md:inline-flex">
-            Get a quote
-          </Link>
+          <div className="flex items-center gap-2">
+            {/* Visible at every width: it is the one thing most visitors came to do. */}
+            <Link href={QUOTE_HREF} className="btn btn-primary btn-sm px-4">
+              Get a quote
+            </Link>
 
-          <button
-            id="mobile-toggle"
-            type="button"
-            className="md:hidden inline-flex h-11 w-11 items-center justify-center rounded-lg text-[var(--color-ink)]"
-            onClick={toggle}
-            aria-label={isOpen ? 'Close menu' : 'Open menu'}
-            aria-expanded={isOpen}
-            aria-controls="mobile-menu"
-          >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
-              {isOpen ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
-            </svg>
-          </button>
+            <button
+              id="mobile-toggle"
+              type="button"
+              className="md:hidden inline-flex h-11 w-11 items-center justify-center rounded-lg text-[var(--color-ink)]"
+              onClick={toggle}
+              aria-label={isOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={isOpen}
+              aria-controls="mobile-menu"
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                {isOpen ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
+              </svg>
+            </button>
+          </div>
         </div>
 
         <div id="mobile-menu" className={`mobile-menu md:hidden ${isOpen ? 'open' : ''}`} aria-hidden={!isOpen}>

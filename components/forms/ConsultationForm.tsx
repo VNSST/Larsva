@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect, type FormEvent, type ChangeEvent } from 'react';
 import { submitConsultation } from '@/app/actions/submitConsultation';
 import countryCodes, { type CountryCode } from '@/data/countryCodes';
+import { services } from '@/data/services';
 
 // Lets visitors from countries not in the list type their own dialling code.
 // 7–15 digits matches the phone check in submitConsultation.
@@ -44,6 +45,28 @@ export default function ConsultationForm() {
     }
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  // Close the country list with Escape and return focus to its button.
+  useEffect(() => {
+    if (!dropdownOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== 'Escape') return;
+      setDropdownOpen(false);
+      setSearchQuery('');
+      dropdownRef.current?.querySelector('button')?.focus();
+    };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [dropdownOpen]);
+
+  // "Get a quote for websites" links arrive with ?service=websites: start the brief for them.
+  useEffect(() => {
+    const slug = new URLSearchParams(window.location.search).get('service');
+    const service = services.find((s) => s.slug === slug);
+    if (service) {
+      setFormData((d) => (d.startupIdea ? d : { ...d, startupIdea: `I'd like a quote for: ${service.title}.\n\n` }));
+    }
   }, []);
 
   // Focus search input when dropdown opens

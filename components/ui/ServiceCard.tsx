@@ -1,19 +1,31 @@
+import Link from 'next/link';
 import type { Service } from '@/data/services';
-import { ClockIcon } from './icons';
+import { ArrowIcon, ClockIcon } from './icons';
 
+// The whole card is one link to that service's details, so it can be tapped anywhere.
 export default function ServiceCard({ service }: { service: Service }) {
   return (
-    <article className="card flex h-full flex-col p-6">
+    <Link
+      href={`/services#${service.slug}`}
+      className="card card-link group flex h-full flex-col p-6"
+      aria-label={`${service.title}: ${service.summary} ${service.timeline}. From ${service.price}. See details`}
+    >
       <h3 className="text-xl font-bold">{service.title}</h3>
       <p className="mt-3 leading-relaxed text-[var(--color-ink-2)]">{service.summary}</p>
       <p className="mt-5 flex items-center gap-2 text-sm font-medium text-[var(--color-ink-2)]">
         <ClockIcon />
         {service.timeline}
       </p>
-      <p className="mt-auto border-t border-[var(--color-line)] pt-5 font-display">
-        <span className="text-sm text-[var(--color-ink-2)]">From </span>
-        <span className="text-lg font-bold">{service.price}</span>
-      </p>
-    </article>
+      <div className="mt-auto flex items-end justify-between gap-3 border-t border-[var(--color-line)] pt-5">
+        <p className="font-display">
+          <span className="text-sm text-[var(--color-ink-2)]">From </span>
+          <span className="text-lg font-bold">{service.price}</span>
+        </p>
+        <span className="inline-flex items-center gap-1 font-display text-sm font-semibold text-[var(--color-accent)]">
+          Details
+          <ArrowIcon className="transition-transform group-hover:translate-x-0.5" />
+        </span>
+      </div>
+    </Link>
   );
 }

@@ -13,7 +13,7 @@ export default function CtaBand({
           <h2 className="h-section">{title}</h2>
           <p className="lead mt-4">{text}</p>
         </div>
-        <Link href="/#quote" className="btn btn-primary shrink-0">Get a quote</Link>
+        <Link href="/contact#quote-form" className="btn btn-primary shrink-0">Get a quote</Link>
       </div>
     </section>
   );

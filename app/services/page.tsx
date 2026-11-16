@@ -49,7 +49,9 @@ export default function ServicesPage() {
                   <dd className="mt-1 font-display font-bold">From {s.price}</dd>
                 </div>
               </dl>
-              <Link href="/#quote" className="btn btn-primary mt-8">Get a quote</Link>
+              <Link href={`/contact?service=${s.slug}#quote-form`} className="btn btn-primary mt-8">
+                Get a quote for {s.title.toLowerCase()}
+              </Link>
             </div>
             <div className="card p-6 md:p-8">
               <h3 className="text-lg font-bold">What&apos;s included</h3>
