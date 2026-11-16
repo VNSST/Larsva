@@ -1,5 +1,4 @@
 // Questions clients usually ask before getting in touch.
-// [PAYMENT TERMS] and [CARE PLAN DETAILS] are placeholders to fill in.
 export const faqs = [
   {
     q: 'How can you give a fixed price?',
@@ -11,7 +10,7 @@ export const faqs = [
   },
   {
     q: 'How do payments work?',
-    a: '[PAYMENT TERMS]',
+    a: '50% when you approve the written quote and 50% at launch, before handover. Projects longer than six weeks are split into three: 40% to start, 30% at the midway demo and 30% at launch. You can pay by bank transfer or UPI.',
   },
   {
     q: 'Who owns the code and the accounts?',
@@ -19,7 +18,7 @@ export const faqs = [
   },
   {
     q: 'What happens after launch?',
-    a: 'You can run it yourself, or choose our optional monthly care for updates, fixes and small changes. [CARE PLAN DETAILS]',
+    a: 'Every project includes 30 days of free bug fixes after launch. After that you can run it yourself, or choose monthly care from ₹5,000 a month: hosting and uptime checks, security updates, bug fixes and up to 4 hours of small changes. Cancel any time.',
   },
   {
     q: 'What do I need to get started?',

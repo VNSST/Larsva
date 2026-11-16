@@ -1,5 +1,5 @@
 // The four services shown on the home page and the Services page.
-// Replace each [PRICE] with a starting price, e.g. '₹40,000'.
+// Starting prices shown as "From ..." on the home page and the Services page.
 export interface Service {
   slug: string;
   title: string;
@@ -15,7 +15,7 @@ export const services: Service[] = [
     title: 'Websites',
     summary: 'Business sites that load fast, work on phones and bring in enquiries.',
     timeline: '1 to 2 weeks',
-    price: '[PRICE]',
+    price: '₹25,000',
     includes: [
       'Design and build for phones, tablets and desktops',
       'Contact and enquiry forms that reach your inbox',
@@ -28,7 +28,7 @@ export const services: Service[] = [
     title: 'Web apps and MVPs',
     summary: 'Dashboards, portals and first product versions with logins, payments and admin.',
     timeline: '4 to 8 weeks',
-    price: '[PRICE]',
+    price: '₹1,50,000',
     includes: [
       'User sign-up, logins and roles',
       'Online payments and subscriptions',
@@ -41,7 +41,7 @@ export const services: Service[] = [
     title: 'Mobile apps',
     summary: 'Android and iOS apps, built and published to the stores under your name.',
     timeline: '6 to 10 weeks',
-    price: '[PRICE]',
+    price: '₹2,00,000',
     includes: [
       'One app for both Android and iOS',
       'Logins, notifications and payments where needed',
@@ -54,7 +54,7 @@ export const services: Service[] = [
     title: 'AI automation',
     summary: 'Chat assistants, document search and workflows that remove manual work.',
     timeline: '2 to 4 weeks',
-    price: '[PRICE]',
+    price: '₹60,000',
     includes: [
       'Chat assistants that answer from your own documents',
       'Search across your files, policies and records',
