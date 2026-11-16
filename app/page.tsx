@@ -1,19 +1,23 @@
 import Hero from '@/components/home/Hero';
-import ProblemSection from '@/components/home/ProblemSection';
-import FrameworkSection from '@/components/home/FrameworkSection';
-import ServicesOverview from '@/components/home/ServicesOverview';
-import WhyLarsva from '@/components/home/WhyLarsva';
-import FinalCTA from '@/components/home/FinalCTA';
+import WhatWeBuild from '@/components/home/WhatWeBuild';
+import WorkSection from '@/components/home/WorkSection';
+import HowItWorks from '@/components/home/HowItWorks';
+import Founder from '@/components/home/Founder';
+import QuoteSection from '@/components/home/QuoteSection';
 
 export default function HomePage() {
   return (
     <>
       <Hero />
-      <ProblemSection />
-      <FrameworkSection />
-      <ServicesOverview />
-      <WhyLarsva />
-      <FinalCTA />
+      <WhatWeBuild />
+      <WorkSection />
+      <HowItWorks />
+      <section className="section section-alt" aria-label="Who builds it">
+        <div className="container-site">
+          <Founder />
+        </div>
+      </section>
+      <QuoteSection />
     </>
   );
 }
