@@ -74,7 +74,7 @@ async function sendEmailNotification(data: ConsultationData): Promise<void> {
   await transporter.sendMail({
     from: `"Larsva Website" <${SMTP_USER}>`,
     to: NOTIFICATION_EMAIL,
-    subject: 'New Founder Consultation Request - Larsva',
+    subject: 'New Quote Request - Larsva',
     text: `Name: ${data.fullName}\nEmail: ${data.email}\nPhone: ${data.phone}\n\nStartup Idea:\n${data.startupIdea}`,
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -168,7 +168,7 @@ export async function submitConsultation(
 
     // Startup idea minimum length
     if (data.startupIdea.trim().length < 30) {
-      return { success: false, error: 'Please describe your startup idea in at least 3-5 sentences.' };
+      return { success: false, error: 'Please tell us a little more about what you need built (at least 30 characters).' };
     }
 
     // Rate limiting by email

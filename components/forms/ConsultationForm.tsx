@@ -4,6 +4,14 @@ import { useState, useRef, useEffect, type FormEvent, type ChangeEvent } from 'r
 import { submitConsultation } from '@/app/actions/submitConsultation';
 import countryCodes, { type CountryCode } from '@/data/countryCodes';
 
+// Lets visitors from countries not in the list type their own dialling code.
+// 7–15 digits matches the phone check in submitConsultation.
+const OTHER_COUNTRY: CountryCode = { code: 'OTHER', name: 'Other country', dialCode: '', flag: '', minDigits: 7, maxDigits: 15 };
+
+const digitRule = (c: CountryCode) =>
+  c.minDigits === c.maxDigits ? `${c.maxDigits} digits` : `${c.minDigits}–${c.maxDigits} digits`;
+const where = (c: CountryCode) => (c.code === OTHER_COUNTRY.code ? 'Phone numbers' : `Phone numbers in ${c.name}`);
+
 export default function ConsultationForm() {
   const [formData, setFormData] = useState({
     fullName: '',
@@ -14,6 +22,7 @@ export default function ConsultationForm() {
   const [selectedCountry, setSelectedCountry] = useState<CountryCode>(
     countryCodes.find((c) => c.code === 'IN')!
   );
+  const [customDial, setCustomDial] = useState('');
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [phoneWarning, setPhoneWarning] = useState<string | null>(null);
@@ -50,6 +59,8 @@ export default function ConsultationForm() {
       c.dialCode.includes(searchQuery) ||
       c.code.toLowerCase().includes(searchQuery.toLowerCase())
   );
+  const isOther = selectedCountry.code === OTHER_COUNTRY.code;
+  const dialCode = isOther ? (customDial ? `+${customDial}` : '') : selectedCountry.dialCode;
 
   const handlePhoneChange = (e: ChangeEvent<HTMLInputElement>) => {
     const rawValue = e.target.value;
@@ -59,19 +70,14 @@ export default function ConsultationForm() {
 
     if (digitsOnly.length > selectedCountry.maxDigits) {
       setPhoneWarning(
-        `Phone numbers in ${selectedCountry.name} should be ${selectedCountry.minDigits === selectedCountry.maxDigits
-          ? `${selectedCountry.maxDigits} digits`
-          : `${selectedCountry.minDigits}–${selectedCountry.maxDigits} digits`
-        }. You've entered ${digitsOnly.length} digits.`
+        `${where(selectedCountry)} should be ${digitRule(selectedCountry)}. You've entered ${digitsOnly.length} digits.`
       );
       // Don't update — cap the input
       return;
     }
 
     if (digitsOnly.length > 0 && digitsOnly.length < selectedCountry.minDigits) {
-      setPhoneWarning(
-        `Phone numbers in ${selectedCountry.name} should be at least ${selectedCountry.minDigits} digits.`
-      );
+      setPhoneWarning(`${where(selectedCountry)} should be at least ${selectedCountry.minDigits} digits.`);
     } else {
       setPhoneWarning(null);
     }
@@ -87,18 +93,11 @@ export default function ConsultationForm() {
     // Re-validate current phone against new country rules
     const digitsOnly = formData.phone.replace(/\s/g, '');
     if (digitsOnly.length > country.maxDigits) {
-      setPhoneWarning(
-        `Phone numbers in ${country.name} should be ${country.minDigits === country.maxDigits
-          ? `${country.maxDigits} digits`
-          : `${country.minDigits}–${country.maxDigits} digits`
-        }. You've entered ${digitsOnly.length} digits.`
-      );
+      setPhoneWarning(`${where(country)} should be ${digitRule(country)}. You've entered ${digitsOnly.length} digits.`);
       // Trim phone to max digits
       setFormData({ ...formData, phone: digitsOnly.slice(0, country.maxDigits) });
     } else if (digitsOnly.length > 0 && digitsOnly.length < country.minDigits) {
-      setPhoneWarning(
-        `Phone numbers in ${country.name} should be at least ${country.minDigits} digits.`
-      );
+      setPhoneWarning(`${where(country)} should be at least ${country.minDigits} digits.`);
     } else {
       setPhoneWarning(null);
     }
@@ -117,16 +116,19 @@ export default function ConsultationForm() {
     // Validate phone digits
     const digitsOnly = formData.phone.replace(/\s/g, '');
     if (digitsOnly.length < selectedCountry.minDigits) {
-      setPhoneWarning(
-        `Phone numbers in ${selectedCountry.name} must be at least ${selectedCountry.minDigits} digits.`
-      );
+      setPhoneWarning(`${where(selectedCountry)} must be at least ${selectedCountry.minDigits} digits.`);
+      return;
+    }
+
+    if (!dialCode) {
+      setError('Please enter your country code.');
       return;
     }
 
     setIsSubmitting(true);
 
     try {
-      const fullPhone = `${selectedCountry.dialCode} ${formData.phone}`;
+      const fullPhone = `${dialCode} ${formData.phone}`;
       const result = await submitConsultation({
         ...formData,
         phone: fullPhone,
@@ -148,32 +150,30 @@ export default function ConsultationForm() {
 
   if (submitted) {
     return (
-      <div className="text-center py-8">
-        <div className="w-16 h-16 rounded-full bg-[var(--color-accent-light)] flex items-center justify-center mx-auto mb-5">
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="var(--color-accent)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M26 11L13 24L6 17" />
+      <div className="py-8 text-center" role="status">
+        <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-[var(--color-accent-soft)] text-[var(--color-accent)]">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M20 6L9 17l-5-5" />
           </svg>
         </div>
-        <h3 className="font-heading font-bold text-xl mb-3 text-[var(--color-text-primary)]">
-          Thank You for Reaching Out
-        </h3>
-        <p className="text-[var(--color-text-secondary)] leading-relaxed max-w-[400px] mx-auto">
-          Thank you for reaching out to Larsva. We have received your startup idea and will contact you within 24 hours.
+        <h3 className="mb-2 text-xl font-bold">Thanks, we have your brief</h3>
+        <p className="mx-auto max-w-[400px] leading-relaxed text-[var(--color-ink-2)]">
+          We&apos;ll read it and reply with a clear quote within 24 hours.
         </p>
       </div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit} className="w-full flex flex-col gap-5">
+    <form onSubmit={handleSubmit} className="relative flex w-full flex-col gap-5">
       {error && (
-        <div className="bg-red-50 text-red-600 p-4 rounded-xl text-sm border border-red-100">
+        <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700" role="alert">
           {error}
         </div>
       )}
 
       {/* Honeypot field — hidden from users, visible to bots */}
-      <div className="absolute opacity-0 h-0 w-0 overflow-hidden" aria-hidden="true">
+      <div className="absolute h-0 w-0 overflow-hidden opacity-0" aria-hidden="true">
         <label htmlFor="website">Website</label>
         <input
           id="website"
@@ -187,13 +187,12 @@ export default function ConsultationForm() {
       </div>
 
       <div>
-        <label htmlFor="fullName" className="block font-display font-semibold text-sm mb-2 text-[var(--color-text-primary)]">
-          Full Name <span className="text-red-400">*</span>
-        </label>
+        <label htmlFor="fullName" className="form-label">Name</label>
         <input
           id="fullName"
           type="text"
           required
+          autoComplete="name"
           placeholder="Your full name"
           className="form-input"
           value={formData.fullName}
@@ -203,14 +202,13 @@ export default function ConsultationForm() {
       </div>
 
       <div>
-        <label htmlFor="email" className="block font-display font-semibold text-sm mb-2 text-[var(--color-text-primary)]">
-          Email Address <span className="text-red-400">*</span>
-        </label>
+        <label htmlFor="email" className="form-label">Email</label>
         <input
           id="email"
           type="email"
           required
-          placeholder="you@example.com"
+          autoComplete="email"
+          placeholder="you@company.com"
           className="form-input"
           value={formData.email}
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -218,150 +216,141 @@ export default function ConsultationForm() {
         />
       </div>
 
-      {/* Phone with Country Code Dropdown */}
+      {/* Phone with country code */}
       <div>
-        <label htmlFor="phone" className="block font-display font-semibold text-sm mb-2 text-[var(--color-text-primary)]">
-          Phone Number <span className="text-red-400">*</span>
-        </label>
+        <label htmlFor="phone" className="form-label">Phone</label>
         <div className="flex gap-2">
-          {/* Country Code Dropdown */}
           <div className="relative" ref={dropdownRef}>
             <button
               type="button"
               onClick={() => setDropdownOpen(!dropdownOpen)}
               disabled={isSubmitting}
-              className="form-input flex items-center gap-1.5 px-3 min-w-[110px] cursor-pointer hover:border-[var(--color-accent)]/40 transition-colors whitespace-nowrap"
-              aria-label="Select country code"
+              className="form-input flex min-w-[92px] cursor-pointer items-center gap-2 whitespace-nowrap px-3"
+              aria-label={`Country code: ${isOther ? 'other country' : `${selectedCountry.name} ${selectedCountry.dialCode}`}. Change`}
               aria-expanded={dropdownOpen}
             >
-              <span className="text-lg leading-none">{selectedCountry.flag}</span>
-              <span className="text-sm font-medium text-[var(--color-text-primary)]">{selectedCountry.dialCode}</span>
+              <span className="text-[0.9375rem] font-medium">{isOther ? 'Other' : selectedCountry.dialCode}</span>
               <svg
                 width="12"
                 height="12"
                 viewBox="0 0 12 12"
                 fill="none"
-                className={`ml-auto transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`}
+                aria-hidden="true"
+                className={`ml-auto transition-transform ${dropdownOpen ? 'rotate-180' : ''}`}
               >
                 <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </button>
 
-            {/* Dropdown List */}
             {dropdownOpen && (
-              <div className="absolute top-full left-0 mt-1 w-[280px] bg-white rounded-xl border border-gray-200 shadow-[0_8px_30px_rgba(0,0,0,0.08)] z-50 overflow-hidden animate-in fade-in slide-in-from-top-1 duration-150">
-                {/* Search */}
-                <div className="p-2 border-b border-gray-100">
+              <div className="absolute left-0 top-full z-50 mt-1 w-[280px] overflow-hidden rounded-lg border border-[var(--color-line)] bg-white shadow-[0_8px_24px_rgba(15,23,42,0.08)]">
+                <div className="border-b border-[var(--color-line)] p-2">
                   <input
                     ref={searchInputRef}
                     type="text"
-                    placeholder="Search country..."
+                    placeholder="Search country or code"
+                    aria-label="Search country or code"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full px-3 py-2 text-sm rounded-lg bg-gray-50 border border-gray-100 outline-none focus:border-[var(--color-accent)]/40 focus:bg-white transition-colors placeholder:text-gray-400"
+                    className="w-full rounded-md border border-[var(--color-line)] px-3 py-2 text-sm outline-none focus:border-[var(--color-accent)]"
                   />
                 </div>
-                {/* Country List */}
-                <div className="max-h-[220px] overflow-y-auto overscroll-contain">
-                  {filteredCountries.length === 0 ? (
-                    <div className="px-4 py-3 text-sm text-gray-400 text-center">No countries found</div>
-                  ) : (
-                    filteredCountries.map((country) => (
-                      <button
-                        key={country.code}
-                        type="button"
-                        onClick={() => handleCountrySelect(country)}
-                        className={`w-full flex items-center gap-3 px-4 py-2.5 text-left hover:bg-[var(--color-accent-light)] transition-colors text-sm ${
-                          selectedCountry.code === country.code
-                            ? 'bg-[var(--color-accent-light)] font-medium'
-                            : ''
-                        }`}
-                      >
-                        <span className="text-lg leading-none">{country.flag}</span>
-                        <span className="flex-1 text-[var(--color-text-primary)] truncate">{country.name}</span>
-                        <span className="text-[var(--color-text-muted)] text-xs font-mono">{country.dialCode}</span>
-                      </button>
-                    ))
-                  )}
+                <div className="max-h-[240px] overflow-y-auto overscroll-contain">
+                  {filteredCountries.map((country) => (
+                    <button
+                      key={country.code}
+                      type="button"
+                      onClick={() => handleCountrySelect(country)}
+                      className={`flex w-full items-center gap-3 px-4 py-2.5 text-left text-sm hover:bg-[var(--color-bg-alt)] ${
+                        selectedCountry.code === country.code ? 'bg-[var(--color-accent-soft)] font-medium' : ''
+                      }`}
+                    >
+                      <span className="flex-1 truncate">{country.name}</span>
+                      <span className="font-mono text-xs text-[var(--color-ink-2)]">{country.dialCode}</span>
+                    </button>
+                  ))}
+                  <button
+                    type="button"
+                    onClick={() => handleCountrySelect(OTHER_COUNTRY)}
+                    className={`flex w-full items-center gap-3 border-t border-[var(--color-line)] px-4 py-2.5 text-left text-sm hover:bg-[var(--color-bg-alt)] ${
+                      isOther ? 'bg-[var(--color-accent-soft)] font-medium' : ''
+                    }`}
+                  >
+                    <span className="flex-1">Other country (enter code)</span>
+                  </button>
                 </div>
               </div>
             )}
           </div>
 
-          {/* Phone Input */}
+          {isOther && (
+            <div className="relative w-[84px] shrink-0">
+              <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-ink-2)]" aria-hidden="true">+</span>
+              <input
+                id="dialCode"
+                type="text"
+                inputMode="numeric"
+                required
+                aria-label="Country code"
+                placeholder="255"
+                className="form-input pl-6"
+                value={customDial}
+                onChange={(e) => {
+                  setCustomDial(e.target.value.replace(/\D/g, '').slice(0, 4));
+                  setError(null);
+                }}
+                disabled={isSubmitting}
+              />
+            </div>
+          )}
+
           <input
             id="phone"
             type="tel"
             required
-            placeholder={`${selectedCountry.minDigits === selectedCountry.maxDigits
-              ? `${selectedCountry.maxDigits} digit number`
-              : `${selectedCountry.minDigits}–${selectedCountry.maxDigits} digit number`
-            }`}
-            className={`form-input flex-1 ${phoneWarning ? 'border-amber-400 focus:border-amber-500' : ''}`}
+            autoComplete="tel-national"
+            placeholder={`${digitRule(selectedCountry)}`}
+            className={`form-input min-w-0 flex-1 ${phoneWarning ? 'border-amber-500' : ''}`}
             value={formData.phone}
             onChange={handlePhoneChange}
             disabled={isSubmitting}
+            aria-describedby="phone-hint"
           />
         </div>
 
-        {/* Phone Validation Warning */}
-        {phoneWarning && (
-          <div className="mt-2 flex items-start gap-2 text-amber-600 text-xs">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="flex-shrink-0 mt-0.5">
-              <path d="M7 1L13 12H1L7 1Z" stroke="currentColor" strokeWidth="1.2" strokeLinejoin="round" />
-              <path d="M7 5.5V8" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
-              <circle cx="7" cy="9.75" r="0.5" fill="currentColor" />
-            </svg>
-            <span>{phoneWarning}</span>
-          </div>
-        )}
-
-        {!phoneWarning && (
-          <p className="mt-1.5 text-xs text-[var(--color-text-muted)]">
-            Enter digits only, without country code.
-          </p>
-        )}
+        <p id="phone-hint" className={`form-hint ${phoneWarning ? 'text-amber-700' : ''}`}>
+          {phoneWarning ?? (isOther ? 'Enter your country code, then your number.' : 'Digits only, without the country code.')}
+        </p>
       </div>
 
       <div>
-        <label htmlFor="startupIdea" className="block font-display font-semibold text-sm mb-2 text-[var(--color-text-primary)]">
-          Startup Idea Description <span className="text-red-400">*</span>
-        </label>
+        <label htmlFor="startupIdea" className="form-label">What do you need built?</label>
         <textarea
           id="startupIdea"
           required
-          placeholder="Describe your startup idea in 3-5 sentences. What problem does it solve? Who is the target audience?"
+          minLength={30}
+          placeholder="A website, app or automation? Tell us what it should do, who it is for, and any deadline or budget you have in mind."
           className="form-input"
           rows={5}
           value={formData.startupIdea}
           onChange={(e) => setFormData({ ...formData, startupIdea: e.target.value })}
           disabled={isSubmitting}
+          aria-describedby="brief-hint"
         />
-        <p className="mt-1.5 text-xs text-[var(--color-text-muted)]">
-          Minimum 3-5 sentences. Your idea is kept confidential.
-        </p>
+        <p id="brief-hint" className="form-hint">A few sentences is enough. Everything you share stays confidential.</p>
       </div>
 
-      <button
-        type="submit"
-        disabled={isSubmitting || !!phoneWarning}
-        className="btn-primary w-full justify-center text-lg py-4 mt-2 disabled:opacity-70 rounded-xl"
-      >
+      <button type="submit" disabled={isSubmitting || !!phoneWarning} className="btn btn-primary mt-1 w-full">
         {isSubmitting ? (
           <>
-            <svg className="animate-spin h-5 w-5 mr-3 text-white" viewBox="0 0 24 24" fill="none">
-              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            <svg className="h-5 w-5 animate-spin" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
             </svg>
-            Submitting...
+            Sending...
           </>
         ) : (
-          <>
-            Request Founder Consultation
-            <svg className="btn-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </>
+          'Get a quote'
         )}
       </button>
     </form>
