@@ -3,6 +3,7 @@ import { services, deliverables } from '@/data/services';
 import { ArrowIcon, ClockIcon, TickIcon } from '@/components/ui/icons';
 import HowItWorks from '@/components/home/HowItWorks';
 import CtaBand from '@/components/ui/CtaBand';
+import { serviceIllustrations } from '@/components/illustrations';
 
 export default function ServicesPage() {
   return (
@@ -37,52 +38,62 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {services.map((s, i) => (
-        <section
-          key={s.slug}
-          id={s.slug}
-          className={`section ${i % 2 === 0 ? 'section-alt' : ''}`}
-          aria-labelledby={`${s.slug}-heading`}
-        >
-          <div className="container-site grid gap-10 lg:grid-cols-[1fr_1fr] lg:gap-16">
-            <div>
-              <h2 id={`${s.slug}-heading`} className="h-section">{s.title}</h2>
-              <p className="lead mt-4">{s.summary}</p>
-              <dl className="mt-8 grid max-w-[420px] grid-cols-2 gap-4">
-                <div className="card p-4">
-                  <dt className="text-sm text-[var(--color-ink-2)]">Typical timeline</dt>
-                  <dd className="mt-1 flex items-center gap-2 font-display font-bold">
-                    <ClockIcon />
-                    {s.timeline}
-                  </dd>
+      {services.map((s, i) => {
+        const Illustration = serviceIllustrations[s.slug];
+        return (
+          <section
+            key={s.slug}
+            id={s.slug}
+            className={`section ${i % 2 === 0 ? 'section-alt' : ''}`}
+            aria-labelledby={`${s.slug}-heading`}
+          >
+            <div className="container-site grid gap-10 lg:grid-cols-[1fr_1fr] lg:gap-16">
+              <div>
+                <h2 id={`${s.slug}-heading`} className="h-section">{s.title}</h2>
+                <p className="lead mt-4">{s.summary}</p>
+                <dl className="mt-8 grid max-w-[420px] grid-cols-2 gap-4">
+                  <div className="card p-4">
+                    <dt className="text-sm text-[var(--color-ink-2)]">Typical timeline</dt>
+                    <dd className="mt-1 flex items-center gap-2 font-display font-bold">
+                      <ClockIcon />
+                      {s.timeline}
+                    </dd>
+                  </div>
+                  <div className="card p-4">
+                    <dt className="text-sm text-[var(--color-ink-2)]">Pricing</dt>
+                    <dd className="mt-1 font-display font-bold">
+                      <Link href={`/contact?service=${s.slug}#demo-form`} className="text-[var(--color-accent)] underline-offset-4 hover:underline">
+                        Contact us
+                      </Link>
+                    </dd>
+                  </div>
+                </dl>
+                <Link href={`/book-a-demo?service=${s.slug}`} className="btn btn-primary mt-8">
+                  Book a demo
+                </Link>
+              </div>
+              <div className="card overflow-hidden">
+                {Illustration && (
+                  <div className="border-b border-[var(--color-line)] bg-[var(--color-bg-alt)] px-4 pt-4 sm:px-8 sm:pt-6">
+                    <Illustration className="h-auto w-full" />
+                  </div>
+                )}
+                <div className="p-6 md:p-8">
+                  <h3 className="text-lg font-bold">What&apos;s included</h3>
+                  <ul className="tick-list mt-5">
+                    {s.includes.map((item) => (
+                      <li key={item}>
+                        <TickIcon />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <div className="card p-4">
-                  <dt className="text-sm text-[var(--color-ink-2)]">Pricing</dt>
-                  <dd className="mt-1 font-display font-bold">
-                    <Link href={`/contact?service=${s.slug}#demo-form`} className="text-[var(--color-accent)] underline-offset-4 hover:underline">
-                      Contact us
-                    </Link>
-                  </dd>
-                </div>
-              </dl>
-              <Link href={`/book-a-demo?service=${s.slug}`} className="btn btn-primary mt-8">
-                Book a demo
-              </Link>
+              </div>
             </div>
-            <div className="card p-6 md:p-8">
-              <h3 className="text-lg font-bold">What&apos;s included</h3>
-              <ul className="tick-list mt-5">
-                {s.includes.map((item) => (
-                  <li key={item}>
-                    <TickIcon />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </section>
-      ))}
+          </section>
+        );
+      })}
 
       <section className="section" aria-labelledby="every-project">
         <div className="container-site">

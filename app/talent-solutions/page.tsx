@@ -4,6 +4,7 @@ import { talentRoles, talentSteps, talentTerms, talentFaqs } from '@/data/talent
 import FaqList from '@/components/ui/FaqList';
 import CtaBand from '@/components/ui/CtaBand';
 import { TickIcon } from '@/components/ui/icons';
+import { ScreeningIllustration, SourcingIllustration } from '@/components/illustrations';
 
 export const metadata: Metadata = {
   title: 'Talent Solutions — Hiring and Recruitment',
@@ -67,23 +68,33 @@ export default function TalentSolutionsPage() {
           <p className="eyebrow">Why it works</p>
           <h2 id="engine-team" className="h-section mt-3 max-w-[640px]">A sourcing engine and a team that knows the roles</h2>
           <div className="mt-12 grid gap-5 md:grid-cols-2">
-            <article className="card p-6 md:p-8">
-              <h3 className="text-xl font-bold">Sourcing engines</h3>
-              <p className="mt-2 text-[var(--color-ink-2)]">The same lead-generation systems we build for businesses, pointed at talent.</p>
-              <ul className="tick-list mt-6">
-                {engine.map((e) => (
-                  <li key={e}><TickIcon /><span>{e}</span></li>
-                ))}
-              </ul>
+            <article className="card overflow-hidden">
+              <div className="border-b border-[var(--color-line)] bg-[var(--color-bg-alt)] px-4 py-4 sm:px-8">
+                <SourcingIllustration className="h-auto w-full" />
+              </div>
+              <div className="p-6 md:p-8">
+                <h3 className="text-xl font-bold">Sourcing engines</h3>
+                <p className="mt-2 text-[var(--color-ink-2)]">The same lead-generation systems we build for businesses, pointed at talent.</p>
+                <ul className="tick-list mt-6">
+                  {engine.map((e) => (
+                    <li key={e}><TickIcon /><span>{e}</span></li>
+                  ))}
+                </ul>
+              </div>
             </article>
-            <article className="card p-6 md:p-8">
-              <h3 className="text-xl font-bold">Screening team</h3>
-              <p className="mt-2 text-[var(--color-ink-2)]">People, not just filters, decide who reaches your shortlist.</p>
-              <ul className="tick-list mt-6">
-                {team.map((e) => (
-                  <li key={e}><TickIcon /><span>{e}</span></li>
-                ))}
-              </ul>
+            <article className="card overflow-hidden">
+              <div className="border-b border-[var(--color-line)] bg-[var(--color-bg-alt)] px-4 py-4 sm:px-8">
+                <ScreeningIllustration className="h-auto w-full" />
+              </div>
+              <div className="p-6 md:p-8">
+                <h3 className="text-xl font-bold">Screening team</h3>
+                <p className="mt-2 text-[var(--color-ink-2)]">People, not just filters, decide who reaches your shortlist.</p>
+                <ul className="tick-list mt-6">
+                  {team.map((e) => (
+                    <li key={e}><TickIcon /><span>{e}</span></li>
+                  ))}
+                </ul>
+              </div>
             </article>
           </div>
         </div>

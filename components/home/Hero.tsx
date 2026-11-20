@@ -2,11 +2,12 @@ import Link from 'next/link';
 import { deliverables } from '@/data/services';
 import { projects } from '@/data/projects';
 import { TickIcon } from '@/components/ui/icons';
+import { HeroIllustration } from '@/components/illustrations';
 
 export default function Hero() {
   return (
-    <section className="pt-[136px] pb-20 md:pt-[168px] md:pb-28">
-      <div className="container-site grid items-center gap-12 lg:grid-cols-[1.25fr_1fr] lg:gap-16">
+    <section className="pt-[128px] pb-16 md:pt-[152px] md:pb-20">
+      <div className="container-site grid items-center gap-12 lg:grid-cols-[1fr_1.05fr] lg:gap-12">
         <div>
           <p className="eyebrow">Websites, apps and AI automation</p>
           <h1 className="h-display mt-4">We build it. You launch it.</h1>
@@ -31,12 +32,18 @@ export default function Hero() {
           </p>
         </div>
 
-        <aside className="card-muted p-6 md:p-8" aria-labelledby="what-you-get">
-          <h2 id="what-you-get" className="text-lg font-bold">What you get</h2>
-          <ul className="tick-list mt-5">
+        <div className="rounded-[20px] bg-[var(--color-bg-alt)] p-4 sm:p-6">
+          <HeroIllustration className="h-auto w-full" />
+        </div>
+      </div>
+
+      <div className="container-site mt-14">
+        <aside className="card-muted px-6 py-5 md:px-8" aria-labelledby="what-you-get">
+          <h2 id="what-you-get" className="text-base font-bold">What you get</h2>
+          <ul className="mt-4 grid gap-x-8 gap-y-3 sm:grid-cols-2 lg:grid-cols-4">
             {deliverables.map((item) => (
-              <li key={item}>
-                <TickIcon />
+              <li key={item} className="flex items-start gap-3 text-[0.9375rem] leading-snug">
+                <TickIcon size={18} className="mt-0.5 shrink-0 text-[var(--color-accent)]" />
                 <span>{item}</span>
               </li>
             ))}
