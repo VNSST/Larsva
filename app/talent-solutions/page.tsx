@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   },
 };
 
-const DEMO = '/contact?service=talent#demo-form';
+const DEMO = '/book-a-demo?service=talent';
 
 const engine = [
   'Reaches active and passive candidates across job boards, LinkedIn and our network',

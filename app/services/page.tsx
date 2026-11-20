@@ -65,7 +65,7 @@ export default function ServicesPage() {
                   </dd>
                 </div>
               </dl>
-              <Link href={`/contact?service=${s.slug}#demo-form`} className="btn btn-primary mt-8">
+              <Link href={`/book-a-demo?service=${s.slug}`} className="btn btn-primary mt-8">
                 Book a demo
               </Link>
             </div>

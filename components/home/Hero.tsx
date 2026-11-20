@@ -15,7 +15,7 @@ export default function Hero() {
             within 24 hours.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Link href="#demo" className="btn btn-primary">Book a demo</Link>
+            <Link href="/book-a-demo" className="btn btn-primary">Book a demo</Link>
             <Link href="/works" className="btn btn-outline">See our work</Link>
           </div>
           <p className="mt-8 text-sm text-[var(--color-ink-2)]">

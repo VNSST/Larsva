@@ -4,6 +4,7 @@ import { useState, useRef, useEffect, type FormEvent, type ChangeEvent } from 'r
 import { submitConsultation } from '@/app/actions/submitConsultation';
 import countryCodes, { type CountryCode } from '@/data/countryCodes';
 import { services } from '@/data/services';
+import RequirementSelect, { OTHER, requirementText } from './RequirementSelect';
 
 // Lets visitors from countries not in the list type their own dialling code.
 // 7–15 digits matches the phone check in submitConsultation.
@@ -24,6 +25,9 @@ export default function ConsultationForm() {
     countryCodes.find((c) => c.code === 'IN')!
   );
   const [customDial, setCustomDial] = useState('');
+  const [requirements, setRequirements] = useState<string[]>([]);
+  const [otherText, setOtherText] = useState('');
+  const [requirementError, setRequirementError] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [phoneWarning, setPhoneWarning] = useState<string | null>(null);
@@ -60,12 +64,11 @@ export default function ConsultationForm() {
     return () => document.removeEventListener('keydown', onKey);
   }, [dropdownOpen]);
 
-  // "Book a demo" links from a service or the Talent page arrive with ?service=<slug>: start the brief for them.
+  // "Book a demo" links from a service or the Talent page arrive with ?service=<slug>: pre-select it.
   useEffect(() => {
     const slug = new URLSearchParams(window.location.search).get('service');
-    const service = services.find((s) => s.slug === slug);
-    const start = slug === 'talent' ? "I'd like to hire for: " : service ? `I'd like a demo for: ${service.title}.\n\n` : '';
-    if (start) setFormData((d) => (d.startupIdea ? d : { ...d, startupIdea: start }));
+    const choice = slug === 'talent' ? 'Talent Solutions' : services.find((s) => s.slug === slug)?.title;
+    if (choice) setRequirements((r) => (r.length ? r : [choice]));
   }, []);
 
   // Focus search input when dropdown opens
@@ -147,6 +150,17 @@ export default function ConsultationForm() {
       return;
     }
 
+    if (requirements.length === 0) {
+      setRequirementError(true);
+      setError('Please choose what you need under Requirement.');
+      return;
+    }
+    if (requirements.includes(OTHER) && !otherText.trim()) {
+      setRequirementError(true);
+      setError('Please tell us what you need under Other.');
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
@@ -154,11 +168,14 @@ export default function ConsultationForm() {
       const result = await submitConsultation({
         ...formData,
         phone: fullPhone,
+        startupIdea: requirementText(requirements, otherText),
       });
 
       if (result.success) {
         setSubmitted(true);
         setFormData({ fullName: '', email: '', phone: '', startupIdea: '' });
+        setRequirements([]);
+        setOtherText('');
         setPhoneWarning(null);
       } else {
         setError(result.error || 'Failed to submit form');
@@ -349,22 +366,22 @@ export default function ConsultationForm() {
         )}
       </div>
 
-      <div>
-        <label htmlFor="startupIdea" className="form-label">Requirement</label>
-        <textarea
-          id="startupIdea"
-          required
-          minLength={30}
-          placeholder="What do you need? A website, app, AI automation or a role to hire for."
-          className="form-input"
-          rows={3}
-          value={formData.startupIdea}
-          onChange={(e) => setFormData({ ...formData, startupIdea: e.target.value })}
-          disabled={isSubmitting}
-          aria-describedby="brief-hint"
-        />
-        <p id="brief-hint" className="form-hint">A sentence or two is enough.</p>
-      </div>
+      <RequirementSelect
+        selected={requirements}
+        onChange={(r) => {
+          setRequirements(r);
+          setRequirementError(false);
+          setError(null);
+        }}
+        otherText={otherText}
+        onOtherTextChange={(t) => {
+          setOtherText(t);
+          setRequirementError(false);
+          setError(null);
+        }}
+        disabled={isSubmitting}
+        invalid={requirementError}
+      />
 
       <button type="submit" disabled={isSubmitting || !!phoneWarning} className="btn btn-primary mt-1 w-full">
         {isSubmitting ? (

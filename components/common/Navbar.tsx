@@ -16,8 +16,8 @@ const links = [
   { label: 'Contact', href: '/contact' },
 ];
 
-// On the home page "Book a demo" scrolls to the form there; elsewhere it opens the Contact page form.
-const demoHref = (pathname: string) => (pathname === '/' ? '#demo' : '/contact#demo-form');
+// Every "Book a demo" button opens the dedicated Book a demo page.
+const DEMO_HREF = '/book-a-demo';
 
 function Chevron({ open }: { open: boolean }) {
   return (
@@ -74,7 +74,6 @@ export default function Navbar() {
   };
 
   const isActive = (href: string) => (href === '/' ? pathname === '/' : pathname.startsWith(href));
-  const DEMO_HREF = demoHref(pathname);
   const linkClass = (href: string) =>
     `inline-flex items-center gap-1.5 min-h-[44px] px-3 xl:px-4 rounded-lg font-display font-medium text-[0.9375rem] transition-colors ${
       isActive(href) ? 'text-[var(--color-accent)]' : 'text-[var(--color-ink-2)] hover:text-[var(--color-ink)]'
