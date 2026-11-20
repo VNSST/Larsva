@@ -13,19 +13,19 @@ export const photos = {
     credit: 'Smartworks Coworking, Unsplash',
   },
   websites: {
-    src: '/images/photos/websites-in.jpg',
-    alt: 'A smiling developer working at his desk with two screens',
-    credit: 'litoon dev, Unsplash',
+    src: '/images/photos/websites-ui.jpg',
+    alt: 'A desktop screen showing a landing page design next to its code',
+    credit: 'Pankaj Patel, Unsplash',
   },
   'web-apps': {
-    src: '/images/photos/web-apps-in.jpg',
-    alt: 'A developer writing code across two monitors',
-    credit: 'Ofspace LLC, Unsplash',
+    src: '/images/photos/web-apps-ui.jpg',
+    alt: 'A laptop showing an analytics dashboard with charts',
+    credit: 'Carlos Muza, Unsplash',
   },
   'mobile-apps': {
-    src: '/images/photos/mobile-apps-in.jpg',
-    alt: 'A young woman smiling as she uses an app on her phone',
-    credit: 'Rupinder Singh, Unsplash',
+    src: '/images/photos/mobile-apps-device.jpg',
+    alt: 'A phone on a stand showing a live data dashboard app',
+    credit: 'Balázs Kétyi, Unsplash',
   },
   'ai-automation': {
     src: '/images/photos/ai-automation.jpg',
