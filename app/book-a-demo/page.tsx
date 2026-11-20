@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import ConsultationForm from '@/components/forms/ConsultationForm';
 import { TickIcon } from '@/components/ui/icons';
-import { DemoCallIllustration } from '@/components/illustrations';
+import Image from 'next/image';
+import { photos } from '@/data/photos';
 
 export const metadata: Metadata = {
   title: 'Book a Demo',
@@ -41,8 +42,8 @@ export default function BookADemoPage() {
         </div>
 
         <div className="lg:col-start-1 lg:row-start-2 lg:mt-10">
-          <div className="mb-10 hidden rounded-[20px] bg-white p-4 lg:block">
-            <DemoCallIllustration className="h-auto w-full" />
+          <div className="relative mb-10 hidden aspect-[16/10] overflow-hidden rounded-[20px] lg:block">
+            <Image src={photos.demoCall.src} alt={photos.demoCall.alt} fill sizes="460px" className="object-cover" />
           </div>
           <h2 className="font-display text-lg font-bold">In the demo</h2>
           <ul className="tick-list mt-4">

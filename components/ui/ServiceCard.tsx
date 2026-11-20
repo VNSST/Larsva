@@ -1,20 +1,27 @@
 import Link from 'next/link';
 import type { Service } from '@/data/services';
-import { serviceIllustrations } from '@/components/illustrations';
+import Image from 'next/image';
+import { servicePhotos } from '@/data/photos';
 import { ArrowIcon, ClockIcon } from './icons';
 
 // The whole card is one link to that service's details, so it can be tapped anywhere.
 export default function ServiceCard({ service }: { service: Service }) {
-  const Illustration = serviceIllustrations[service.slug];
+  const photo = servicePhotos[service.slug];
   return (
     <Link
       href={`/services#${service.slug}`}
       className="card card-link group flex h-full flex-col overflow-hidden"
       aria-label={`${service.title}: ${service.summary} Typical timeline ${service.timeline}. See details`}
     >
-      {Illustration && (
-        <div className="border-b border-[var(--color-line)] bg-[var(--color-bg-alt)] px-3 pt-3" aria-hidden="true">
-          <Illustration className="h-auto w-full" />
+      {photo && (
+        <div className="relative aspect-[16/10] border-b border-[var(--color-line)] bg-[var(--color-bg-alt)]">
+          <Image
+            src={photo.src}
+            alt={photo.alt}
+            fill
+            sizes="(min-width: 1024px) 264px, (min-width: 640px) 50vw, 100vw"
+            className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+          />
         </div>
       )}
       <div className="flex flex-1 flex-col p-6">

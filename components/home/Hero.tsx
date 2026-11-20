@@ -2,7 +2,8 @@ import Link from 'next/link';
 import { deliverables } from '@/data/services';
 import { projects } from '@/data/projects';
 import { TickIcon } from '@/components/ui/icons';
-import { HeroIllustration } from '@/components/illustrations';
+import Image from 'next/image';
+import { photos } from '@/data/photos';
 
 export default function Hero() {
   return (
@@ -32,8 +33,15 @@ export default function Hero() {
           </p>
         </div>
 
-        <div className="rounded-[20px] bg-[var(--color-bg-alt)] p-4 sm:p-6">
-          <HeroIllustration className="h-auto w-full" />
+        <div className="relative aspect-[4/3] overflow-hidden rounded-[20px] bg-[var(--color-bg-alt)]">
+          <Image
+            src={photos.hero.src}
+            alt={photos.hero.alt}
+            fill
+            priority
+            sizes="(min-width: 1024px) 560px, 100vw"
+            className="object-cover"
+          />
         </div>
       </div>
 

@@ -4,7 +4,8 @@ import { talentRoles, talentSteps, talentTerms, talentFaqs } from '@/data/talent
 import FaqList from '@/components/ui/FaqList';
 import CtaBand from '@/components/ui/CtaBand';
 import { TickIcon } from '@/components/ui/icons';
-import { ScreeningIllustration, SourcingIllustration } from '@/components/illustrations';
+import Image from 'next/image';
+import { photos } from '@/data/photos';
 
 export const metadata: Metadata = {
   title: 'Talent Solutions — Hiring and Recruitment',
@@ -69,8 +70,8 @@ export default function TalentSolutionsPage() {
           <h2 id="engine-team" className="h-section mt-3 max-w-[640px]">A sourcing engine and a team that knows the roles</h2>
           <div className="mt-12 grid gap-5 md:grid-cols-2">
             <article className="card overflow-hidden">
-              <div className="border-b border-[var(--color-line)] bg-[var(--color-bg-alt)] px-4 py-4 sm:px-8">
-                <SourcingIllustration className="h-auto w-full" />
+              <div className="relative aspect-[16/9] border-b border-[var(--color-line)] bg-[var(--color-bg-alt)]">
+                <Image src={photos.talentSourcing.src} alt={photos.talentSourcing.alt} fill sizes="(min-width: 768px) 528px, 100vw" className="object-cover" />
               </div>
               <div className="p-6 md:p-8">
                 <h3 className="text-xl font-bold">Sourcing engines</h3>
@@ -83,8 +84,8 @@ export default function TalentSolutionsPage() {
               </div>
             </article>
             <article className="card overflow-hidden">
-              <div className="border-b border-[var(--color-line)] bg-[var(--color-bg-alt)] px-4 py-4 sm:px-8">
-                <ScreeningIllustration className="h-auto w-full" />
+              <div className="relative aspect-[16/9] border-b border-[var(--color-line)] bg-[var(--color-bg-alt)]">
+                <Image src={photos.talentScreening.src} alt={photos.talentScreening.alt} fill sizes="(min-width: 768px) 528px, 100vw" className="object-cover" />
               </div>
               <div className="p-6 md:p-8">
                 <h3 className="text-xl font-bold">Screening team</h3>

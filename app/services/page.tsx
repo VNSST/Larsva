@@ -3,7 +3,8 @@ import { services, deliverables } from '@/data/services';
 import { ArrowIcon, ClockIcon, TickIcon } from '@/components/ui/icons';
 import HowItWorks from '@/components/home/HowItWorks';
 import CtaBand from '@/components/ui/CtaBand';
-import { serviceIllustrations } from '@/components/illustrations';
+import Image from 'next/image';
+import { servicePhotos } from '@/data/photos';
 
 export default function ServicesPage() {
   return (
@@ -39,7 +40,7 @@ export default function ServicesPage() {
       </section>
 
       {services.map((s, i) => {
-        const Illustration = serviceIllustrations[s.slug];
+        const photo = servicePhotos[s.slug];
         return (
           <section
             key={s.slug}
@@ -73,9 +74,9 @@ export default function ServicesPage() {
                 </Link>
               </div>
               <div className="card overflow-hidden">
-                {Illustration && (
-                  <div className="border-b border-[var(--color-line)] bg-[var(--color-bg-alt)] px-4 pt-4 sm:px-8 sm:pt-6">
-                    <Illustration className="h-auto w-full" />
+                {photo && (
+                  <div className="relative aspect-[16/9] border-b border-[var(--color-line)] bg-[var(--color-bg-alt)]">
+                    <Image src={photo.src} alt={photo.alt} fill sizes="(min-width: 1024px) 528px, 100vw" className="object-cover" />
                   </div>
                 )}
                 <div className="p-6 md:p-8">
