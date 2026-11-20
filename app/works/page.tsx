@@ -6,7 +6,7 @@ import CtaBand from '@/components/ui/CtaBand';
 
 export const metadata: Metadata = {
   title: 'Our Work — Websites and Apps We Have Built',
-  description: 'Websites and web apps built by Larsva, including Mana PG Rent, B School of AI and Fly Castles.',
+  description: 'Websites and web apps built by Larsva, including Flycastles, B School of AI and Mana PG Rent.',
   keywords: ['Larsva Portfolio', 'Website Development Projects', 'Web App Case Studies'],
   alternates: {
     canonical: '/works',
