@@ -26,7 +26,7 @@ export default function DemoSection() {
             ))}
           </ul>
           <p className="mt-10 text-[var(--color-ink-2)]">Prefer email?</p>
-          <a href="mailto:info@larsva.com" className="mt-1 inline-block font-display text-lg font-semibold text-[var(--color-accent)] underline-offset-4 hover:underline">
+          <a href="mailto:info@larsva.com" className="tap-link font-display text-lg font-semibold text-[var(--color-accent)] underline-offset-4 hover:underline">
             info@larsva.com
           </a>
         </div>

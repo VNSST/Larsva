@@ -28,7 +28,7 @@ export default function Footer() {
             <p className="mt-4 leading-relaxed">
               Websites, apps and AI automation, and hiring help backed by our own sourcing engines.
             </p>
-            <a href="mailto:info@larsva.com" className="mt-4 inline-block text-white underline underline-offset-4 hover:no-underline">
+            <a href="mailto:info@larsva.com" className="tap-link mt-2 text-white underline underline-offset-4 hover:no-underline">
               info@larsva.com
             </a>
           </div>
@@ -36,20 +36,20 @@ export default function Footer() {
           <div className="flex flex-wrap gap-x-16 gap-y-8">
             <div>
               <h2 className="font-display text-sm font-semibold text-white mb-4">Pages</h2>
-              <ul className="flex flex-col gap-3">
+              <ul className="flex flex-col md:gap-3">
                 {pageLinks.map((l) => (
                   <li key={l.href}>
-                    <Link href={l.href} className="hover:text-white">{l.label}</Link>
+                    <Link href={l.href} className="tap-link hover:text-white md:min-h-0">{l.label}</Link>
                   </li>
                 ))}
               </ul>
             </div>
             <div>
               <h2 className="font-display text-sm font-semibold text-white mb-4">Follow</h2>
-              <ul className="flex flex-col gap-3">
+              <ul className="flex flex-col md:gap-3">
                 {socialLinks.map((l) => (
                   <li key={l.href}>
-                    <a href={l.href} target="_blank" rel="noopener noreferrer" className="hover:text-white">
+                    <a href={l.href} target="_blank" rel="noopener noreferrer" className="tap-link hover:text-white md:min-h-0">
                       {l.label}
                     </a>
                   </li>
@@ -61,7 +61,7 @@ export default function Footer() {
 
         <div className="mt-12 flex flex-col gap-3 border-t border-[var(--color-line-dark)] pt-8 text-sm md:flex-row md:items-center md:justify-between">
           <p>&copy; {new Date().getFullYear()} LARSVA (OPC) PRIVATE LIMITED</p>
-          <Link href="/privacy-policy" className="hover:text-white">Privacy policy</Link>
+          <Link href="/privacy-policy" className="tap-link self-start hover:text-white md:min-h-0">Privacy policy</Link>
         </div>
       </div>
     </footer>

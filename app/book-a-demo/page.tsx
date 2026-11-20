@@ -58,9 +58,9 @@ export default function BookADemoPage() {
           <div className="mt-10 border-t border-[var(--color-line)] pt-8 text-[var(--color-ink-2)]">
             <p>Prefer to reach us directly?</p>
             <p className="mt-2">
-              <a href="mailto:info@larsva.com" className="font-medium text-[var(--color-accent)] underline-offset-4 hover:underline">info@larsva.com</a>
+              <a href="mailto:info@larsva.com" className="tap-link font-medium text-[var(--color-accent)] underline-offset-4 hover:underline">info@larsva.com</a>
               <span aria-hidden="true"> · </span>
-              <a href="tel:+919133804790" className="font-medium text-[var(--color-accent)] underline-offset-4 hover:underline">+91 91338 04790</a>
+              <a href="tel:+919133804790" className="tap-link font-medium text-[var(--color-accent)] underline-offset-4 hover:underline">+91 91338 04790</a>
             </p>
           </div>
         </div>

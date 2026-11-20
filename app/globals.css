@@ -216,6 +216,7 @@
   .link-arrow {
     display: inline-flex;
     align-items: center;
+    min-height: 44px;
     gap: 6px;
     font-family: var(--font-display);
     font-weight: 600;
@@ -336,6 +337,34 @@
     margin-top: 6px;
     font-size: 0.8125rem;
     color: var(--color-ink-2);
+  }
+
+  /* ===== SWIPE ROWS (phones) ===== */
+  .swipe-row {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: 20px;
+    margin: 0 -20px;
+    padding: 0 20px 4px;
+    scrollbar-width: none;
+  }
+
+  .swipe-row::-webkit-scrollbar { display: none; }
+
+  .swipe-item {
+    flex: 0 0 84%;
+    scroll-snap-align: start;
+  }
+
+  .swipe-item > * { height: 100%; }
+
+  /* A comfortable tap target for standalone text links (email, phone, footer). */
+  .tap-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
   }
 
   /* ===== FAQ ===== */

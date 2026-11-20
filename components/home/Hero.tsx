@@ -20,7 +20,7 @@ export default function Hero() {
             <Link href="/book-a-demo" className="btn btn-primary">Book a demo</Link>
             <Link href="/works" className="btn btn-outline">See our work</Link>
           </div>
-          <p className="mt-8 text-sm text-[var(--color-ink-2)]">
+          <p className="mt-8 text-sm leading-8 text-[var(--color-ink-2)]">
             Recently built:{' '}
             {projects.map((p, i) => (
               <span key={p.slug}>

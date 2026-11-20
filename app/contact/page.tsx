@@ -55,14 +55,14 @@ export default function ContactPage() {
               <div>
                 <dt className="font-display text-sm font-semibold uppercase tracking-[0.06em] text-[var(--color-ink-2)]">Email</dt>
                 <dd className="mt-2 flex flex-col gap-1">
-                  <a href="mailto:info@larsva.com" className="text-lg font-medium text-[var(--color-accent)] hover:underline underline-offset-4">info@larsva.com</a>
-                  <a href="mailto:admin@larsva.com" className="text-lg font-medium text-[var(--color-accent)] hover:underline underline-offset-4">admin@larsva.com</a>
+                  <a href="mailto:info@larsva.com" className="tap-link text-lg font-medium text-[var(--color-accent)] hover:underline underline-offset-4">info@larsva.com</a>
+                  <a href="mailto:admin@larsva.com" className="tap-link text-lg font-medium text-[var(--color-accent)] hover:underline underline-offset-4">admin@larsva.com</a>
                 </dd>
               </div>
               <div>
                 <dt className="font-display text-sm font-semibold uppercase tracking-[0.06em] text-[var(--color-ink-2)]">Phone</dt>
                 <dd className="mt-2">
-                  <a href="tel:+919133804790" className="text-lg font-medium text-[var(--color-accent)] hover:underline underline-offset-4">+91 91338 04790</a>
+                  <a href="tel:+919133804790" className="tap-link text-lg font-medium text-[var(--color-accent)] hover:underline underline-offset-4">+91 91338 04790</a>
                 </dd>
               </div>
               <div>

@@ -63,7 +63,7 @@ export default function ServicesPage() {
                   <div className="card p-4">
                     <dt className="text-sm text-[var(--color-ink-2)]">Pricing</dt>
                     <dd className="mt-1 font-display font-bold">
-                      <Link href={`/contact?service=${s.slug}#demo-form`} className="text-[var(--color-accent)] underline-offset-4 hover:underline">
+                      <Link href={`/contact?service=${s.slug}#demo-form`} className="tap-link -my-2 text-[var(--color-accent)] underline-offset-4 hover:underline">
                         Contact us
                       </Link>
                     </dd>

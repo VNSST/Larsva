@@ -66,10 +66,10 @@ export default function PrivacyPolicyPage() {
 
           <nav aria-label="Contents" className="card-muted p-6 mb-4">
             <p className="font-display font-semibold text-sm mb-3 text-[var(--color-text-primary)]">Contents</p>
-            <ol className="list-decimal pl-5 space-y-1 text-sm">
+            <ol className="list-decimal pl-5 text-sm">
               {contents.map(([id, label]) => (
                 <li key={id}>
-                  <a href={`#${id}`} className="hover:text-[var(--color-accent)]">{label}</a>
+                  <a href={`#${id}`} className="inline-block py-2 hover:text-[var(--color-accent)]">{label}</a>
                 </li>
               ))}
             </ol>
