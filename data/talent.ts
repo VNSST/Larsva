@@ -37,18 +37,16 @@ export const talentSteps = [
 export const talentTerms = [
   { label: 'First shortlist', value: 'Within 7 working days' },
   { label: 'Fee', value: 'Contact for pricing' },
-  { label: 'When you pay', value: 'Only after your hire joins' },
-  { label: 'Replacement', value: 'Free if they leave within 60 days' },
 ];
 
 export const talentFaqs = [
   {
-    q: 'Do you charge anything upfront?',
-    a: 'No. You pay the fee only after the candidate you hire has joined.',
+    q: 'How much does it cost?',
+    a: 'It depends on the role and its seniority. Contact us for pricing.',
   },
   {
-    q: 'What if the hire does not work out?',
-    a: 'If they leave within 60 days of joining, we find a replacement at no extra cost.',
+    q: 'Which roles do you hire for?',
+    a: 'Engineering, AI and data, and product and design roles, from individual hires to full teams.',
   },
   {
     q: 'Can you hire several people for one team?',

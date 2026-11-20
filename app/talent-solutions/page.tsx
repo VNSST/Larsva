@@ -10,12 +10,12 @@ import { photos } from '@/data/photos';
 export const metadata: Metadata = {
   title: 'Talent Solutions — Hiring and Recruitment',
   description:
-    'Larsva helps companies hire engineering, AI and data, and product and design talent. Our sourcing engines find candidates and our team screens them. You pay only after your hire joins.',
+    'Larsva helps companies hire engineering, AI and data, and product and design talent. Our sourcing engines find candidates and our team screens them.',
   keywords: ['Tech Recruitment India', 'Hire Developers India', 'Hire AI Engineers', 'Hire Product Managers', 'IT Recruitment Agency'],
   alternates: { canonical: '/talent-solutions' },
   openGraph: {
     title: 'Larsva Talent Solutions — Hire faster with sourcing engines and a screening team',
-    description: 'Pre-screened candidates within 7 working days. Pay only after your hire joins.',
+    description: 'Pre-screened engineering, AI and product candidates within 7 working days.',
   },
 };
 
