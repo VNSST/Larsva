@@ -7,15 +7,11 @@ export const talentRoles = [
   },
   {
     title: 'AI and data',
-    text: 'Machine learning engineers, data engineers and analysts.',
+    text: 'AI engineers, forward deployed engineers (FDE), Gen AI engineers, machine learning engineers, data engineers and analysts.',
   },
   {
     title: 'Product and design',
-    text: 'Product managers, UI and UX designers.',
-  },
-  {
-    title: 'Sales and marketing',
-    text: 'Sales executives, business development, digital and performance marketers.',
+    text: 'Product managers, product analysts and UI/UX designers.',
   },
 ];
 

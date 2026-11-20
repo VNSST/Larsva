@@ -12,7 +12,7 @@ export default function TalentTeaser() {
             <h2 id="talent-heading" className="h-section mt-3">Hiring too? We find the people.</h2>
             <p className="lead mt-4">
               Our sourcing engines find candidates and our team screens them, so you only meet people worth
-              interviewing. Engineering, AI, product, design, sales and marketing roles.
+              interviewing. Engineering, AI and data, and product and design roles.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link href="/talent-solutions" className="btn btn-outline">

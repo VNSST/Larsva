@@ -10,8 +10,8 @@ import { photos } from '@/data/photos';
 export const metadata: Metadata = {
   title: 'Talent Solutions — Hiring and Recruitment',
   description:
-    'Larsva helps companies hire engineers, AI, product, design, sales and marketing talent. Our sourcing engines find candidates and our team screens them. You pay only after your hire joins.',
-  keywords: ['Recruitment India', 'Tech Hiring', 'Hire Developers India', 'IT Recruitment Agency', 'Talent Acquisition'],
+    'Larsva helps companies hire engineering, AI and data, and product and design talent. Our sourcing engines find candidates and our team screens them. You pay only after your hire joins.',
+  keywords: ['Tech Recruitment India', 'Hire Developers India', 'Hire AI Engineers', 'Hire Product Managers', 'IT Recruitment Agency'],
   alternates: { canonical: '/talent-solutions' },
   openGraph: {
     title: 'Larsva Talent Solutions — Hire faster with sourcing engines and a screening team',
@@ -105,7 +105,7 @@ export default function TalentSolutionsPage() {
         <div className="container-site">
           <p className="eyebrow">Roles we hire for</p>
           <h2 id="roles" className="h-section mt-3">From first engineer to full team</h2>
-          <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="mt-12 grid gap-5 md:grid-cols-3">
             {talentRoles.map((r) => (
               <li key={r.title} className="card p-6">
                 <h3 className="text-lg font-bold">{r.title}</h3>

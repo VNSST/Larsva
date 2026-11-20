@@ -116,7 +116,7 @@ export default function ServicesPage() {
           <div className="card-muted flex flex-col gap-4 p-6 md:flex-row md:items-center md:justify-between md:p-8">
             <p className="text-lg">
               <span className="font-display font-bold">Need people, not a project?</span>{' '}
-              <span className="text-[var(--color-ink-2)]">We also hire engineers, designers and sales talent for you.</span>
+              <span className="text-[var(--color-ink-2)]">We also hire engineers, AI specialists and product talent for you.</span>
             </p>
             <Link href="/talent-solutions" className="btn btn-outline shrink-0">Talent Solutions</Link>
           </div>
