@@ -8,24 +8,24 @@ export interface Photo {
 
 export const photos = {
   hero: {
-    src: '/images/photos/hero-team.jpg',
-    alt: 'Two developers working through code together on a laptop',
-    credit: 'Christina @ wocintechchat.com, Unsplash',
+    src: '/images/photos/hero-team-in.jpg',
+    alt: 'An Indian team in a meeting room while a colleague presents',
+    credit: 'Smartworks Coworking, Unsplash',
   },
   websites: {
-    src: '/images/photos/websites.jpg',
-    alt: 'A desktop screen showing a landing page design next to its code',
-    credit: 'Pankaj Patel, Unsplash',
+    src: '/images/photos/websites-in.jpg',
+    alt: 'A smiling developer working at his desk with two screens',
+    credit: 'litoon dev, Unsplash',
   },
   'web-apps': {
-    src: '/images/photos/web-apps.jpg',
-    alt: 'A laptop showing an analytics dashboard with charts',
-    credit: 'Carlos Muza, Unsplash',
+    src: '/images/photos/web-apps-in.jpg',
+    alt: 'A developer writing code across two monitors',
+    credit: 'Ofspace LLC, Unsplash',
   },
   'mobile-apps': {
-    src: '/images/photos/mobile-apps.jpg',
-    alt: 'A hand holding a phone with a dashboard app open',
-    credit: 'Balázs Kétyi, Unsplash',
+    src: '/images/photos/mobile-apps-in.jpg',
+    alt: 'A young woman smiling as she uses an app on her phone',
+    credit: 'Rupinder Singh, Unsplash',
   },
   'ai-automation': {
     src: '/images/photos/ai-automation.jpg',
@@ -33,19 +33,19 @@ export const photos = {
     credit: 'Steve Johnson, Unsplash',
   },
   talentSourcing: {
-    src: '/images/photos/talent-sourcing.jpg',
-    alt: 'A dashboard of charts and data on a screen',
-    credit: 'Luke Chesser, Unsplash',
+    src: '/images/photos/talent-sourcing-in.jpg',
+    alt: 'A recruiter at her desk with a laptop',
+    credit: 'Skytech Aviation, Unsplash',
   },
   talentScreening: {
-    src: '/images/photos/talent-screening.jpg',
-    alt: 'A hiring manager interviewing a candidate in an office',
-    credit: 'Vitaly Gariev, Unsplash',
+    src: '/images/photos/talent-screening-in.jpg',
+    alt: 'A candidate in a job interview across the desk from an interviewer',
+    credit: 'Mina Rad, Unsplash',
   },
   demoCall: {
-    src: '/images/photos/demo-call.jpg',
-    alt: 'A man on a video call at his laptop',
-    credit: 'LinkedIn Sales Solutions, Unsplash',
+    src: '/images/photos/demo-call-in.jpg',
+    alt: 'A woman on a call at her laptop, taking notes',
+    credit: 'Sweet Life, Unsplash',
   },
 } satisfies Record<string, Photo>;
 

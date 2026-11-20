@@ -40,7 +40,7 @@ export default function Hero() {
             fill
             priority
             sizes="(min-width: 1024px) 560px, 100vw"
-            className="object-cover"
+            className="object-cover object-right"
           />
         </div>
       </div>
