@@ -26,7 +26,7 @@ export default function Footer() {
               <span className="font-heading font-bold text-xl text-white">Larsva</span>
             </Link>
             <p className="mt-4 leading-relaxed">
-              Websites, apps and AI automation, and hiring help backed by our own sourcing engines.
+              Websites, apps and AI automation, plus hiring and corporate training for tech teams.
             </p>
             <a href="mailto:info@larsva.com" className="tap-link mt-2 text-white underline underline-offset-4 hover:no-underline">
               info@larsva.com

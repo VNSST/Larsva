@@ -6,7 +6,7 @@ import { ExternalIcon } from './icons';
 // screen readers so the same link isn't announced twice.
 export default function ProjectCard({ project }: { project: Project }) {
   return (
-    <article className="card card-link flex h-full flex-col overflow-hidden">
+    <article className="card card-link relative flex h-full flex-col overflow-hidden">
       <a
         href={project.url}
         target="_blank"

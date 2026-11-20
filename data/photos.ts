@@ -42,6 +42,11 @@ export const photos = {
     alt: 'A candidate in a job interview across the desk from an interviewer',
     credit: 'Mina Rad, Unsplash',
   },
+  corporateTraining: {
+    src: '/images/photos/corporate-training.jpg',
+    alt: 'A team working together on laptops around a table during a workshop',
+    credit: 'Smartworks Coworking, Unsplash',
+  },
   demoCall: {
     src: '/images/photos/demo-call-in.jpg',
     alt: 'A woman on a call at her laptop, taking notes',

@@ -49,7 +49,34 @@ export const talentFaqs = [
     a: 'Engineering, AI and data, and product and design roles, from individual hires to full teams.',
   },
   {
+    q: 'Do you also train our existing team?',
+    a: 'Yes. Our corporate training covers engineering, AI and data, and product and design, as workshops or longer programmes, at your office or online. Contact us for pricing.',
+  },
+  {
     q: 'Can you hire several people for one team?',
     a: 'Yes. Tell us the roles and timeline, and we run the searches in parallel with one point of contact.',
   },
+];
+
+// Corporate training: the same three areas we hire for.
+export const trainingTracks = [
+  {
+    title: 'Engineering',
+    topics: ['Modern frontend and backend development', 'Mobile app development', 'DevOps, cloud and CI/CD', 'Test automation and QA'],
+  },
+  {
+    title: 'AI and data',
+    topics: ['Gen AI and prompt engineering for teams', 'Building with LLMs, RAG and AI agents', 'Machine learning and data engineering', 'AI for business leaders'],
+  },
+  {
+    title: 'Product and design',
+    topics: ['Product management essentials', 'Product analytics and metrics', 'UI/UX design and prototyping', 'Running product discovery'],
+  },
+];
+
+export const trainingFormats = [
+  'Workshops of one or two days, or programmes over several weeks',
+  'At your office or live online',
+  'Hands-on exercises on your own tools and codebase',
+  'Content tailored to your team’s level and goals',
 ];

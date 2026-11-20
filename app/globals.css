@@ -354,6 +354,9 @@
   .swipe-row::-webkit-scrollbar { display: none; }
 
   .swipe-item {
+    /* relative: keeps absolutely positioned bits (e.g. screen-reader text) inside the row,
+       otherwise off-screen cards stretch the phone's layout width. */
+    position: relative;
     flex: 0 0 84%;
     scroll-snap-align: start;
   }

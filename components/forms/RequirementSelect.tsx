@@ -4,7 +4,7 @@ import { useEffect, useId, useRef, useState } from 'react';
 import { services } from '@/data/services';
 
 export const OTHER = 'Other';
-export const REQUIREMENT_OPTIONS = [...services.map((s) => s.title), 'Talent Solutions', OTHER];
+export const REQUIREMENT_OPTIONS = [...services.map((s) => s.title), 'Talent Solutions', 'Corporate training', OTHER];
 
 type Props = {
   selected: string[];

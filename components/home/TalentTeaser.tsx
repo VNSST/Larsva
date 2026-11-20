@@ -9,14 +9,19 @@ export default function TalentTeaser() {
         <div className="card grid gap-10 p-6 md:p-10 lg:grid-cols-[1.2fr_1fr] lg:items-center lg:gap-16">
           <div>
             <p className="eyebrow">Talent Solutions</p>
-            <h2 id="talent-heading" className="h-section mt-3">Hiring too? We find the people.</h2>
+            <h2 id="talent-heading" className="h-section mt-3">Hiring or upskilling? We do both.</h2>
             <p className="lead mt-4">
               Our sourcing engines find candidates and our team screens them, so you only meet people worth
-              interviewing. Engineering, AI and data, and product and design roles.
+              interviewing. Our corporate training upskills the team you already have. Engineering, AI and data, and
+              product and design.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link href="/talent-solutions" className="btn btn-outline">
+              <Link href="/talent-solutions#hiring" className="btn btn-outline">
                 How hiring works
+                <ArrowIcon />
+              </Link>
+              <Link href="/talent-solutions#corporate-training" className="btn btn-outline">
+                Corporate training
                 <ArrowIcon />
               </Link>
             </div>

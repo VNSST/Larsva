@@ -67,7 +67,8 @@ export default function ConsultationForm() {
   // "Book a demo" links from a service or the Talent page arrive with ?service=<slug>: pre-select it.
   useEffect(() => {
     const slug = new URLSearchParams(window.location.search).get('service');
-    const choice = slug === 'talent' ? 'Talent Solutions' : services.find((s) => s.slug === slug)?.title;
+    const choice =
+      slug === 'talent' ? 'Talent Solutions' : slug === 'training' ? 'Corporate training' : services.find((s) => s.slug === slug)?.title;
     if (choice) setRequirements((r) => (r.length ? r : [choice]));
   }, []);
 
