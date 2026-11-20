@@ -1,10 +1,11 @@
 import Link from 'next/link';
 
-type Props = { title?: string; text?: string };
+type Props = { title?: string; text?: string; href?: string };
 
 export default function CtaBand({
   title = 'Have a project in mind?',
-  text = 'Send a short brief and get a written scope, one fixed price and a delivery date within 24 hours.',
+  text = 'Book a free 30-minute demo. Within 24 hours you get a written scope, one fixed price and a delivery date.',
+  href = '/contact#demo-form',
 }: Props) {
   return (
     <section className="section section-dark">
@@ -13,7 +14,7 @@ export default function CtaBand({
           <h2 className="h-section">{title}</h2>
           <p className="lead mt-4">{text}</p>
         </div>
-        <Link href="/contact#quote-form" className="btn btn-primary shrink-0">Get a quote</Link>
+        <Link href={href} className="btn btn-primary shrink-0">Book a demo</Link>
       </div>
     </section>
   );

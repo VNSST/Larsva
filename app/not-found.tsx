@@ -11,7 +11,7 @@ export default function NotFound() {
         <p className="lead mt-6 max-w-[520px]">The link may be old or mistyped. Try one of these instead.</p>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
           <Link href="/" className="btn btn-primary">Go to the home page</Link>
-          <Link href="/contact#quote-form" className="btn btn-outline">Get a quote</Link>
+          <Link href="/contact#demo-form" className="btn btn-outline">Book a demo</Link>
         </div>
       </div>
     </section>

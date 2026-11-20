@@ -18,7 +18,7 @@ const inter = Inter({
 
 const SITE_TITLE = 'Larsva — Websites, Apps and AI Automation at a Fixed Price';
 const SITE_DESCRIPTION =
-  'Larsva builds websites, web apps, mobile apps and AI automations at a fixed price on a fixed timeline. Tell us what you need and get a clear quote within 24 hours.';
+  'Larsva builds websites, web apps, mobile apps and AI automations at a fixed price on a fixed timeline. We also help companies hire, with recruitment backed by our own sourcing engines.';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://larsva.com'),

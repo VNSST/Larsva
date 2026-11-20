@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: 'Contact Us',
   description:
     'Contact LARSVA (OPC) PRIVATE LIMITED: email info@larsva.com, phone +91 91338 04790, registered office in Piduguralla, Guntur, Andhra Pradesh.',
-  keywords: ['Contact Larsva', 'Website Quote India', 'App Development Quote'],
+  keywords: ['Contact Larsva', 'Book a Demo', 'Software Development India', 'Recruitment India'],
   alternates: {
     canonical: '/contact',
   },
@@ -23,7 +23,7 @@ export default function ContactPage() {
           <p className="eyebrow">Contact</p>
           <h1 className="h-display mt-4">Contact us</h1>
           <p className="lead mt-6 max-w-[600px]">
-            Email, call or send the form below. We reply within 24 hours.
+            Email, call or book a demo below. We reply within 24 hours.
           </p>
         </div>
       </section>
@@ -72,10 +72,10 @@ export default function ContactPage() {
             </dl>
           </div>
 
-          <div id="quote-form" className="card p-6 md:p-8">
-            <h2 className="text-2xl font-bold">Get a quote</h2>
+          <div id="demo-form" className="card p-6 md:p-8">
+            <h2 className="text-2xl font-bold">Book a demo</h2>
             <p className="mb-6 mt-2 text-[var(--color-ink-2)]">
-              Tell us what you need. We reply with a written scope, one fixed price and a delivery date.
+              A free 30-minute call about your project or hiring needs. We reply within 24 hours to set a time.
             </p>
             <ConsultationForm />
           </div>

@@ -60,13 +60,12 @@ export default function ConsultationForm() {
     return () => document.removeEventListener('keydown', onKey);
   }, [dropdownOpen]);
 
-  // "Get a quote for websites" links arrive with ?service=websites: start the brief for them.
+  // "Book a demo" links from a service or the Talent page arrive with ?service=<slug>: start the brief for them.
   useEffect(() => {
     const slug = new URLSearchParams(window.location.search).get('service');
     const service = services.find((s) => s.slug === slug);
-    if (service) {
-      setFormData((d) => (d.startupIdea ? d : { ...d, startupIdea: `I'd like a quote for: ${service.title}.\n\n` }));
-    }
+    const start = slug === 'talent' ? "I'd like to hire for: " : service ? `I'd like a demo for: ${service.title}.\n\n` : '';
+    if (start) setFormData((d) => (d.startupIdea ? d : { ...d, startupIdea: start }));
   }, []);
 
   // Focus search input when dropdown opens
@@ -179,9 +178,9 @@ export default function ConsultationForm() {
             <path d="M20 6L9 17l-5-5" />
           </svg>
         </div>
-        <h3 className="mb-2 text-xl font-bold">Thanks, we have your brief</h3>
+        <h3 className="mb-2 text-xl font-bold">Thanks, we have your request</h3>
         <p className="mx-auto max-w-[400px] leading-relaxed text-[var(--color-ink-2)]">
-          We&apos;ll read it and reply with a clear quote within 24 hours.
+          We&apos;ll email you within 24 hours to set a time for your demo.
         </p>
       </div>
     );
@@ -347,12 +346,12 @@ export default function ConsultationForm() {
       </div>
 
       <div>
-        <label htmlFor="startupIdea" className="form-label">What do you need built?</label>
+        <label htmlFor="startupIdea" className="form-label">What can we help with?</label>
         <textarea
           id="startupIdea"
           required
           minLength={30}
-          placeholder="A website, app or automation? Tell us what it should do, who it is for, and any deadline or budget you have in mind."
+          placeholder="A website, app, AI automation or a role to hire for? Tell us what you need, who it is for, and any deadline or budget."
           className="form-input"
           rows={5}
           value={formData.startupIdea}
@@ -373,7 +372,7 @@ export default function ConsultationForm() {
             Sending...
           </>
         ) : (
-          'Get a quote'
+          'Book a demo'
         )}
       </button>
     </form>

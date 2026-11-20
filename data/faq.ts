@@ -21,7 +21,11 @@ export const faqs = [
     a: 'Every project includes 30 days of free bug fixes after launch. After that you can run it yourself, or choose monthly care from ₹5,000 a month: hosting and uptime checks, security updates, bug fixes and up to 4 hours of small changes. Cancel any time.',
   },
   {
+    q: 'What happens in the demo?',
+    a: 'A free 30-minute video call. We show you projects like yours, ask about your goals and suggest what to build first. Within 24 hours you get a written scope, one fixed price and a delivery date. There is no obligation to go ahead.',
+  },
+  {
     q: 'What do I need to get started?',
-    a: 'Just a few sentences about what you want built. If you have designs, examples or documents, send them too, but they are not required.',
+    a: 'Just a few sentences about what you want built. If you have designs, examples or documents, bring them to the demo, but they are not required.',
   },
 ];

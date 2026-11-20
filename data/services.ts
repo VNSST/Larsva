@@ -74,8 +74,8 @@ export const deliverables = [
 
 export const steps = [
   {
-    title: 'Send your brief',
-    text: 'Tell us what you want built, who it is for and when you need it. A few sentences is enough.',
+    title: 'Book a demo',
+    text: 'A free 30-minute call. We show you similar projects we have built and understand what you need.',
   },
   {
     title: 'Get a fixed quote',

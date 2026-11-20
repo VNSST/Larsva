@@ -74,7 +74,7 @@ async function sendEmailNotification(data: ConsultationData): Promise<void> {
   await transporter.sendMail({
     from: `"Larsva Website" <${SMTP_USER}>`,
     to: NOTIFICATION_EMAIL,
-    subject: 'New Quote Request - Larsva',
+    subject: 'New Demo Request - Larsva',
     text: `Name: ${data.fullName}\nEmail: ${data.email}\nPhone: ${data.phone}\n\nStartup Idea:\n${data.startupIdea}`,
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">

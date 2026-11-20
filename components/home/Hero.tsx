@@ -11,11 +11,11 @@ export default function Hero() {
           <p className="eyebrow">Websites, apps and AI automation</p>
           <h1 className="h-display mt-4">We build it. You launch it.</h1>
           <p className="lead mt-6 max-w-[540px]">
-            Fixed price and a fixed timeline for every project. Tell us what you need and get a clear quote within 24
-            hours.
+            Fixed price and a fixed timeline for every project. Book a free 30-minute demo and get a clear quote within
+            24 hours.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Link href="#quote" className="btn btn-primary">Get a quote</Link>
+            <Link href="#demo" className="btn btn-primary">Book a demo</Link>
             <Link href="/works" className="btn btn-outline">See our work</Link>
           </div>
           <p className="mt-8 text-sm text-[var(--color-ink-2)]">

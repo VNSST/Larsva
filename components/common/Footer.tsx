@@ -3,7 +3,8 @@ import Image from 'next/image';
 
 const pageLinks = [
   { label: 'Services', href: '/services' },
-  { label: 'Work', href: '/works' },
+  { label: 'Talent Solutions', href: '/talent-solutions' },
+  { label: 'Our work', href: '/works' },
   { label: 'About', href: '/about' },
   { label: 'Contact', href: '/contact' },
 ];
@@ -25,7 +26,7 @@ export default function Footer() {
               <span className="font-heading font-bold text-xl text-white">Larsva</span>
             </Link>
             <p className="mt-4 leading-relaxed">
-              Websites, apps and AI automation, built at a fixed price on a fixed timeline.
+              Websites, apps and AI automation at a fixed price, and hiring help backed by our own sourcing engines.
             </p>
             <a href="mailto:info@larsva.com" className="mt-4 inline-block text-white underline underline-offset-4 hover:no-underline">
               info@larsva.com
