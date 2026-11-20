@@ -4,7 +4,7 @@ type Props = { title?: string; text?: string; href?: string };
 
 export default function CtaBand({
   title = 'Have a project in mind?',
-  text = 'Book a free 30-minute demo. Within 24 hours you get a written scope, one fixed price and a delivery date.',
+  text = 'Book a free 30-minute demo. Within 24 hours you get a written scope, a delivery date and pricing.',
   href = '/contact#demo-form',
 }: Props) {
   return (

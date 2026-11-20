@@ -1,11 +1,10 @@
 // The four services shown on the home page and the Services page.
-// Starting prices shown as "From ..." on the home page and the Services page.
+// Pricing is per requirement ("Contact for pricing"), so no prices are listed here.
 export interface Service {
   slug: string;
   title: string;
   summary: string;
   timeline: string;
-  price: string;
   includes: string[];
 }
 
@@ -15,7 +14,6 @@ export const services: Service[] = [
     title: 'Websites',
     summary: 'Business sites that load fast, work on phones and bring in enquiries.',
     timeline: '1 to 2 weeks',
-    price: '₹25,000',
     includes: [
       'Design and build for phones, tablets and desktops',
       'Contact and enquiry forms that reach your inbox',
@@ -28,7 +26,6 @@ export const services: Service[] = [
     title: 'Web apps and MVPs',
     summary: 'Dashboards, portals and first product versions with logins, payments and admin.',
     timeline: '4 to 8 weeks',
-    price: '₹1,50,000',
     includes: [
       'User sign-up, logins and roles',
       'Online payments and subscriptions',
@@ -41,7 +38,6 @@ export const services: Service[] = [
     title: 'Mobile apps',
     summary: 'Android and iOS apps, built and published to the stores under your name.',
     timeline: '6 to 10 weeks',
-    price: '₹2,00,000',
     includes: [
       'One app for both Android and iOS',
       'Logins, notifications and payments where needed',
@@ -54,7 +50,6 @@ export const services: Service[] = [
     title: 'AI automation',
     summary: 'Chat assistants, document search and workflows that remove manual work.',
     timeline: '2 to 4 weeks',
-    price: '₹60,000',
     includes: [
       'Chat assistants that answer from your own documents',
       'Search across your files, policies and records',
@@ -66,7 +61,7 @@ export const services: Service[] = [
 
 // What every project includes (home page hero card and Services page).
 export const deliverables = [
-  'A written scope and one price before any work starts',
+  'A written scope and plan before any work starts',
   'A working demo you can click through midway',
   'Launch, handover and the full source code',
   'Optional monthly care after launch',
@@ -78,8 +73,8 @@ export const steps = [
     text: 'A free 30-minute call. We show you similar projects we have built and understand what you need.',
   },
   {
-    title: 'Get a fixed quote',
-    text: 'Within 24 hours you get a written scope, one fixed price and a delivery date.',
+    title: 'Get a proposal',
+    text: 'Within 24 hours you get a written scope, a delivery date and pricing for your requirement.',
   },
   {
     title: 'We build and hand over',

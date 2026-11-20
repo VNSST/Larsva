@@ -8,8 +8,8 @@ export default function WhatWeBuild() {
   return (
     <section className="section section-alt" aria-labelledby="what-we-build">
       <div className="container-site">
-        <SectionHeading id="what-we-build" eyebrow="What we build" title="Four things, each at a fixed price">
-          Pick what you need. You get the price and delivery date in writing before any work starts.
+        <SectionHeading id="what-we-build" eyebrow="What we build" title="Four things we build">
+          Tell us your requirement and we send a proposal with the scope, timeline and pricing before any work starts.
         </SectionHeading>
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {services.map((s) => (

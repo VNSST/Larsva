@@ -8,20 +8,17 @@ export default function ServiceCard({ service }: { service: Service }) {
     <Link
       href={`/services#${service.slug}`}
       className="card card-link group flex h-full flex-col p-6"
-      aria-label={`${service.title}: ${service.summary} ${service.timeline}. From ${service.price}. See details`}
+      aria-label={`${service.title}: ${service.summary} Typical timeline ${service.timeline}. See details`}
     >
       <h3 className="text-xl font-bold">{service.title}</h3>
       <p className="mt-3 leading-relaxed text-[var(--color-ink-2)]">{service.summary}</p>
-      <p className="mt-5 flex items-center gap-2 text-sm font-medium text-[var(--color-ink-2)]">
+      <p className="mt-auto flex items-center gap-2 pt-5 text-sm font-medium text-[var(--color-ink-2)]">
         <ClockIcon />
         {service.timeline}
       </p>
-      <div className="mt-auto flex items-end justify-between gap-3 border-t border-[var(--color-line)] pt-5">
-        <p className="font-display">
-          <span className="text-sm text-[var(--color-ink-2)]">From </span>
-          <span className="text-lg font-bold">{service.price}</span>
-        </p>
-        <span className="inline-flex items-center gap-1 font-display text-sm font-semibold text-[var(--color-accent)]">
+      <div className="mt-5 flex items-center justify-between gap-3 border-t border-[var(--color-line)] pt-5">
+        <p className="whitespace-nowrap text-sm text-[var(--color-ink-2)]">Contact for pricing</p>
+        <span className="inline-flex shrink-0 items-center gap-1 font-display text-sm font-semibold text-[var(--color-accent)]">
           Details
           <ArrowIcon className="transition-transform group-hover:translate-x-0.5" />
         </span>

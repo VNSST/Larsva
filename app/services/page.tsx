@@ -12,7 +12,7 @@ export default function ServicesPage() {
           <p className="eyebrow">Services</p>
           <h1 className="h-display mt-4 max-w-[760px]">What we build</h1>
           <p className="lead mt-6 max-w-[600px]">
-            Every project starts with a written scope, one fixed price and a delivery date. You see a working demo
+            Every project starts with a written scope and a delivery date. You see a working demo
             midway and get the full source code at the end.
           </p>
           <nav aria-label="Services on this page" className="mt-10">
@@ -24,9 +24,6 @@ export default function ServicesPage() {
                     <span className="mt-3 flex items-center gap-1.5 text-sm text-[var(--color-ink-2)]">
                       <ClockIcon size={14} />
                       {s.timeline}
-                    </span>
-                    <span className="mt-1 text-sm text-[var(--color-ink-2)]">
-                      From <span className="font-semibold text-[var(--color-ink)]">{s.price}</span>
                     </span>
                     <span className="mt-4 inline-flex items-center gap-1 font-display text-sm font-semibold text-[var(--color-accent)]">
                       Details
@@ -53,15 +50,19 @@ export default function ServicesPage() {
               <p className="lead mt-4">{s.summary}</p>
               <dl className="mt-8 grid max-w-[420px] grid-cols-2 gap-4">
                 <div className="card p-4">
-                  <dt className="text-sm text-[var(--color-ink-2)]">Timeline</dt>
+                  <dt className="text-sm text-[var(--color-ink-2)]">Typical timeline</dt>
                   <dd className="mt-1 flex items-center gap-2 font-display font-bold">
                     <ClockIcon />
                     {s.timeline}
                   </dd>
                 </div>
                 <div className="card p-4">
-                  <dt className="text-sm text-[var(--color-ink-2)]">Price</dt>
-                  <dd className="mt-1 font-display font-bold">From {s.price}</dd>
+                  <dt className="text-sm text-[var(--color-ink-2)]">Pricing</dt>
+                  <dd className="mt-1 font-display font-bold">
+                    <Link href={`/contact?service=${s.slug}#demo-form`} className="text-[var(--color-accent)] underline-offset-4 hover:underline">
+                      Contact us
+                    </Link>
+                  </dd>
                 </div>
               </dl>
               <Link href={`/contact?service=${s.slug}#demo-form`} className="btn btn-primary mt-8">
@@ -111,7 +112,7 @@ export default function ServicesPage() {
       </section>
 
       <HowItWorks />
-      <CtaBand title="Not sure which one you need?" text="Describe the problem instead. We'll tell you what to build and what it will cost." />
+      <CtaBand title="Not sure which one you need?" text="Describe the problem instead. We'll tell you what to build, how long it takes and what it costs." />
     </>
   );
 }

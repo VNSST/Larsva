@@ -187,7 +187,7 @@ export default function ConsultationForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="relative flex w-full flex-col gap-5">
+    <form onSubmit={handleSubmit} className="relative flex w-full flex-col gap-4">
       {error && (
         <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700" role="alert">
           {error}
@@ -208,34 +208,36 @@ export default function ConsultationForm() {
         />
       </div>
 
-      <div>
-        <label htmlFor="fullName" className="form-label">Name</label>
-        <input
-          id="fullName"
-          type="text"
-          required
-          autoComplete="name"
-          placeholder="Your full name"
-          className="form-input"
-          value={formData.fullName}
-          onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-          disabled={isSubmitting}
-        />
-      </div>
+      <div className="grid gap-4 sm:grid-cols-2">
+        <div>
+          <label htmlFor="fullName" className="form-label">Name</label>
+          <input
+            id="fullName"
+            type="text"
+            required
+            autoComplete="name"
+            placeholder="Your name"
+            className="form-input"
+            value={formData.fullName}
+            onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+            disabled={isSubmitting}
+          />
+        </div>
 
-      <div>
-        <label htmlFor="email" className="form-label">Email</label>
-        <input
-          id="email"
-          type="email"
-          required
-          autoComplete="email"
-          placeholder="you@company.com"
-          className="form-input"
-          value={formData.email}
-          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-          disabled={isSubmitting}
-        />
+        <div>
+          <label htmlFor="email" className="form-label">Email</label>
+          <input
+            id="email"
+            type="email"
+            required
+            autoComplete="email"
+            placeholder="you@company.com"
+            className="form-input"
+            value={formData.email}
+            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            disabled={isSubmitting}
+          />
+        </div>
       </div>
 
       {/* Phone with country code */}
@@ -336,30 +338,32 @@ export default function ConsultationForm() {
             value={formData.phone}
             onChange={handlePhoneChange}
             disabled={isSubmitting}
-            aria-describedby="phone-hint"
+            aria-describedby={phoneWarning || isOther ? 'phone-hint' : undefined}
           />
         </div>
 
-        <p id="phone-hint" className={`form-hint ${phoneWarning ? 'text-amber-700' : ''}`}>
-          {phoneWarning ?? (isOther ? 'Enter your country code, then your number.' : 'Digits only, without the country code.')}
-        </p>
+        {(phoneWarning || isOther) && (
+          <p id="phone-hint" className={`form-hint ${phoneWarning ? 'text-amber-700' : ''}`}>
+            {phoneWarning ?? 'Enter your country code, then your number.'}
+          </p>
+        )}
       </div>
 
       <div>
-        <label htmlFor="startupIdea" className="form-label">What can we help with?</label>
+        <label htmlFor="startupIdea" className="form-label">Requirement</label>
         <textarea
           id="startupIdea"
           required
           minLength={30}
-          placeholder="A website, app, AI automation or a role to hire for? Tell us what you need, who it is for, and any deadline or budget."
+          placeholder="What do you need? A website, app, AI automation or a role to hire for."
           className="form-input"
-          rows={5}
+          rows={3}
           value={formData.startupIdea}
           onChange={(e) => setFormData({ ...formData, startupIdea: e.target.value })}
           disabled={isSubmitting}
           aria-describedby="brief-hint"
         />
-        <p id="brief-hint" className="form-hint">A few sentences is enough. Everything you share stays confidential.</p>
+        <p id="brief-hint" className="form-hint">A sentence or two is enough.</p>
       </div>
 
       <button type="submit" disabled={isSubmitting || !!phoneWarning} className="btn btn-primary mt-1 w-full">

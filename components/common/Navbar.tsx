@@ -125,7 +125,7 @@ export default function Navbar() {
                               <span className="mt-1 block text-sm leading-snug text-[var(--color-ink-2)]">{s.summary}</span>
                               <span className="mt-2 flex items-center gap-1.5 text-xs font-medium text-[var(--color-ink-2)]">
                                 <ClockIcon size={13} />
-                                {s.timeline} · From {s.price}
+                                Typically {s.timeline}
                               </span>
                             </Link>
                           </li>
@@ -136,7 +136,7 @@ export default function Navbar() {
                         onClick={() => setServicesOpen(false)}
                         className="flex items-center justify-between border-t border-[var(--color-line)] bg-[var(--color-bg-alt)] px-7 py-4 font-display text-sm font-semibold text-[var(--color-accent)] hover:underline underline-offset-4"
                       >
-                        All services, pricing and what&apos;s included
+                        All services and what&apos;s included
                         <ArrowIcon />
                       </Link>
                     </div>
@@ -201,7 +201,6 @@ export default function Navbar() {
                           className="flex min-h-[44px] items-center justify-between text-[var(--color-ink-2)]"
                         >
                           {s.title}
-                          <span className="text-sm">From {s.price}</span>
                         </Link>
                       </li>
                     ))}

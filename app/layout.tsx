@@ -16,9 +16,9 @@ const inter = Inter({
   display: 'swap',
 });
 
-const SITE_TITLE = 'Larsva — Websites, Apps and AI Automation at a Fixed Price';
+const SITE_TITLE = 'Larsva — Websites, Apps, AI Automation and Talent Solutions';
 const SITE_DESCRIPTION =
-  'Larsva builds websites, web apps, mobile apps and AI automations at a fixed price on a fixed timeline. We also help companies hire, with recruitment backed by our own sourcing engines.';
+  'Larsva builds websites, web apps, mobile apps and AI automations on a clear timeline. We also help companies hire, with recruitment backed by our own sourcing engines.';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://larsva.com'),
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     'MVP Development India',
     'Mobile App Development',
     'AI Automation',
-    'Fixed Price Software Development',
+    'Tech Recruitment India',
   ],
   authors: [{ name: 'Larsva' }],
   openGraph: {

@@ -15,7 +15,7 @@ export default function DemoSection() {
           <p className="eyebrow">Book a demo</p>
           <h2 id="demo-heading" className="h-section mt-3">See how we would build it</h2>
           <p className="lead mt-4 max-w-[460px]">
-            A free 30-minute call. Within 24 hours of it, you get a written scope, one fixed price and a delivery date.
+            A free 30-minute call. Within 24 hours of it, you get a written scope, a delivery date and pricing for your requirement.
           </p>
           <ul className="tick-list mt-8">
             {agenda.map((item) => (

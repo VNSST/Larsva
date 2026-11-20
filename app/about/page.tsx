@@ -5,25 +5,25 @@ import CtaBand from '@/components/ui/CtaBand';
 export const metadata: Metadata = {
   title: 'About — Who We Are and How We Work',
   description:
-    'Larsva is a build shop: we build websites, web apps, mobile apps and AI automations at a fixed price on a fixed timeline.',
-  keywords: ['About Larsva', 'Fixed Price Development', 'Software Development India'],
+    'Larsva is a build shop: we build websites, web apps, mobile apps and AI automations on a clear timeline, and help companies hire.',
+  keywords: ['About Larsva', 'Recruitment India', 'Software Development India'],
   alternates: {
     canonical: '/about',
   },
   openGraph: {
     title: 'About Larsva',
-    description: 'We build websites, apps and AI automations at a fixed price on a fixed timeline.',
+    description: 'We build websites, apps and AI automations, and help companies hire.',
   },
 };
 
 const principles = [
   {
-    title: 'One price, agreed up front',
-    text: 'You get a written scope and a single price before we start. If the scope stays the same, the price does too.',
+    title: 'Clear scope, agreed up front',
+    text: 'You get a written scope and pricing before we start, so you know exactly what you are paying for.',
   },
   {
     title: 'A date you can plan around',
-    text: 'Every quote has a delivery date. Midway, you click through a working demo, so there are no surprises at the end.',
+    text: 'Every proposal has a delivery date. Midway, you click through a working demo, so there are no surprises at the end.',
   },
   {
     title: 'You own everything',
@@ -43,8 +43,8 @@ export default function AboutPage() {
           <p className="eyebrow">About</p>
           <h1 className="h-display mt-4 max-w-[800px]">A small team that builds and ships</h1>
           <p className="lead mt-6 max-w-[620px]">
-            Larsva builds websites, web apps, mobile apps and AI automations for businesses. Each project has a fixed
-            price and a fixed timeline, agreed in writing before any work starts.
+            Larsva builds websites, web apps, mobile apps and AI automations for businesses. Each project starts with a
+            written scope and a delivery date, agreed before any work starts.
           </p>
         </div>
       </section>

@@ -1,5 +1,5 @@
 // Content for the Talent Solutions page (hiring and recruitment).
-// Fees, timelines and guarantees are draft values: edit them here.
+// Timelines and guarantees are draft values: edit them here.
 export const talentRoles = [
   {
     title: 'Engineering',
@@ -40,7 +40,7 @@ export const talentSteps = [
 
 export const talentTerms = [
   { label: 'First shortlist', value: 'Within 7 working days' },
-  { label: 'Fee', value: '8.33% of annual CTC' },
+  { label: 'Fee', value: 'Contact for pricing' },
   { label: 'When you pay', value: 'Only after your hire joins' },
   { label: 'Replacement', value: 'Free if they leave within 60 days' },
 ];
