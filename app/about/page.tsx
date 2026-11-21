@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import CtaBand from '@/components/ui/CtaBand';
+import WorkSection from '@/components/home/WorkSection';
 
 export const metadata: Metadata = {
   title: 'About — Who We Are and How We Work',
@@ -63,7 +64,9 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="section" aria-labelledby="company">
+      <WorkSection />
+
+      <section className="section section-alt" aria-labelledby="company">
         <div className="container-site">
           <h2 id="company" className="h-section">Company details</h2>
           <dl className="mt-8 grid gap-6 sm:grid-cols-2">
